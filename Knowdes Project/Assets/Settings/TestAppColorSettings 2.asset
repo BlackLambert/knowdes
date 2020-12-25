@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b57d28b59791e243bb5e3340ad7edae, type: 3}
+  m_Name: TestAppColorSettings 2
+  m_EditorClassIdentifier: 
+  _selected: {r: 1, g: 0.95475364, b: 0, a: 1}
+  _highlighted: {r: 0.09392464, g: 1, b: 0, a: 1}
+  _interactable: {r: 0, g: 0.52198887, b: 1, a: 1}
+  _mainBackground: {r: 0, g: 0, b: 0, a: 1}
+  _interactionElementBackground: {r: 0.0047347625, g: 0.27883282, b: 0.3584906, a: 1}
+  _workspaceBackground: {r: 0.13631046, g: 0.4433962, b: 0, a: 1}
+  _defaultText: {r: 0, g: 1, b: 0.63982034, a: 1}
+  _labelText: {r: 0.76745605, g: 0, b: 1, a: 1}

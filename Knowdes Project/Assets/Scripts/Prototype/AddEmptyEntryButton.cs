@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Knowdes.Prototype
+{
+    public class AddEmptyEntryButton : MonoBehaviour
+    {
+        [SerializeField]
+        private Button _addButton = null;
+        [SerializeField]
+        private Entry _entryPrefab = null;
+		[SerializeField]
+		private EntriesList entries = null;
+
+        protected virtual void Start()
+		{
+            _addButton.onClick.AddListener(onClick);
+		}
+
+		protected virtual void OnDestroy()
+		{
+			_addButton.onClick.RemoveListener(onClick);
+		}
+
+		private void onClick()
+		{
+			Entry newEntry = Instantiate(_entryPrefab, null);
+			newEntry.Base.localScale = Vector3.one;
+			entries.Add(newEntry);
+		}
+	}
+}

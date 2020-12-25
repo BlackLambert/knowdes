@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b57d28b59791e243bb5e3340ad7edae, type: 3}
+  m_Name: DefaultAppColorSettings 1
+  m_EditorClassIdentifier: 
+  _selected: {r: 1, g: 1, b: 1, a: 1}
+  _highlighted: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
+  _interactable: {r: 0.73333335, g: 0.73333335, b: 0.73333335, a: 1}
+  _mainBackground: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+  _interactionElementBackground: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 1}
+  _workspaceBackground: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+  _defaultText: {r: 1, g: 1, b: 1, a: 1}
+  _labelText: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
+  _placeholderText: {r: 0.6, g: 0.6, b: 0.6, a: 1}
