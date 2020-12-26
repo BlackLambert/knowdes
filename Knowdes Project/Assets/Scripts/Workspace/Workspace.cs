@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Knowdes.Prototype
@@ -24,6 +25,17 @@ namespace Knowdes.Prototype
         public event Action<WorkspaceEntry> OnEntryAdded;
         public event Action<WorkspaceEntry> OnEntryRemoved;
 
+        private PendingWorkspaceEntry _pendingEntry;
+        public PendingWorkspaceEntry PendingEntry
+		{
+			get { return _pendingEntry; }
+            set
+			{
+                _pendingEntry = value;
+                OnPendingEntryChanged?.Invoke();
+            }
+		}
+        public event Action OnPendingEntryChanged;
 
         public void Add(WorkspaceEntry entry)
         {
@@ -40,5 +52,14 @@ namespace Knowdes.Prototype
             OnCountChanged?.Invoke();
             OnEntryRemoved?.Invoke(entry);
         }
+
+        public void DeleteWith(Entry entry)
+		{
+            IEnumerable<WorkspaceEntry> entriesToDelete = _entries.Where(e => e.LinkedEntry == entry);
+            foreach(WorkspaceEntry entryToDelete in new List<WorkspaceEntry>(entriesToDelete))
+			{
+                Remove(entryToDelete);
+            }
+		}
     }
 }

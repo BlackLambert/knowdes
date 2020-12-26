@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Knowdes
+namespace Knowdes.Prototype
 {
     public class RemoveEntryButton : MonoBehaviour
     {

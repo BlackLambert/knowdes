@@ -30,6 +30,8 @@ namespace Knowdes
                     return _colors.Highlighted;
                 case Type.Selected:
                     return _colors.Selected;
+                case Type.Inactive:
+                    return _colors.Inactive;
                 default:
                     throw new NotImplementedException();
 			}
@@ -47,7 +49,8 @@ namespace Knowdes
 
             Interactable = 200,
             Highlighted = 201,
-            Selected = 202
+            Selected = 202,
+            Inactive = 203
         }
     }
 }

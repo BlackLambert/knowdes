@@ -197,7 +197,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _addButton: {fileID: 626887558225430921}
   _entryPrefab: {fileID: 9172443232455824186, guid: 009f1a13d8aec554988c53dea6189af3, type: 3}
-  entries: {fileID: 0}
+  _entries: {fileID: 0}
+  _contentPrefabs:
+  - {fileID: 6823654196670514965, guid: e4e7407384a43fc4f8045e8980fac6d3, type: 3}
+  - {fileID: -5023077757282074433, guid: 58448ceac43501c4095b4a513f8d6a3e, type: 3}
+  - {fileID: 629281618989643623, guid: e52fc855e9faecc43ab1eb89feeb80cc, type: 3}
+  - {fileID: 900294547412432468, guid: b50b16dfd3ae4e045b54f00349f81055, type: 3}
 --- !u!114 &906102217041751067
 MonoBehaviour:
   m_ObjectHideFlags: 0

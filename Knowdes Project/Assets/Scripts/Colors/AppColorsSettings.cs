@@ -20,6 +20,10 @@ namespace Knowdes
         public Color Interactable => _interactable;
 
         [SerializeField]
+        private Color _inactive = new Color(0.6f, 0.6f, 0.6f, 1f);
+        public Color Inactive => _inactive;
+
+        [SerializeField]
         private Color _mainBackground = new Color(0.3f, 0.3f, 0.3f, 1f);
         public Color MainBackground => _mainBackground;
 

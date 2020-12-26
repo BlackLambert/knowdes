@@ -15,5 +15,16 @@ namespace Knowdes.Prototype
 		private RectTransform _base;
 		public RectTransform Base => _base;
 
+		[SerializeField]
+		private RectTransform _contentHook;
+
+		public Entry LinkedEntry { get; set; }
+
+
+		public void SetContent(EntryContent content)
+		{
+			content.Base.SetParent(_contentHook, false);
+			content.Base.localPosition = Vector3.one;
+		}
 	}
 }

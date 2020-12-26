@@ -15,9 +15,10 @@ MonoBehaviour:
   _selected: {r: 1, g: 1, b: 1, a: 1}
   _highlighted: {r: 0.8666667, g: 0.8666667, b: 0.8666667, a: 1}
   _interactable: {r: 0.73333335, g: 0.73333335, b: 0.73333335, a: 1}
-  _mainBackground: {r: 0.3, g: 0.3, b: 0.3, a: 1}
-  _interactionElementBackground: {r: 0.1764706, g: 0.1764706, b: 0.1764706, a: 1}
-  _workspaceBackground: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+  _inactive: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  _mainBackground: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  _interactionElementBackground: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 1}
+  _workspaceBackground: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
   _defaultText: {r: 1, g: 1, b: 1, a: 1}
   _labelText: {r: 0.6666667, g: 0.6666667, b: 0.6666667, a: 1}
   _placeholderText: {r: 0.6, g: 0.6, b: 0.6, a: 1}

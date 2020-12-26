@@ -36,6 +36,7 @@ namespace Knowdes.Prototype
 			bool shallPlace = RectTransformUtility.RectangleContainsScreenPoint(_workspace.Rect, Input.mousePosition, GetComponentInParent<Canvas>().worldCamera);
 			if (shallPlace)
 				place();
+			_workspace.PendingEntry = null;
 			Destroy(_entry.Base.gameObject);
 		}
 	}

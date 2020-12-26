@@ -6,14 +6,17 @@ using UnityEngine.UI;
 
 namespace Knowdes.Prototype
 {
-    public class AddEmptyEntryButton : MonoBehaviour
+    public class AddRandomEntryButton : MonoBehaviour
     {
         [SerializeField]
         private Button _addButton = null;
         [SerializeField]
         private Entry _entryPrefab = null;
 		[SerializeField]
-		private EntriesList entries = null;
+		private EntriesList _entries = null;
+
+		[SerializeField]
+		private List<EntryContent> _contentPrefabs = new List<EntryContent>();
 
         protected virtual void Start()
 		{
@@ -29,7 +32,15 @@ namespace Knowdes.Prototype
 		{
 			Entry newEntry = Instantiate(_entryPrefab, null);
 			newEntry.Base.localScale = Vector3.one;
-			entries.Add(newEntry);
+			EntryContent content = createRandomContent();
+			newEntry.SetContent(content);
+			_entries.Add(newEntry);
+		}
+
+		private EntryContent createRandomContent()
+		{
+			int index = UnityEngine.Random.Range(0, _contentPrefabs.Count - 1);
+			return Instantiate(_contentPrefabs[index]);
 		}
 	}
 }

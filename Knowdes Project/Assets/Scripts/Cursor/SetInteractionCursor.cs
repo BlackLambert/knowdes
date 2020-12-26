@@ -32,7 +32,7 @@ namespace Knowdes
 
 		private void setDefault()
 		{
-			if (!_stateSet)
+			if (!_stateSet || _stateMachine.Locked)
 				return;
 			_stateMachine.SetState(CursorStateMachine.State.Default);
 			_stateSet = false;
