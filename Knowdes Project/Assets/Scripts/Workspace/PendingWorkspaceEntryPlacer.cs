@@ -21,19 +21,12 @@ namespace Knowdes.Prototype
 
 		private void place()
 		{
-			_workspace.Add(_entry.WorkspaceEntry);
-			Vector2 rectPoint;
-			RectTransformUtility.ScreenPointToLocalPointInRectangle(_workspace.Content, Input.mousePosition, GetComponentInParent<Canvas>().worldCamera, out rectPoint);
-			Vector2 normalized = Rect.PointToNormalized(_workspace.Content.rect, rectPoint);
-			_entry.WorkspaceEntry.Base.anchorMin = normalized;
-			_entry.WorkspaceEntry.Base.anchorMax = normalized;
-			_entry.WorkspaceEntry.Base.anchoredPosition = Vector2.zero;
-			_entry.WorkspaceEntry.CursorFollower.Container = _workspace.Content;
+			_workspace.Add(_entry.WorkspaceEntry, Input.mousePosition);
 		}
 
 		public void OnDrop(PointerEventData eventData)
 		{
-			bool shallPlace = RectTransformUtility.RectangleContainsScreenPoint(_workspace.Rect, Input.mousePosition, GetComponentInParent<Canvas>().worldCamera);
+			bool shallPlace = RectTransformUtility.RectangleContainsScreenPoint(_workspace.RectTrans, Input.mousePosition, GetComponentInParent<Canvas>().worldCamera);
 			if (shallPlace)
 				place();
 			_workspace.PendingEntry = null;

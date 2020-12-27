@@ -14,6 +14,9 @@ namespace Knowdes.Prototype
 
         public event Action<Entry> OnDestruct;
 
+        [SerializeField]
+        private UISelectable _selectable = null;
+
         private EntryContent _content = null;
         public EntryContent Content => _content;
 
@@ -30,6 +33,7 @@ namespace Knowdes.Prototype
             _content = content;
             content.Base.SetParent(_contentHook, false);
             content.Base.localScale = Vector3.one;
+            content.Selectable = _selectable;
         }
     }
 }

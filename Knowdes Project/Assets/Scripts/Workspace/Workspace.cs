@@ -10,7 +10,7 @@ namespace Knowdes.Prototype
     {
         [SerializeField]
         private RectTransform _rect;
-        public RectTransform Rect => _rect;
+        public RectTransform RectTrans => _rect;
 
         [SerializeField]
         private RectTransform _content;
@@ -37,18 +37,34 @@ namespace Knowdes.Prototype
 		}
         public event Action OnPendingEntryChanged;
 
-        public void Add(WorkspaceEntry entry)
+        public void Add(WorkspaceEntry entry, Vector2 screenPos)
         {
             _entries.Add(entry);
             entry.Base.SetParent(_hook, true);
+            Vector2 rectPoint;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(Content, screenPos, GetComponentInParent<Canvas>().worldCamera, out rectPoint);
+            Vector2 normalized = Rect.PointToNormalized(Content.rect, rectPoint);
+            entry.Base.anchorMin = normalized;
+            entry.Base.anchorMax = normalized;
+            entry.Base.anchoredPosition = Vector2.zero;
+            entry.CursorFollower.Container = Content;
+
             OnCountChanged?.Invoke();
             OnEntryAdded?.Invoke(entry);
+        }
+
+
+
+        public void AddToCenter(WorkspaceEntry entry)
+		{
+            Add(entry, RectTrans.position);
         }
 
         public void Remove(WorkspaceEntry entry)
         {
             _entries.Remove(entry);
             Destroy(entry.Base.gameObject);
+
             OnCountChanged?.Invoke();
             OnEntryRemoved?.Invoke(entry);
         }
@@ -61,5 +77,10 @@ namespace Knowdes.Prototype
                 Remove(entryToDelete);
             }
 		}
+
+        public bool HasEntry(Entry entry)
+		{
+            return _entries.FirstOrDefault(e => e.LinkedEntry == entry) != null;
+        }
     }
 }

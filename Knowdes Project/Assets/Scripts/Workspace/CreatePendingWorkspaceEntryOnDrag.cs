@@ -21,6 +21,9 @@ namespace Knowdes.Prototype
 
 		public void OnBeginDrag(PointerEventData eventData)
 		{
+			if (_workspace.HasEntry(_entry))
+				return;
+
 			PendingWorkspaceEntry result = Instantiate(_entryPrefab);
 			result.transform.SetParent(GetComponentInParent<Canvas>().transform, false);
 			result.transform.localScale = Vector3.one;
