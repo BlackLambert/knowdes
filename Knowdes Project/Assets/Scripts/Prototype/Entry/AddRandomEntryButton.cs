@@ -39,7 +39,7 @@ namespace Knowdes.Prototype
 
 		private EntryContent createRandomContent()
 		{
-			int index = UnityEngine.Random.Range(0, _contentPrefabs.Count - 1);
+			int index = UnityEngine.Random.Range(0, _contentPrefabs.Count );
 			return Instantiate(_contentPrefabs[index]);
 		}
 	}

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -33,12 +31,16 @@ namespace Knowdes
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
+
+			//Debug.Log($"{Selected} && {!Blocked}");
 			if (Blocked)
 				return;
 			if (Selected)
 				_selector.Deselect(this);
 			else
 				_selector.Select(this);
+
+			//Debug.Log($"{Selected} && {!Blocked}");
 		}
 
 		public void Deselect()

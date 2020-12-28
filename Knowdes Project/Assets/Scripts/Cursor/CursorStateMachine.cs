@@ -15,6 +15,8 @@ namespace Knowdes
         private Texture2D _resizeVerticalImage = null;
         [SerializeField]
         private Texture2D _draggingImage = null;
+        [SerializeField]
+        private Texture2D _wwwImage = null;
 
         private object _lockingObject = null;
         public bool Locked => _lockingObject != null;
@@ -50,6 +52,8 @@ namespace Knowdes
                     return _resizeVerticalImage;
                 case State.Dragging:
                     return _draggingImage;
+                case State.WWW:
+                    return _wwwImage;
                 default:
                     throw new NotImplementedException();
             }
@@ -66,6 +70,7 @@ namespace Knowdes
                 case State.ResizeHorizontal:
                 case State.ResizeVertical:
                 case State.Dragging:
+                case State.WWW:
                     return new Vector2(16, 16);
                 default:
                     throw new NotImplementedException();
@@ -99,7 +104,8 @@ namespace Knowdes
             Interaction = 1,
             ResizeHorizontal = 2,
             ResizeVertical = 4,
-            Dragging = 8
+            Dragging = 8,
+            WWW = 16
 		}
     }
 }

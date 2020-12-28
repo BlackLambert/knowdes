@@ -37,6 +37,14 @@ namespace Knowdes
             UISelectable current = Current;
             Current = null;
             current.Deselect();
+            Debug.Log("Deselect all"); 
+        }
+
+        public void DeselectAll()
+		{
+            if (Current == null)
+                return;
+            Deselect(Current);
         }
     }
 }

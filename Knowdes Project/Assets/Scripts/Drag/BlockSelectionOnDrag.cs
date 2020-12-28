@@ -20,5 +20,10 @@ namespace Knowdes.Prototype
 		{
 			_selectable.Blocked = false;
 		}
+
+		protected virtual void OnDestroy()
+		{
+			_selectable.Blocked = false;
+		}
 	}
 }
