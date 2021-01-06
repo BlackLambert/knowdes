@@ -16,6 +16,8 @@ namespace Knowdes
                     return _colors.MainBackground;
                 case Type.InteractionElementBackground:
                     return _colors.InteractionElementBackground;
+                case Type.InteractionElementBackgroundShadow:
+                    return _colors.InteractionElementBackgroundShadow;
                 case Type.WorkspaceBackground:
                     return _colors.WorkspaceBackground;
                 case Type.DefaultText:
@@ -42,6 +44,7 @@ namespace Knowdes
             MainBackground = 0,
             InteractionElementBackground = 1,
             WorkspaceBackground = 2,
+            InteractionElementBackgroundShadow = 3,
 
             DefaultText = 100,
             LabelText = 101,

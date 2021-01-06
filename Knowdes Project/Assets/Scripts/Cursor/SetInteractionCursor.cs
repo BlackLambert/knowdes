@@ -7,7 +7,9 @@ namespace Knowdes
 {
     public class SetInteractionCursor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-		private bool _stateSet = false;
+		private const int _priority = 1;
+
+		private bool _cursorChanged = false;
 		private CursorStateMachine _stateMachine = null;
 
 		protected virtual void Start()
@@ -32,18 +34,18 @@ namespace Knowdes
 
 		private void setDefault()
 		{
-			if (!_stateSet || _stateMachine.Locked)
+			if (!_cursorChanged)
 				return;
-			_stateMachine.SetState(CursorStateMachine.State.Default);
-			_stateSet = false;
+			_stateMachine.RemoveState(this, CursorStateMachine.State.Interaction);
+			_cursorChanged = false;
 		}
 
 		private void setInteraction()
 		{
-			if (_stateMachine.Locked)
+			if (_cursorChanged)
 				return;
-			_stateMachine.SetState(CursorStateMachine.State.Interaction);
-			_stateSet = true;
+			_stateMachine.AddState(CursorStateMachine.State.Interaction, this, _priority);
+			_cursorChanged = true;
 		}
 	}
 }

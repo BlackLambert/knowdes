@@ -7,16 +7,9 @@ namespace Knowdes
 {
     public class Selector : MonoBehaviour
     {
-        public UISelectable Current { get; private set; }
+        public SelectorSelectable Current { get; private set; }
 
-        public void Next()
-		{
-            UISelectable current = Current;
-            Deselect(Current);
-            Select(current.Next);
-		}
-
-        public void Select(UISelectable selectable)
+        public void Select(SelectorSelectable selectable)
 		{
             if (Current == selectable)
                 throw new InvalidOperationException();
@@ -28,16 +21,15 @@ namespace Knowdes
             Current.Select();
 		}
 
-        public void Deselect(UISelectable selectable)
+        public void Deselect(SelectorSelectable selectable)
 		{
             if (Current == null)
                 throw new ArgumentNullException();
             if (Current != selectable)
                 throw new ArgumentException();
-            UISelectable current = Current;
+            SelectorSelectable current = Current;
             Current = null;
             current.Deselect();
-            Debug.Log("Deselect all"); 
         }
 
         public void DeselectAll()

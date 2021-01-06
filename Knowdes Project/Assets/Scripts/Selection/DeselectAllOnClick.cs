@@ -25,14 +25,12 @@ namespace Knowdes
 
 		public void OnPointerDown(PointerEventData eventData)
 		{
-			Debug.Log("Down");
 			_downPosition = Input.mousePosition;
 			_downTime = Time.time;
 		}
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
-			Debug.Log("Up");
 			if (Time.time - _downTime > _maxDownTime || (eventData.position - _downPosition).magnitude > _maxMouseDelta)
 				return;
 			_selector.DeselectAll();

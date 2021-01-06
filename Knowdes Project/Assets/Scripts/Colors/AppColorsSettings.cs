@@ -32,6 +32,10 @@ namespace Knowdes
         public Color InteractionElementBackground => _interactionElementBackground;
 
         [SerializeField]
+        private Color _interactionElementBackgroundShadow = new Color(0f, 0f, 0f, 0.75f);
+        public Color InteractionElementBackgroundShadow => _interactionElementBackgroundShadow;
+
+        [SerializeField]
         private Color _workspaceBackground = new Color(0.35f, 0.35f, 0.35f, 1f);
         public Color WorkspaceBackground => _workspaceBackground;
 

@@ -6,6 +6,8 @@ namespace Knowdes
 {
 	public class SetDragCursor : MonoBehaviour, IBeginDragHandler
 	{
+		private const int _priority = 100;
+
 		private CursorStateMachine _stateMachine = null;
 		private bool _cursorChanged = false;
 
@@ -14,10 +16,11 @@ namespace Knowdes
 			_stateMachine = FindObjectOfType<CursorStateMachine>();
 		}
 
-		protected virtual void OnDestroy()
+		protected virtual void OnDisable()
 		{
-			if(_cursorChanged)
-				_stateMachine.Unlock(this);
+			if (_cursorChanged)
+				_stateMachine.RemoveState(this, CursorStateMachine.State.Dragging);
+			_cursorChanged = false;
 		}
 
 		protected virtual void Update()
@@ -29,18 +32,15 @@ namespace Knowdes
 		{
 			if (!_cursorChanged || !Input.GetMouseButtonUp(0))
 				return;
-			_stateMachine.Unlock(this);
-			_stateMachine.SetState(CursorStateMachine.State.Default);
+			_stateMachine.RemoveState(this, CursorStateMachine.State.Dragging);
 			_cursorChanged = false;
 		}
 
 		public void OnBeginDrag(PointerEventData eventData)
 		{
-			if (_stateMachine.Locked)
+			if (_cursorChanged)
 				return;
-
-			_stateMachine.SetState(CursorStateMachine.State.Dragging);
-			_stateMachine.Lock(this);
+			_stateMachine.AddState(CursorStateMachine.State.Dragging, this, _priority);
 			_cursorChanged = true;
 		}
 	}

@@ -20,25 +20,22 @@ namespace Knowdes
 
             _colors = FindObjectOfType<AppColors>();
             _graphic.color = _colors.Get(AppColors.Type.Interactable);
-            _selectable.OnSelected += onSelect;
-            _selectable.OnDeselected += onDeselect;
+            _selectable.OnSelected += updateColor;
+            _selectable.OnDeselected += updateColor;
+            updateColor();
         }
 
         protected virtual void OnDestroy()
 		{
 
-            _selectable.OnSelected -= onSelect;
-            _selectable.OnDeselected -= onDeselect;
+            _selectable.OnSelected -= updateColor;
+            _selectable.OnDeselected -= updateColor;
         }
 
-		private void onDeselect()
+		private void updateColor()
 		{
-            _graphic.color = _colors.Get(AppColors.Type.Interactable);
-        }
-
-		private void onSelect()
-		{
-            _graphic.color = _colors.Get(AppColors.Type.Selected);
+            _graphic.color = _selectable.Selected ? _colors.Get(AppColors.Type.Selected) : 
+                _colors.Get(AppColors.Type.InteractionElementBackground);
         }
 	}
 }

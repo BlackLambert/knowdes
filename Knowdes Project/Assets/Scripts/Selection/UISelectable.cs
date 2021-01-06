@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Knowdes
 {
-    public class UISelectable : MonoBehaviour, IPointerClickHandler
+    public class UISelectable : MonoBehaviour, IPointerClickHandler, SelectorSelectable
     {
 		private Selector _selector;
 
@@ -18,14 +18,14 @@ namespace Knowdes
 		public bool Selected { get; private set; } = false;
 		public bool Blocked { get; set; } = false;
 
-		protected virtual void Start()
+		protected virtual void Awake()
 		{
 			_selector = FindObjectOfType<Selector>();
 		}
 
 		protected virtual void OnDestroy()
 		{
-			if (Selected)
+			if (Selected && _selector != null)
 				_selector.Deselect(this);
 		}
 
@@ -43,20 +43,27 @@ namespace Knowdes
 			//Debug.Log($"{Selected} && {!Blocked}");
 		}
 
-		public void Deselect()
+		public void TrySelect()
 		{
-			if (!Selected)
-				throw new InvalidOperationException();
-			Selected = false;
-			OnDeselected?.Invoke();
+			if (Blocked || Selected)
+				return;
+			_selector.Select(this);
 		}
 
-		public void Select()
+		void SelectorSelectable.Select()
 		{
 			if (Selected)
 				throw new InvalidOperationException();
 			Selected = true;
 			OnSelected?.Invoke();
+		}
+
+		void SelectorSelectable.Deselect()
+		{
+			if (!Selected)
+				throw new InvalidOperationException();
+			Selected = false;
+			OnDeselected?.Invoke();
 		}
 	}
 }

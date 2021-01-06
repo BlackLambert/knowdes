@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Knowdes
@@ -17,26 +18,32 @@ namespace Knowdes
         private Texture2D _draggingImage = null;
         [SerializeField]
         private Texture2D _wwwImage = null;
+        [SerializeField]
+        private Texture2D _editTextImage = null;
 
-        private object _lockingObject = null;
-        public bool Locked => _lockingObject != null;
+        public State CurrentState => _states[_states.Count - 1].State;
 
-        public State CurrentState { get; private set; } = State.Default;
+        private List<StateData> _states = new List<StateData>();
 
 
         /// <summary>
         /// Sets requested state if the current cursor state is not locked.
         /// </summary>
         /// <param name="newState"></param>
-        public void SetState(State newState)
+        public void AddState(State newState, object caller, int priority)
 		{
-            if (Locked)
-                throw new InvalidOperationException("The StateMachine is Locked");
-            if (newState == CurrentState)
-                return;
-            Cursor.SetCursor(getTexture(newState), getOffset(newState), CursorMode.Auto);
-            CurrentState = newState;
+            _states.Add(new StateData(newState, priority, caller));
+            reorder();
         }
+
+        public void RemoveState(object caller, State state)
+		{
+            StateData data = _states.FirstOrDefault(s => s.SetterObject == caller && s.State == state);
+            if (data == null)
+                throw new InvalidOperationException();
+            _states.Remove(data);
+            reorder();
+		}
 
         private Texture2D getTexture(State state)
 		{
@@ -54,6 +61,8 @@ namespace Knowdes
                     return _draggingImage;
                 case State.WWW:
                     return _wwwImage;
+                case State.EditText:
+                    return _editTextImage;
                 default:
                     throw new NotImplementedException();
             }
@@ -71,31 +80,24 @@ namespace Knowdes
                 case State.ResizeVertical:
                 case State.Dragging:
                 case State.WWW:
+                case State.EditText:
                     return new Vector2(16, 16);
                 default:
                     throw new NotImplementedException();
             }
         }
 
-
-        public void Lock(object lockingObject)
+        private void reorder()
 		{
-            if (Locked)
-                throw new InvalidOperationException();
-            if (lockingObject == null)
-                throw new ArgumentNullException();
-            _lockingObject = lockingObject;
+            _states = _states.OrderBy(s => s.Priority).ToList();
+            setState();
         }
 
-        public void Unlock(object lockingObject)
+        private void setState()
 		{
-            if (!Locked)
-                throw new InvalidOperationException();
-            if (_lockingObject != lockingObject)
-                throw new ArgumentException();
-            _lockingObject = null;
-		}
-
+            State state = _states.Count > 0 ? _states[_states.Count - 1].State : State.Default;
+            Cursor.SetCursor(getTexture(state), getOffset(state), CursorMode.Auto);
+        }
 
 
         public enum State
@@ -105,7 +107,25 @@ namespace Knowdes
             ResizeHorizontal = 2,
             ResizeVertical = 4,
             Dragging = 8,
-            WWW = 16
+            WWW = 16,
+            EditText = 32
+		}
+
+        private class StateData
+		{
+            public State State { get; }
+            public int Priority { get; }
+            public object SetterObject { get; }
+
+            public StateData(
+                State state,
+                int priority,
+                object setterObject)
+			{
+                State = state;
+                Priority = priority;
+                SetterObject = setterObject;
+            }
 		}
     }
 }

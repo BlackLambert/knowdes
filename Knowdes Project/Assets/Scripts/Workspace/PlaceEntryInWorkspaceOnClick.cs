@@ -16,10 +16,12 @@ namespace Knowdes.Prototype
         private WorkspaceEntry _entryPrefab = null;
 
         private Workspace _workspace;
+        private EntryVolumeFactory _volumeFactory;
 
         protected virtual void Start()
 		{
             _workspace = FindObjectOfType<Workspace>();
+            _volumeFactory = FindObjectOfType<EntryVolumeFactory>();
             _button.onClick.AddListener(onClick);
         }
 
@@ -31,8 +33,9 @@ namespace Knowdes.Prototype
         private void onClick()
         {
             WorkspaceEntry newEntry = Instantiate(_entryPrefab);
-            newEntry.SetContent(Instantiate(_entry.Content));
+            newEntry.SetContent(_volumeFactory.Create(_entry.Volume));
             newEntry.LinkedEntry = _entry;
+            newEntry.Content.Data = _entry.Volume.Data;
             _workspace.AddToCenter(newEntry);
         }
     }

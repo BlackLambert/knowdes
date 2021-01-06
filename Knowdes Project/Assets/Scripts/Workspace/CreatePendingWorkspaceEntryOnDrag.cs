@@ -13,10 +13,12 @@ namespace Knowdes.Prototype
 		private Entry _entry = null;
 
 		private Workspace _workspace;
+		private EntryVolumeFactory _volumeFactory;
 
 		protected virtual void Start()
 		{
 			_workspace = FindObjectOfType<Workspace>();
+			_volumeFactory = FindObjectOfType<EntryVolumeFactory>();
 		}
 
 		public void OnBeginDrag(PointerEventData eventData)
@@ -28,7 +30,8 @@ namespace Knowdes.Prototype
 			result.transform.SetParent(GetComponentInParent<Canvas>().transform, false);
 			result.transform.localScale = Vector3.one;
 			result.WorkspaceEntry.LinkedEntry = _entry;
-			result.WorkspaceEntry.SetContent(Instantiate(_entry.Content));
+			result.WorkspaceEntry.SetContent(_volumeFactory.Create(_entry.Volume));
+			result.WorkspaceEntry.Content.Data = _entry.Volume.Data;
 			_workspace.PendingEntry = result;
 		}
 
