@@ -28,9 +28,10 @@ namespace Knowdes
 
 		public override MetaData MetaData => _data;
 
-		protected virtual void OnDestroy()
+		protected override void OnDestroy()
 		{
-			
+			base.OnDestroy();
+			removeDataListeners();
 		}
 
 		private void addDataListeners()

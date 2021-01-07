@@ -16,15 +16,26 @@ namespace Knowdes
             switch(type)
 			{
                 case MetaDataType.Title:
-                    return new TitleData(iD, _defaultTitle);
+                    TitleData title = new TitleData(iD, _defaultTitle);
+                    title.ShowInPreview = true;
+                    return title;
                 case MetaDataType.Author:
-                    return new AuthorData(iD, _defaultAuthor);
+                    AuthorData author = new AuthorData(iD);
+                    author.Add(new Author(_defaultAuthor));
+                    author.ShowInPreview = true;
+                    return author;
                 case MetaDataType.CreationDate:
-                    return new CreationDateData(iD);
+                    CreationDateData creationData = new CreationDateData(iD);
+                    creationData.ShowInPreview = false;
+                    return creationData;
                 case MetaDataType.LastChangedDate:
-                    return new LastChangeDateData(iD);
+                    LastChangeDateData lastChangeDate = new LastChangeDateData(iD);
+                    lastChangeDate.ShowInPreview = false;
+                    return lastChangeDate;
                 case MetaDataType.Tags:
-                    return new TagsData(iD);
+                    TagsData tags = new TagsData(iD);
+                    tags.ShowInPreview = true;
+                    return tags;
                 default:
                     throw new NotImplementedException();
 			}

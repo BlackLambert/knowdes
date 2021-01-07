@@ -6,8 +6,8 @@ namespace Knowdes.Prototype
     public class Entry : MonoBehaviour
     {
         [SerializeField]
-        private Transform _base = null;
-        public Transform Base => _base;
+        private RectTransform _base = null;
+        public RectTransform Base => _base;
 
         [SerializeField]
         private EntryVolume _content = null;

@@ -11,6 +11,8 @@ namespace Knowdes.Prototype
         private MetaContentEditorShell _shellPrefab;
         [SerializeField]
         private TitleEditor _titleEditorPrefab;
+        [SerializeField]
+        private TagsEditor _tagsEditorPrefab;
 
         public MetaContentEditorShell Create(MetaData data)
 		{
@@ -28,6 +30,10 @@ namespace Knowdes.Prototype
                     TitleEditor result = Instantiate(_titleEditorPrefab);
                     result.Data = data as TitleData;
                     return result;
+                case MetaDataType.Tags:
+                    TagsEditor tagsEditor = Instantiate(_tagsEditorPrefab);
+                    tagsEditor.Data = data as TagsData;
+                    return tagsEditor;
                 default:
                     throw new NotImplementedException();
             }

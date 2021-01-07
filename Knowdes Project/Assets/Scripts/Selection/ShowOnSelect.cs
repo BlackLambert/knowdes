@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class ToggleEnableOnSelect : MonoBehaviour
+    public class ShowOnSelect : MonoBehaviour
     {
         [SerializeField]
         private UISelectable _selectable = null;

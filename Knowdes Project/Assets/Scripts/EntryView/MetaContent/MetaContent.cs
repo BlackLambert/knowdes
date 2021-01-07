@@ -27,10 +27,16 @@ namespace Knowdes
         public abstract MetaData MetaData { get; }
 
 
+        protected virtual void OnDestroy()
+		{
+            removeVolumeListeners();
+
+        }
+
 
         protected void updateVisibility()
         {
-            _base.gameObject.SetActive(_volume != null &&(_volume.Expanded || MetaData.ShowInPreview));
+            _base.gameObject.SetActive(_volume != null && (_volume.Expanded || MetaData.ShowInPreview));
         }
 
         private void addVolumeListeners()

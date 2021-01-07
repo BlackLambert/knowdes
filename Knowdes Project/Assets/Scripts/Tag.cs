@@ -17,7 +17,7 @@ namespace Knowdes
 			set
 			{
                 _name = value;
-                OnNameChanged();
+                OnNameChanged?.Invoke();
 			}
 		}
 

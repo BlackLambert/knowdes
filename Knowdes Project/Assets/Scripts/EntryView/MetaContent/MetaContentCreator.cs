@@ -60,7 +60,7 @@ namespace Knowdes
         {
             MetaContent content = _volume.Get(data.Type);
             _volume.RemoveMetaContent(content);
-            Destroy(content.Base);
+            Destroy(content.Base.gameObject);
         }
     }
 }

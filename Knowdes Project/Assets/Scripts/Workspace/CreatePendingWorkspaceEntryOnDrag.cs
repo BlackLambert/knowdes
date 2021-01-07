@@ -27,11 +27,12 @@ namespace Knowdes.Prototype
 				return;
 
 			PendingWorkspaceEntry result = Instantiate(_entryPrefab);
-			result.transform.SetParent(GetComponentInParent<Canvas>().transform, false);
-			result.transform.localScale = Vector3.one;
+			result.Base.SetParent(GetComponentInParent<Canvas>().transform, false);
+			result.Base.localScale = Vector3.one;
 			result.WorkspaceEntry.LinkedEntry = _entry;
 			result.WorkspaceEntry.SetContent(_volumeFactory.Create(_entry.Volume));
 			result.WorkspaceEntry.Content.Data = _entry.Volume.Data;
+			result.Base.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _entry.Base.rect.width);
 			_workspace.PendingEntry = result;
 		}
 

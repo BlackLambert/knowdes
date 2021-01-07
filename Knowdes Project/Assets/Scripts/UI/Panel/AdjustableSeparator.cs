@@ -9,7 +9,6 @@ namespace Knowdes
     [RequireComponent(typeof(Graphics))]
     public class AdjustableSeparator : MonoBehaviour, IPointerDownHandler
     {
-        [SerializeField]
         private Panel _first = null;
         public Panel First
 		{
@@ -19,7 +18,7 @@ namespace Knowdes
                 _first = value;
             }
 		}
-        [SerializeField]
+
         private Panel _second = null;
         public Panel Second
         {

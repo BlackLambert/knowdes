@@ -9,6 +9,8 @@ namespace Knowdes
     {
         [SerializeField]
         private TitleMetaContent _titleContentPrefab;
+        [SerializeField]
+        private TagsContent _tagsContentPrefab;
 
         public MetaContent Create(MetaData data, EntryVolume volume)
 		{
@@ -26,6 +28,10 @@ namespace Knowdes
                     TitleMetaContent result = Instantiate(_titleContentPrefab);
                     result.Data = data as TitleData;
                     return result;
+                case MetaDataType.Tags:
+                    TagsContent tags = Instantiate(_tagsContentPrefab);
+                    tags.Data = data as TagsData;
+                    return tags;
                 default:
                     throw new NotImplementedException();
             }

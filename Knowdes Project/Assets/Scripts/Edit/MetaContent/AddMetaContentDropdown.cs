@@ -40,6 +40,7 @@ namespace Knowdes.Prototype
 				return;
 
 			_dropdown.options.Clear();
+			_selectableTypesList.Clear();
 			List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
 			foreach (MetaDataType value in Enum.GetValues(typeof(MetaDataType)))
 			{
@@ -59,7 +60,6 @@ namespace Knowdes.Prototype
 			if (value == 0)
 				return;
 			_current.Data.AddMetaData(_dataFactory.Create(_selectableTypesList[value]));
-			updateDropdown();
 		}
 
 
@@ -67,13 +67,34 @@ namespace Knowdes.Prototype
 		private void onEntryChanged()
 		{
 			_dropdown.onValueChanged.RemoveListener(onValueChanged);
-			if (_current != null)
-				_current.Data.OnContentChanged -= onContentChanged;
+			removeEntryListeners();
 			_current = _editPanel.Entry;
 			updateDropdown();
-			if (_current != null)
-				_current.Data.OnContentChanged += onContentChanged;
+			addEntryListeners();
 			_dropdown.onValueChanged.AddListener(onValueChanged);
+		}
+
+		private void addEntryListeners()
+		{
+			if (_current == null)
+				return;
+			_current.Data.OnContentChanged += onContentChanged;
+			_current.Data.OnMetaDataAdded += onMetaDataChanged;
+			_current.Data.OnMetaDataRemoved += onMetaDataChanged;
+		}
+
+		private void removeEntryListeners()
+		{
+			if (_current == null)
+				return;
+			_current.Data.OnContentChanged -= onContentChanged;
+			_current.Data.OnMetaDataAdded -= onMetaDataChanged;
+			_current.Data.OnMetaDataRemoved -= onMetaDataChanged;
+		}
+
+		private void onMetaDataChanged(MetaData obj)
+		{
+			updateDropdown();
 		}
 
 		private void onContentChanged()
