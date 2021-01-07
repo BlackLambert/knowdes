@@ -11,6 +11,10 @@ namespace Knowdes
         private TitleMetaContent _titleContentPrefab;
         [SerializeField]
         private TagsContent _tagsContentPrefab;
+        [SerializeField]
+        private CreationDateContent _creationDateContentPrefab;
+        [SerializeField]
+        private LastChangedDateContent _lastChangedDateContentPrefab;
 
         public MetaContent Create(MetaData data, EntryVolume volume)
 		{
@@ -32,6 +36,14 @@ namespace Knowdes
                     TagsContent tags = Instantiate(_tagsContentPrefab);
                     tags.Data = data as TagsData;
                     return tags;
+                case MetaDataType.CreationDate:
+                    CreationDateContent creationDate = Instantiate(_creationDateContentPrefab);
+                    creationDate.Data = data as CreationDateData;
+                    return creationDate;
+                case MetaDataType.LastChangedDate:
+                    LastChangedDateContent lastChangeDate = Instantiate(_lastChangedDateContentPrefab);
+                    lastChangeDate.Data = data as LastChangeDateData;
+                    return lastChangeDate;
                 default:
                     throw new NotImplementedException();
             }

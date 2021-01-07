@@ -13,27 +13,43 @@ namespace Knowdes.Prototype
         private TitleEditor _titleEditorPrefab;
         [SerializeField]
         private TagsEditor _tagsEditorPrefab;
+        [SerializeField]
+        private CreationDateEditor _creationDateEditor;
+        [SerializeField]
+        private LastChangeDateEditor _lastChangeDateEditor;
 
         public MetaContentEditorShell Create(MetaData data)
 		{
             MetaContentEditorShell result = Instantiate(_shellPrefab);
-            MetaContentEditor editor = createEditor(data);
+            MetaContentEditor editor = createEditor(data, result);
             result.SetEditor(editor);
             return result;
         }
 
-        private MetaContentEditor createEditor(MetaData data)
+        private MetaContentEditor createEditor(MetaData data, MetaContentEditorShell shell)
 		{
             switch (data.Type)
             {
                 case MetaDataType.Title:
+                    shell.ViewToggle.Toggle(true);
                     TitleEditor result = Instantiate(_titleEditorPrefab);
                     result.Data = data as TitleData;
                     return result;
                 case MetaDataType.Tags:
+                    shell.ViewToggle.Toggle(true);
                     TagsEditor tagsEditor = Instantiate(_tagsEditorPrefab);
                     tagsEditor.Data = data as TagsData;
                     return tagsEditor;
+                case MetaDataType.CreationDate:
+                    shell.ViewToggle.Toggle(false);
+                    CreationDateEditor creationDateEditor = Instantiate(_creationDateEditor);
+                    creationDateEditor.Data = data as CreationDateData;
+                    return creationDateEditor;
+                case MetaDataType.LastChangedDate:
+                    shell.ViewToggle.Toggle(false);
+                    LastChangeDateEditor lastChangeDate = Instantiate(_lastChangeDateEditor);
+                    lastChangeDate.Data = data as LastChangeDateData;
+                    return lastChangeDate;
                 default:
                     throw new NotImplementedException();
             }

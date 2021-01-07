@@ -20,7 +20,7 @@ namespace Knowdes
                     title.ShowInPreview = true;
                     return title;
                 case MetaDataType.Author:
-                    AuthorData author = new AuthorData(iD);
+                    AuthorData author = new AuthorData(iD, new List<Author>());
                     author.Add(new Author(_defaultAuthor));
                     author.ShowInPreview = true;
                     return author;
@@ -33,7 +33,7 @@ namespace Knowdes
                     lastChangeDate.ShowInPreview = false;
                     return lastChangeDate;
                 case MetaDataType.Tags:
-                    TagsData tags = new TagsData(iD);
+                    TagsData tags = new TagsData(iD, new List<Tag>());
                     tags.ShowInPreview = true;
                     return tags;
                 default:

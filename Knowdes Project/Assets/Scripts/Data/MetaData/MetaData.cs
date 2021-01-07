@@ -14,14 +14,26 @@ namespace Knowdes
 			{
 				_showInPreview = value;
 				OnShowInPreviewChanged?.Invoke();
+				OnChanged?.Invoke();
 			}
 		}
 
 		public abstract MetaDataType Type { get; }
+		public abstract int Priority { get; }
 
-		public MetaData(Guid iD)
+		public bool Destroyable { get; }
+
+		public event Action OnChanged;
+
+		public MetaData(Guid iD, bool destroyable)
 		{
 			ID = iD;
+			Destroyable = destroyable;
+		}
+
+		protected void invokeOnChanged()
+		{
+			OnChanged?.Invoke();
 		}
 	}
 }

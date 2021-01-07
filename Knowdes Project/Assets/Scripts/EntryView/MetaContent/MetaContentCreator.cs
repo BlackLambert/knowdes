@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Knowdes
@@ -37,6 +38,7 @@ namespace Knowdes
 			{
                 addMetaContent(data.Value);
 			}
+            reorder();
 		}
 
 
@@ -54,6 +56,7 @@ namespace Knowdes
                     break;
 			}
             content.Base.localScale = Vector3.one;
+            reorder();
         }
 
         private void removeMetaContent(MetaData data)
@@ -61,6 +64,15 @@ namespace Knowdes
             MetaContent content = _volume.Get(data.Type);
             _volume.RemoveMetaContent(content);
             Destroy(content.Base.gameObject);
+            reorder();
+        }
+
+        private void reorder()
+        {
+            IEnumerable<MetaContent> metaContent = _volume.MetaContentCopy.Values;
+            metaContent = metaContent.OrderBy(e => e.MetaData.Priority);
+            foreach (MetaContent shell in metaContent)
+                shell.Base.SetAsFirstSibling();
         }
     }
 }

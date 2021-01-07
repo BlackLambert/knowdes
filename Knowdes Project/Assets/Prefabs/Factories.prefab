@@ -103,6 +103,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleContentPrefab: {fileID: 7831450399272034922, guid: 99ecf4525303eeb499af91f9731df9f2, type: 3}
   _tagsContentPrefab: {fileID: 8508232644365268676, guid: cd04cbaa8976ff84bacb9567bc7975ae, type: 3}
+  _creationDateContentPrefab: {fileID: 8331954858599100417, guid: 5907c4ee8ac3f2d45be8cfea4d1a48d3, type: 3}
+  _lastChangedDateContentPrefab: {fileID: 2227285345269285312, guid: 3244e6fd533cee14484b1a8b76f7723e, type: 3}
 --- !u!114 &1924200051398045832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +133,5 @@ MonoBehaviour:
   _shellPrefab: {fileID: 4956429100039910949, guid: 8b8a932e5381bd54d8975f9fdcdd9c9e, type: 3}
   _titleEditorPrefab: {fileID: 1979242745407521866, guid: 281182b07aaf2aa40be3be41049b665e, type: 3}
   _tagsEditorPrefab: {fileID: 4923754520298913140, guid: 5c41fad7b1bc6034f8040b3ab5fe85b2, type: 3}
+  _creationDateEditor: {fileID: 3259444324160066811, guid: 3353458c207f2f14db3b532930359478, type: 3}
+  _lastChangeDateEditor: {fileID: 7954613955823255587, guid: e7ce6a78e37564c4e85241ce2ea2b27a, type: 3}

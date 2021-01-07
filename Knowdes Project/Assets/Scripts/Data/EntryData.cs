@@ -18,6 +18,7 @@ namespace Knowdes
 			{
                 _content = value;
                 OnContentChanged?.Invoke();
+                invokeOnChanged();
             }
         }
 
@@ -25,6 +26,8 @@ namespace Knowdes
         public Dictionary<MetaDataType, MetaData> MetaDatasCopy => new Dictionary<MetaDataType, MetaData>(_metaDatas);
         public event Action<MetaData> OnMetaDataAdded;
         public event Action<MetaData> OnMetaDataRemoved;
+
+        public event Action<EntryData> OnChanged;
 
         public EntryData(Guid iD, ContentData content)
 		{
@@ -48,6 +51,8 @@ namespace Knowdes
                 throw new InvalidOperationException();
             _metaDatas.Add(metaData.Type, metaData);
             OnMetaDataAdded?.Invoke(metaData);
+            metaData.OnChanged += invokeOnChanged;
+            invokeOnChanged();
         }
 
         public void RemoveMetaData(MetaData metaData)
@@ -56,11 +61,23 @@ namespace Knowdes
                 throw new InvalidOperationException();
             _metaDatas.Remove(metaData.Type);
             OnMetaDataRemoved?.Invoke(metaData);
-		}
+            metaData.OnChanged -= invokeOnChanged;
+            invokeOnChanged();
+        }
 
         public bool Contains(MetaDataType type)
 		{
             return _metaDatas.ContainsKey(type);
 		}
+
+        public MetaData Get(MetaDataType type)
+		{
+            return _metaDatas[type];
+		}
+
+        private void invokeOnChanged()
+		{
+            OnChanged?.Invoke(this);
+        }
     }
 }

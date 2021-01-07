@@ -10,12 +10,23 @@ namespace Knowdes
 
 
 		public override MetaDataType Type => MetaDataType.Author;
+
+		public override int Priority => 100;
+
 		public event Action<Author> OnAdded;
 		public event Action<Author> OnRemoved;
 
-		public AuthorData(Guid iD) : base(iD)
+		public AuthorData(Guid iD, List<Author> authors) : base(iD, true)
 		{
-			
+			_authors = authors;
+			init();
+		}
+		private void init()
+		{
+			foreach (Author author in _authors)
+			{
+				author.OnNameChanged += invokeOnChanged;
+			}
 		}
 
 		public void Add(Author author)
@@ -23,6 +34,8 @@ namespace Knowdes
 			if (_authors.Contains(author))
 				throw new InvalidOperationException();
 			_authors.Add(author);
+			author.OnNameChanged += invokeOnChanged;
+			invokeOnChanged();
 		}
 
 		public void Remove(Author author)
@@ -30,6 +43,8 @@ namespace Knowdes
 			if (!_authors.Contains(author))
 				throw new InvalidOperationException();
 			_authors.Remove(author);
+			author.OnNameChanged -= invokeOnChanged;
+			invokeOnChanged();
 		}
 	}
 }

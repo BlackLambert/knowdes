@@ -29,5 +29,5 @@ namespace Knowdes.Prototype
             _entries.Add(result);
             return result;
         }
-    }
+	}
 }

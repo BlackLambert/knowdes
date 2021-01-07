@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 2129008444727268219}
   - component: {fileID: 3049584798237586516}
   - component: {fileID: 7279932540400000587}
+  - component: {fileID: 4067475816289668821}
   m_Layer: 5
   m_Name: AddMetaDataDropdown
   m_TagString: Untagged
@@ -454,6 +455,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f98cd8e472d134798e2bae2864b873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4067475816289668821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2663499608912707514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd60a4dbbbd0c340894d3d505aded52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipText: "Neuen Metainhalt hinzuf\xFCgen"
 --- !u!1 &2846457732763604618
 GameObject:
   m_ObjectHideFlags: 0

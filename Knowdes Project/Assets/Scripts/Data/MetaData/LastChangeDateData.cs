@@ -20,9 +20,11 @@ namespace Knowdes
 
 		public override MetaDataType Type => MetaDataType.LastChangedDate;
 
+		public override int Priority => int.MinValue + 1;
+
 		public event Action OnDateChanged;
 
-		public LastChangeDateData(Guid iD) : base(iD)
+		public LastChangeDateData(Guid iD) : base(iD, false)
 		{
 			_date = DateTime.Now;
 		}

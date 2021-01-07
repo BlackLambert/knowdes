@@ -13,12 +13,15 @@ namespace Knowdes
 			{
 				_content = value;
 				OnContentChanged?.Invoke();
+				invokeOnChanged();
 			}
 		}
 
+		public override int Priority => int.MaxValue;
+
 		public override MetaDataType Type => MetaDataType.Title;
 
-		public TitleData(Guid iD, string content) : base(iD)
+		public TitleData(Guid iD, string content) : base(iD, true)
 		{
 			_content = content;
 		}

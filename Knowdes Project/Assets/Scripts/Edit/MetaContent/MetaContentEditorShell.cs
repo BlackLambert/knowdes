@@ -14,6 +14,10 @@ namespace Knowdes.Prototype
         [SerializeField]
         private RectTransform _editorHook;
 
+        [SerializeField]
+        private UIToggle _viewToggle;
+        public UIToggle ViewToggle => _viewToggle;
+
         private MetaContentEditor _editor;
         public MetaData Data => _editor != null ? _editor.MetaData : null;
 

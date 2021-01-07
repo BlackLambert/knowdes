@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 4203932449462889054}
   - component: {fileID: 639725650417806271}
   - component: {fileID: 8250135609449460075}
+  - component: {fileID: 1455744064119352371}
   m_Layer: 5
   m_Name: CollapseButton
   m_TagString: Untagged
@@ -391,6 +392,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f98cd8e472d134798e2bae2864b873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1455744064119352371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7315005442135448867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd60a4dbbbd0c340894d3d505aded52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipText: "Bereich schlie\xDFen"
 --- !u!1001 &3194432277507324671
 PrefabInstance:
   m_ObjectHideFlags: 0

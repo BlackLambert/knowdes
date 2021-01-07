@@ -12,7 +12,9 @@ namespace Knowdes
 
 		public override MetaDataType Type => MetaDataType.CreationDate;
 
-		public CreationDateData(Guid iD) : base(iD)
+		public override int Priority => int.MinValue;
+
+		public CreationDateData(Guid iD) : base(iD, false)
 		{
 			_date = DateTime.Now;
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Knowdes.Prototype
@@ -60,6 +61,7 @@ namespace Knowdes.Prototype
         {
             foreach (KeyValuePair<MetaDataType, MetaData> data in _current.Data.MetaDatasCopy)
                 addMetaEditor(data.Value);
+            reorder();
         }
 
         private void clean()
@@ -76,6 +78,7 @@ namespace Knowdes.Prototype
             editor.Base.SetParent(_editorsHook);
             editor.Base.localScale = Vector3.one;
             _typeToShells.Add(data.Type, editor);
+            reorder();
         }
 
         private void removeMetaContent(MetaData data)
@@ -85,6 +88,15 @@ namespace Knowdes.Prototype
             MetaContentEditorShell editor = _typeToShells[data.Type];
             _typeToShells.Remove(data.Type);
             Destroy(editor.Base.gameObject);
+            reorder();
+        }
+
+        private void reorder()
+        {
+            IEnumerable<MetaContentEditorShell> editorShells = _typeToShells.Values;
+            editorShells = editorShells.OrderBy(e => e.Data.Priority);
+            foreach (MetaContentEditorShell shell in editorShells)
+                shell.Base.SetAsFirstSibling();
         }
     }
 }

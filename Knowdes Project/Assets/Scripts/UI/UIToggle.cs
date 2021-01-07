@@ -14,8 +14,6 @@ namespace Knowdes
         private Button _hideButton = null;
         [SerializeField]
         private GameObject _target = null;
-        [SerializeField]
-        private bool _showOnStart = false;
 
         private bool _shown = false;
 
@@ -23,7 +21,6 @@ namespace Knowdes
 		{
             _showButton.onClick.AddListener(show);
             _hideButton.onClick.AddListener(hide);
-            _shown = _showOnStart;
             updateUI();
         }
 
@@ -32,6 +29,12 @@ namespace Knowdes
             _showButton.onClick.RemoveListener(show);
             _hideButton.onClick.RemoveListener(hide);
         }
+
+        public void Toggle(bool show)
+		{
+            _shown = show;
+            updateUI();
+		}
 
         private void show()
         {
