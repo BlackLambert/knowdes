@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Knowdes.Prototype
 {
-    public class TagsEditor : MetaContentEditor
+    public class TagsEditor : MetaContentEditor<TagsData>
     {
         private const string _defaultTagName = "Neues Schlagwort";
 
@@ -16,21 +17,8 @@ namespace Knowdes.Prototype
         private RectTransform _hook;
         [SerializeField]
         private Button _addButton;
-
-        private TagsData _data;
-        public TagsData Data
-        {
-            get => _data;
-			set
-			{
-                cleanEditors();
-                _data = value;
-                initEditors();
-
-            }
-        }
-
-		public override MetaData MetaData => _data;
+        [SerializeField]
+        private TMP_InputField _tagNameInput;
 
 		private Dictionary<Tag, TagEditor> _editors = new Dictionary<Tag, TagEditor>();
 
@@ -38,34 +26,49 @@ namespace Knowdes.Prototype
         protected virtual void Start()
 		{
             _addButton.onClick.AddListener(addNewTag);
+            _tagNameInput.text = _defaultTagName;
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
 		{
+            base.OnDestroy();
             _addButton.onClick.RemoveListener(addNewTag);
         }
 
-		private void addNewTag()
-		{
-            _data.AddTag(new Tag(Guid.NewGuid(), _defaultTagName)); 
-		}
+        protected override void onDataAdded(TagsData data)
+        {
+            initEditors();
+        }
 
-		private void initEditors()
-		{
-            if (_data == null)
+        protected override void onDataRemoved(TagsData data)
+        {
+            cleanEditors();
+        }
+
+        private void addNewTag()
+        {
+            if (string.IsNullOrEmpty(_tagNameInput.text))
                 return;
-            _data.OnTagsAdded += addEditor;
-            _data.OnTagsRemoved += removeEditor;
-            foreach (Tag tag in _data.TagsCopy)
+            Data.AddTag(new Tag(Guid.NewGuid(), _tagNameInput.text));
+            _tagNameInput.text = string.Empty;
+        }
+
+        private void initEditors()
+		{
+            if (Data == null)
+                return;
+            Data.OnTagsAdded += addEditor;
+            Data.OnTagsRemoved += removeEditor;
+            foreach (Tag tag in Data.TagsCopy)
                 addEditor(tag);
 		}
 
         private void cleanEditors()
 		{
-            if (_data == null)
+            if (Data == null)
                 return;
-            _data.OnTagsAdded -= addEditor;
-            _data.OnTagsRemoved -= removeEditor;
+            Data.OnTagsAdded -= addEditor;
+            Data.OnTagsRemoved -= removeEditor;
             foreach (KeyValuePair<Tag, TagEditor> pair in new Dictionary<Tag, TagEditor>(_editors))
                 removeEditor(pair.Key);
         }
@@ -86,5 +89,5 @@ namespace Knowdes.Prototype
             _editors.Remove(editor.Tag);
             Destroy(editor.Base.gameObject);
 		}
-    }
+	}
 }

@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd60a4dbbbd0c340894d3d505aded52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tooltipText: "F\xFCge einen zuf\xE4lligen Eintrag hinzu"
+  _tooltipText: "F\xFCge einen neuen Eintrag hinzu"
 --- !u!114 &576588807272804588
 MonoBehaviour:
   m_ObjectHideFlags: 0
