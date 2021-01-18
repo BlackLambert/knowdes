@@ -5,29 +5,25 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class CreationDateContent : MetaContent
+    public class CreationDateContent : MetaContent<CreationDateData>
     {
-		private CreationDateData _data;
-		public CreationDateData Data
-		{
-			get => _data;
-			set
-			{
-				_data = value;
-				updateText();
-			}
-		}
-
-		public override MetaDataType Type => _data.Type;
-
-		public override MetaData MetaData => _data;
 
 		[SerializeField]
 		private TextMeshProUGUI _text;
 
 		private void updateText()
 		{
-			_text.text = _data.Date.ToString();
+			_text.text = Data.Date.ToString();
+		}
+
+		protected override void onDataAdded(CreationDateData data)
+		{
+			updateText();
+		}
+
+		protected override void onDataRemoved(CreationDateData data)
+		{
+			
 		}
 	}
 }

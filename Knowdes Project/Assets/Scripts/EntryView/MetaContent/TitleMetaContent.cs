@@ -5,58 +5,30 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class TitleMetaContent : MetaContent
+    public class TitleMetaContent : MetaContent<TitleData>
     {
 		[SerializeField]
 		private TextMeshProUGUI _text;
 
-        private TitleData _data;
-		public TitleData Data
+		protected override void onDataAdded(TitleData data)
 		{
-			get => _data;
-			set
-			{
-				removeDataListeners();
-				_data = value;
-				updateVisibility();
-				updateText();
-				addDataListeners();
-			}
-		}
-
-		public override MetaDataType Type => _data.Type;
-
-		public override MetaData MetaData => _data;
-
-		protected override void OnDestroy()
-		{
-			base.OnDestroy();
-			removeDataListeners();
-		}
-
-		private void addDataListeners()
-		{
-			if (_data == null)
+			if (data == null)
 				return;
 
-			_data.OnContentChanged += updateText;
-			_data.OnShowInPreviewChanged += updateVisibility;
+			data.OnContentChanged += updateText;
 		}
 
-
-		private void removeDataListeners()
+		protected override void onDataRemoved(TitleData data)
 		{
-			if (_data == null)
+			if (data == null)
 				return;
-			
-			_data.OnContentChanged -= updateText;
-			_data.OnShowInPreviewChanged -= updateVisibility;
-			
+
+			data.OnContentChanged -= updateText;
 		}
 
 		private void updateText()
 		{
-			_text.text = _data.Content;
+			_text.text = Data.Content;
 		}
 	}
 }

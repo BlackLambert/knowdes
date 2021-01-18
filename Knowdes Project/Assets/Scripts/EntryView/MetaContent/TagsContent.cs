@@ -1,58 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using TMPro;
 using UnityEngine;
 
 namespace Knowdes
 {
-	public class TagsContent : MetaContent
+	public class TagsContent : MetaContent<TagsData>
 	{
 		[SerializeField]
 		private TextMeshProUGUI _text;
 
-		public override MetaDataType Type => Data.Type;
-
-		public override MetaData MetaData => Data;
-
-		private TagsData _data;
-		public TagsData Data
-		{
-			get => _data;
-			set
-			{
-				clean();
-				_data = value;
-				updateVisibility();
-				init();
-			}
-		}
-
 		protected override void OnDestroy()
 		{
 			base.OnDestroy();
-			clean();
-		}
-
-		private void init()
-		{
-			if (_data == null)
-				return;
-			foreach (Tag tag in Data.TagsCopy)
-				initTag(tag);
-			_data.OnTagsAdded += initTag;
-			_data.OnTagsRemoved += cleanTag;
-			updateText();
-		}
-
-		private void clean()
-		{
-			if (_data == null)
-				return;
-			foreach (Tag tag in Data.TagsCopy)
-				cleanTag(tag);
-			_data.OnTagsAdded -= initTag;
-			_data.OnTagsRemoved -= cleanTag;
+			onDataRemoved(Data);
 		}
 
 		private void initTag(Tag tag)
@@ -70,13 +30,34 @@ namespace Knowdes
 		private void updateText()
 		{
 			string text = string.Empty;
-			foreach(Tag tag in _data.TagsCopy)
+			foreach(Tag tag in Data.TagsCopy)
 			{
 				if (!string.IsNullOrEmpty(text))
 					text += " | ";
 				text += tag.Name;
 			}
 			_text.text = text;
+		}
+
+		protected override void onDataAdded(TagsData data)
+		{
+			if (data == null)
+				return;
+			foreach (Tag tag in Data.TagsCopy)
+				initTag(tag);
+			data.OnTagsAdded += initTag;
+			data.OnTagsRemoved += cleanTag;
+			updateText();
+		}
+
+		protected override void onDataRemoved(TagsData data)
+		{
+			if (data == null)
+				return;
+			foreach (Tag tag in Data.TagsCopy)
+				cleanTag(tag);
+			data.OnTagsAdded -= initTag;
+			data.OnTagsRemoved -= cleanTag;
 		}
 	}
 }
