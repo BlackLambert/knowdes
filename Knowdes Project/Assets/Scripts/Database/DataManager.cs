@@ -262,8 +262,8 @@ namespace Knowdes
             dbcmd.CommandText = "INSERT INTO " + TABLE_NAME_METADATA + " ( " + METADATA_ID + ", " + METADATA_INHALT +
                                                                         ", " + METADATA_DESTROY + ", " + METADATA_PRIORITY + ", " + METADATA_SHOWINPREVIEW +
                                                                         ", " + METADATA_TYP + " ) " +
-                                                                        "VALUES ( '" + meta.ID.ToString() + "', '" + inhalt + "', '" + meta.Destroyable + "', '" +
-                                                                                 meta.Priority + "', '" + meta.ShowInPreview + "', '" + meta.Type + "' )";
+                                                                        "VALUES ( '" + meta.ID.ToString() + "', '" + inhalt + "', '" +
+                                                                                  meta.ShowInPreview + "', '" + ((int)meta.Type) + "' )";
             dbcmd.ExecuteNonQuery();
         }
 
@@ -282,7 +282,7 @@ namespace Knowdes
         {
             IDbCommand dbcmd = getDbCommand();
             dbcmd.CommandText = "INSERT INTO " + TABLE_NAME_CONTENT + " ( " + CONTENT_ID + ", " + CONTENT_TYP + ", " + CONTENT_INHALT + " ) "
-                              + "VALUES ( '" + cd.ID.ToString() + "', '" + cd.Type + "', '" + cd.Text + "' )";
+                              + "VALUES ( '" + cd.ID.ToString() + "', '" + ((int)cd.Type) + "', '" + cd.Text + "' )";
             dbcmd.ExecuteNonQuery();
         }
 
@@ -290,7 +290,7 @@ namespace Knowdes
         {
             IDbCommand dbcmd = getDbCommand();
             dbcmd.CommandText = "INSERT INTO " + TABLE_NAME_CONTENT + " ( " + CONTENT_ID + ", " + CONTENT_TYP + ", " + CONTENT_INHALT + " ) "
-                              + "VALUES ( '" + cd.ID.ToString() + "', '" + cd.Type + "', '" + cd.Path + "' )";
+                              + "VALUES ( '" + cd.ID.ToString() + "', '" + ((int)cd.Type) + "', '" + cd.Path + "' )";
             dbcmd.ExecuteNonQuery();
         }
         public void addContent(ContentData content)
