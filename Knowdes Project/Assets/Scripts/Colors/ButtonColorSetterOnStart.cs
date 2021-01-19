@@ -12,6 +12,7 @@ namespace Knowdes
         [SerializeField]
         private Button _target = null;
 
+
         protected virtual void Start()
         {
             _colors = FindObjectOfType<AppColors>();

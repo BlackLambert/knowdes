@@ -36,6 +36,8 @@ namespace Knowdes
 
         protected void updateVisibility()
         {
+            if (_volume == null || MetaData == null)
+                return;
             _base.gameObject.SetActive(_volume != null && (_volume.Expanded || this.MetaData.ShowInPreview));
         }
 

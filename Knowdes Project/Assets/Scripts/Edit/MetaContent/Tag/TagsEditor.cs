@@ -9,7 +9,6 @@ namespace Knowdes.Prototype
 {
     public class TagsEditor : MetaContentEditor<TagsData>
     {
-        private const string _defaultTagName = "Neues Schlagwort";
 
         [SerializeField]
         private TagEditor _editorPrefab;
@@ -20,19 +19,32 @@ namespace Knowdes.Prototype
         [SerializeField]
         private TMP_InputField _tagNameInput;
 
+        [SerializeField]
+        private RectTransform _emptyNameErrorTextPanel = null;
+
 		private Dictionary<Tag, TagEditor> _editors = new Dictionary<Tag, TagEditor>();
 
 
         protected virtual void Start()
 		{
             _addButton.onClick.AddListener(addNewTag);
-            _tagNameInput.text = _defaultTagName;
+            _tagNameInput.text = string.Empty;
+            _tagNameInput.onSubmit.AddListener(onSubmit);
+            _tagNameInput.onValueChanged.AddListener(onSelect);
+            hideErrors();
         }
 
-        protected override void OnDestroy()
+		private void onSubmit(string arg0)
+		{
+            addNewTag();
+        }
+
+		protected override void OnDestroy()
 		{
             base.OnDestroy();
             _addButton.onClick.RemoveListener(addNewTag);
+            _tagNameInput.onSubmit.RemoveListener(onSubmit);
+            _tagNameInput.onSelect.RemoveListener(onSelect);
         }
 
         protected override void onDataAdded(TagsData data)
@@ -48,9 +60,13 @@ namespace Knowdes.Prototype
         private void addNewTag()
         {
             if (string.IsNullOrEmpty(_tagNameInput.text))
+            {
+                showEmptyNameError();
                 return;
+            }
             Data.AddTag(new Tag(Guid.NewGuid(), _tagNameInput.text));
             _tagNameInput.text = string.Empty;
+            _tagNameInput.ActivateInputField();
         }
 
         private void initEditors()
@@ -89,5 +105,21 @@ namespace Knowdes.Prototype
             _editors.Remove(editor.Tag);
             Destroy(editor.Base.gameObject);
 		}
+
+        private void showEmptyNameError()
+		{
+            _emptyNameErrorTextPanel.gameObject.SetActive(true);
+        }
+
+        private void onSelect(string arg0)
+        {
+            hideErrors();
+        }
+
+        private void hideErrors()
+		{
+            _emptyNameErrorTextPanel.gameObject.SetActive(false);
+
+        }
 	}
 }

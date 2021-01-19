@@ -75,7 +75,7 @@ namespace Knowdes
                 case State.Default:
                     return Vector2.zero;
                 case State.Interaction:
-                    return new Vector2(16,0);
+                    return new Vector2(16,8);
                 case State.ResizeHorizontal:
                 case State.ResizeVertical:
                 case State.Dragging:

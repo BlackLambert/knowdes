@@ -26,7 +26,7 @@ namespace Knowdes
 			}
 		}
 
-		protected virtual void OnDestroy()
+		protected override void OnDestroy()
 		{
 			_input.onValueChanged.RemoveListener(onTextChanged);
 		}

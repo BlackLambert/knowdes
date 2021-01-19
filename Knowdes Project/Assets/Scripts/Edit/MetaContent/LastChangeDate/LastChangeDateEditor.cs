@@ -20,6 +20,7 @@ namespace Knowdes
 			if (data == null)
 				return;
 			data.OnDateChanged += updateText;
+			updateText();
 		}
 
 		protected override void onDataRemoved(LastChangeDateData data)

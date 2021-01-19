@@ -7,6 +7,7 @@ namespace Knowdes
     [CreateAssetMenu(fileName = "AppColorSettings", menuName = "Knowdes/AppColorsSettings", order = 1)]
     public class AppColorsSettings : ScriptableObject
     {
+        [Header("Interaction Colors")]
         [SerializeField]
         private Color _selected = Color.white;
         public Color Selected => _selected;
@@ -23,6 +24,7 @@ namespace Knowdes
         private Color _inactive = new Color(0.6f, 0.6f, 0.6f, 1f);
         public Color Inactive => _inactive;
 
+        [Header("Background Colors")]
         [SerializeField]
         private Color _mainBackground = new Color(0.3f, 0.3f, 0.3f, 1f);
         public Color MainBackground => _mainBackground;
@@ -40,6 +42,11 @@ namespace Knowdes
         public Color WorkspaceBackground => _workspaceBackground;
 
         [SerializeField]
+        private Color _sectionHeader = new Color(0f, 0f, 0f, 0.15f);
+        public Color SectionHeader => _sectionHeader;
+
+        [Header("Text Colors")]
+        [SerializeField]
         private Color _defaultText = Color.white;
         public Color DefaultText => _defaultText;
 
@@ -50,5 +57,9 @@ namespace Knowdes
         [SerializeField]
         private Color _placeholderText = new Color(0.6f, 0.6f, 0.6f, 1f);
         public Color PlaceholderText => _placeholderText;
+
+        [SerializeField]
+        private Color _errorText = Color.red;
+        public Color ErrorText => _errorText;
     }
 }

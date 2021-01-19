@@ -18,6 +18,8 @@ namespace Knowdes
                     return _colors.InteractionElementBackground;
                 case Type.InteractionElementBackgroundShadow:
                     return _colors.InteractionElementBackgroundShadow;
+                case Type.SectionHeader:
+                    return _colors.SectionHeader;
                 case Type.WorkspaceBackground:
                     return _colors.WorkspaceBackground;
                 case Type.DefaultText:
@@ -26,6 +28,8 @@ namespace Knowdes
                     return _colors.LabelText;
                 case Type.PlaceholderText:
                     return _colors.PlaceholderText;
+                case Type.ErrorText:
+                    return _colors.ErrorText;
                 case Type.Interactable:
                     return _colors.Interactable;
                 case Type.Highlighted:
@@ -45,10 +49,12 @@ namespace Knowdes
             InteractionElementBackground = 1,
             WorkspaceBackground = 2,
             InteractionElementBackgroundShadow = 3,
+            SectionHeader = 4,
 
             DefaultText = 100,
             LabelText = 101,
             PlaceholderText = 102,
+            ErrorText = 103,
 
             Interactable = 200,
             Highlighted = 201,

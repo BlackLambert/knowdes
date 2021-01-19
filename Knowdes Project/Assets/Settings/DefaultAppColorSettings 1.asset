@@ -23,3 +23,4 @@ MonoBehaviour:
   _defaultText: {r: 1, g: 1, b: 1, a: 1}
   _labelText: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
   _placeholderText: {r: 0.6, g: 0.6, b: 0.6, a: 1}
+  _errorText: {r: 0.745283, g: 0, b: 0, a: 1}
