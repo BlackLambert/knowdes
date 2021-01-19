@@ -21,7 +21,9 @@ namespace Knowdes
 
 		public override MetaDataType Type => MetaDataType.Title;
 
-		public TitleData(Guid iD, string content) : base(iD, true)
+		public override bool Destroyable => true;
+
+		public TitleData(Guid iD, string content) : base(iD)
 		{
 			_content = content;
 		}

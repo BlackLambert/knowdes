@@ -59,7 +59,7 @@ namespace Knowdes.Prototype
 		{
 			if (value == 0)
 				return;
-			_current.Data.AddMetaData(_dataFactory.Create(_selectableTypesList[value]));
+			_current.Data.AddMetaData(_dataFactory.CreateNew(_selectableTypesList[value]));
 		}
 
 

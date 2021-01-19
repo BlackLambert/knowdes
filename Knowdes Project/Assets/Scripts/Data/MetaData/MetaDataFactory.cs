@@ -8,20 +8,18 @@ namespace Knowdes
     public class MetaDataFactory
     {
         private const string _defaultTitle = "Titel";
-        private const string _defaultAuthor = "Unbekannt";
 
-        public MetaData Create(MetaDataType type)
+        public MetaData CreateNew(MetaDataType type)
 		{
-            Guid iD = Guid.NewGuid();
-            switch(type)
-			{
+            Guid iD = new Guid();
+            switch (type)
+            {
                 case MetaDataType.Title:
                     TitleData title = new TitleData(iD, _defaultTitle);
                     title.ShowInPreview = true;
                     return title;
                 case MetaDataType.Author:
-                    AuthorData author = new AuthorData(iD, new List<Author>());
-                    author.Add(new Author(_defaultAuthor));
+                    AuthorData author = new AuthorData(iD);
                     author.ShowInPreview = true;
                     return author;
                 case MetaDataType.CreationDate:
@@ -33,12 +31,12 @@ namespace Knowdes
                     lastChangeDate.ShowInPreview = false;
                     return lastChangeDate;
                 case MetaDataType.Tags:
-                    TagsData tags = new TagsData(iD, new List<Tag>());
+                    TagsData tags = new TagsData(iD);
                     tags.ShowInPreview = true;
                     return tags;
                 default:
                     throw new NotImplementedException();
-			}
-		}
+            }
+        }
     }
 }

@@ -13,10 +13,17 @@ namespace Knowdes
 
 		public override int Priority => 100;
 
+		public override bool Destroyable => true;
+
 		public event Action<Author> OnAdded;
 		public event Action<Author> OnRemoved;
 
-		public AuthorData(Guid iD, List<Author> authors) : base(iD, true)
+		public AuthorData(Guid iD):base(iD)
+		{
+			_authors = new List<Author>();
+		}
+
+		public AuthorData(Guid iD, List<Author> authors) : base(iD)
 		{
 			_authors = authors;
 			init();

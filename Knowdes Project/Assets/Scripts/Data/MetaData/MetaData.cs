@@ -5,6 +5,7 @@ namespace Knowdes
 	public abstract class MetaData
 	{
 		public Guid ID { get; }
+
 		private bool _showInPreview = false;
 		public event Action OnShowInPreviewChanged;
 		public bool ShowInPreview
@@ -21,14 +22,13 @@ namespace Knowdes
 		public abstract MetaDataType Type { get; }
 		public abstract int Priority { get; }
 
-		public bool Destroyable { get; }
+		public abstract bool Destroyable { get; }
 
 		public event Action OnChanged;
 
-		public MetaData(Guid iD, bool destroyable)
+		public MetaData(Guid iD)
 		{
 			ID = iD;
-			Destroyable = destroyable;
 		}
 
 		protected void invokeOnChanged()

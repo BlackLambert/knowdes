@@ -22,11 +22,18 @@ namespace Knowdes
 
 		public override int Priority => int.MinValue + 1;
 
+		public override bool Destroyable => false;
+
 		public event Action OnDateChanged;
 
-		public LastChangeDateData(Guid iD) : base(iD, false)
+		public LastChangeDateData(Guid iD) : base(iD)
 		{
 			_date = DateTime.Now;
+		}
+
+		public LastChangeDateData(Guid iD, DateTime dateTime) : base(iD)
+		{
+			_date = dateTime;
 		}
 	}
 }

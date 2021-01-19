@@ -75,13 +75,13 @@ namespace Knowdes
                 case State.Default:
                     return Vector2.zero;
                 case State.Interaction:
-                    return new Vector2(16,8);
+                    return new Vector2(32,12);
                 case State.ResizeHorizontal:
                 case State.ResizeVertical:
                 case State.Dragging:
                 case State.WWW:
                 case State.EditText:
-                    return new Vector2(16, 16);
+                    return new Vector2(32, 32);
                 default:
                     throw new NotImplementedException();
             }

@@ -17,10 +17,14 @@ namespace Knowdes
 
         public EntryData CreateNew(ContentData content)
 		{
-            Guid iD = Guid.NewGuid();
+            return CreateNew(Guid.NewGuid(), content);
+		}
+
+        public EntryData CreateNew(Guid iD, ContentData content)
+		{
             EntryData result = new EntryData(iD, content);
-            MetaData creationDateData = _factory.Create(MetaDataType.CreationDate);
-            MetaData lastChangeDateData = _factory.Create(MetaDataType.LastChangedDate);
+            MetaData creationDateData = _factory.CreateNew(MetaDataType.CreationDate);
+            MetaData lastChangeDateData = _factory.CreateNew(MetaDataType.LastChangedDate);
             result.AddMetaData(creationDateData);
             result.AddMetaData(lastChangeDateData);
             result.OnChanged += updateLastChangeDate;

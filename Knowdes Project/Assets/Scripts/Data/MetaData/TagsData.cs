@@ -13,12 +13,19 @@ namespace Knowdes
 		public override MetaDataType Type => MetaDataType.Tags;
 		public override int Priority => 0;
 
+		public override bool Destroyable => true;
+
 		public event Action<Tag> OnTagsAdded;
 		public event Action<Tag> OnTagsRemoved;
 
-		public TagsData(Guid iD, List<Tag> initialTags) : base(iD, true)
+		public TagsData(Guid iD) : base(iD)
 		{
-			_tags = initialTags;
+			_tags = new List<Tag>();
+		}
+
+		public TagsData(Guid iD, List<Tag> tags) : base(iD)
+		{
+			_tags = tags;
 			init();
 		}
 
