@@ -5,31 +5,29 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class TitleMetaContent : MetaContent<TitleData>
-    {
+	public class CommentContent : MetaContent<CommentData>
+	{
 		[SerializeField]
 		private TextMeshProUGUI _text;
 
-		protected override void onDataAdded(TitleData data)
+		private void updateText()
+		{
+			_text.text = Data.Content.ToString();
+		}
+
+		protected override void onDataAdded(CommentData data)
 		{
 			if (data == null)
 				return;
-
 			data.OnContentChanged += updateText;
 			updateText();
 		}
 
-		protected override void onDataRemoved(TitleData data)
+		protected override void onDataRemoved(CommentData data)
 		{
 			if (data == null)
 				return;
-
 			data.OnContentChanged -= updateText;
-		}
-
-		private void updateText()
-		{
-			_text.text = Data.Content;
 		}
 	}
 }

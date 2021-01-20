@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class TitleEditor : MetaContentEditor<TitleData>
+    public class CommentEditor : MetaContentEditor<CommentData>
     {
-        [SerializeField]
-        private TMP_InputField _input;
+		[SerializeField]
+		private TMP_InputField _input;
 
 		protected virtual void Start()
 		{
@@ -32,7 +32,7 @@ namespace Knowdes
 			Data.Content = _input.text;
 		}
 
-		protected override void onDataAdded(TitleData data)
+		protected override void onDataAdded(CommentData data)
 		{
 			if (data == null)
 				return;
@@ -40,7 +40,7 @@ namespace Knowdes
 			data.OnContentChanged += updateText;
 		}
 
-		protected override void onDataRemoved(TitleData data)
+		protected override void onDataRemoved(CommentData data)
 		{
 			if (data == null)
 				return;

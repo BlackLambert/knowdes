@@ -8,6 +8,7 @@ namespace Knowdes
     public class MetaDataFactory
     {
         private const string _defaultTitle = "Titel";
+        private const string _defaultComment = "Neuer Kommentar";
 
         public MetaData CreateNew(MetaDataType type)
 		{
@@ -34,6 +35,10 @@ namespace Knowdes
                     TagsData tags = new TagsData(iD);
                     tags.ShowInPreview = true;
                     return tags;
+                case MetaDataType.Comment:
+                    CommentData comment = new CommentData(iD, _defaultComment);
+                    comment.ShowInPreview = true;
+                    return comment;
                 default:
                     throw new NotImplementedException();
             }

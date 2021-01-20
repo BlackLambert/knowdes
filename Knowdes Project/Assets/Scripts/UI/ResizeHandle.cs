@@ -21,6 +21,8 @@ namespace Knowdes
         private Vector2 _formerMaxAnchor;
         private Vector2 _formerPivot;
         private Vector2 _formerPosition;
+        private float _startDistance = 0;
+        private float _delta = 0;
 
         public void OnBeginDrag(PointerEventData eventData)
 		{
@@ -34,6 +36,8 @@ namespace Knowdes
             _target.anchorMax = anchor;
             _formerPosition = _target.anchoredPosition;
             _target.anchoredPosition = Vector2.zero;
+            _startDistance = getDistance(_side);
+            _delta = 0;
         }
 
 		public void OnEndDrag(PointerEventData eventData)
@@ -41,7 +45,8 @@ namespace Knowdes
             _target.pivot = _formerPivot;
             _target.anchorMin = _formerMinAnchor;
             _target.anchorMax = _formerMaxAnchor;
-            _target.anchoredPosition = _formerPosition;
+            
+            resetPosition(_side);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -52,6 +57,7 @@ namespace Knowdes
             if (_maxSize >= 0)
                 distance = Mathf.Min(_maxSize, distance);
             _target.SetSizeWithCurrentAnchors(getAxis(_side), distance);
+            _delta = _startDistance - distance;
         }
 
 		private RectTransform.Axis getAxis(Side side)
@@ -68,6 +74,23 @@ namespace Knowdes
                     throw new NotImplementedException();
 			}
 		}
+
+        private void resetPosition(Side side)
+		{
+            switch (side)
+            {
+                case Side.Bottom:
+                case Side.Top:
+                    _target.anchoredPosition = new Vector2(_formerPosition.x, _formerPosition.y + _delta / 2);
+                    break;
+                case Side.Left:
+                case Side.Right:
+                    _target.anchoredPosition = new Vector2(_formerPosition.x + _delta / 2, _formerPosition.y);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+        }
 
 		private float getDistance(Side side)
 		{

@@ -17,6 +17,8 @@ namespace Knowdes.Prototype
         private CreationDateEditor _creationDateEditor;
         [SerializeField]
         private LastChangeDateEditor _lastChangeDateEditor;
+        [SerializeField]
+        private CommentEditor _commentEditor;
 
         public MetaContentEditorShell Create(MetaData data)
 		{
@@ -50,6 +52,11 @@ namespace Knowdes.Prototype
                     LastChangeDateEditor lastChangeDate = Instantiate(_lastChangeDateEditor);
                     lastChangeDate.Data = data as LastChangeDateData;
                     return lastChangeDate;
+                case MetaDataType.Comment:
+                    shell.ViewToggle.Toggle(true);
+                    CommentEditor commentEditor = Instantiate(_commentEditor);
+                    commentEditor.Data = data as CommentData;
+                    return commentEditor;
                 default:
                     throw new NotImplementedException();
             }

@@ -105,6 +105,7 @@ MonoBehaviour:
   _tagsContentPrefab: {fileID: 8508232644365268676, guid: cd04cbaa8976ff84bacb9567bc7975ae, type: 3}
   _creationDateContentPrefab: {fileID: 8331954858599100417, guid: 5907c4ee8ac3f2d45be8cfea4d1a48d3, type: 3}
   _lastChangedDateContentPrefab: {fileID: 2227285345269285312, guid: 3244e6fd533cee14484b1a8b76f7723e, type: 3}
+  _commentContentPrefab: {fileID: 8171094574938113448, guid: f7107a248c86522469c273cf996e0b5b, type: 3}
 --- !u!114 &1924200051398045832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,3 +136,4 @@ MonoBehaviour:
   _tagsEditorPrefab: {fileID: 4923754520298913140, guid: 5c41fad7b1bc6034f8040b3ab5fe85b2, type: 3}
   _creationDateEditor: {fileID: 3259444324160066811, guid: 3353458c207f2f14db3b532930359478, type: 3}
   _lastChangeDateEditor: {fileID: 7954613955823255587, guid: e7ce6a78e37564c4e85241ce2ea2b27a, type: 3}
+  _commentEditor: {fileID: 4311815901090114059, guid: 71a7a9e2474887242bccbde7b9657ae8, type: 3}

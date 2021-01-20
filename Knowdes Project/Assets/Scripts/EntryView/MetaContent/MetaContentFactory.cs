@@ -15,6 +15,8 @@ namespace Knowdes
         private CreationDateContent _creationDateContentPrefab;
         [SerializeField]
         private LastChangedDateContent _lastChangedDateContentPrefab;
+        [SerializeField]
+        private CommentContent _commentContentPrefab;
 
         public MetaContent Create(MetaData data, EntryVolume volume)
 		{
@@ -44,6 +46,10 @@ namespace Knowdes
                     LastChangedDateContent lastChangeDate = Instantiate(_lastChangedDateContentPrefab);
                     lastChangeDate.Data = data as LastChangeDateData;
                     return lastChangeDate;
+                case MetaDataType.Comment:
+                    CommentContent commentContent = Instantiate(_commentContentPrefab);
+                    commentContent.Data = data as CommentData;
+                    return commentContent;
                 default:
                     throw new NotImplementedException();
             }

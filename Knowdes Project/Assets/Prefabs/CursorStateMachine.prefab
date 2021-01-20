@@ -49,3 +49,4 @@ MonoBehaviour:
   _draggingImage: {fileID: 2800000, guid: 8ca239c44eccaf24db84564b9a054a9d, type: 3}
   _wwwImage: {fileID: 2800000, guid: a561ad73bd04e454e90018e05f514b70, type: 3}
   _editTextImage: {fileID: 2800000, guid: 84ed27474029bdd4ca0c897e1746bc67, type: 3}
+  _navigateImage: {fileID: 2800000, guid: 7ac6c69308c1c01499ec8a6e24b6ed03, type: 3}

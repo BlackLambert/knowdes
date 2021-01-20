@@ -20,6 +20,8 @@ namespace Knowdes
         private Texture2D _wwwImage = null;
         [SerializeField]
         private Texture2D _editTextImage = null;
+        [SerializeField]
+        private Texture2D _navigateImage = null;
 
         public State CurrentState => _states[_states.Count - 1].State;
 
@@ -63,6 +65,8 @@ namespace Knowdes
                     return _wwwImage;
                 case State.EditText:
                     return _editTextImage;
+                case State.Navigate:
+                    return _navigateImage;
                 default:
                     throw new NotImplementedException();
             }
@@ -81,6 +85,7 @@ namespace Knowdes
                 case State.Dragging:
                 case State.WWW:
                 case State.EditText:
+                case State.Navigate:
                     return new Vector2(32, 32);
                 default:
                     throw new NotImplementedException();
@@ -108,7 +113,8 @@ namespace Knowdes
             ResizeVertical = 4,
             Dragging = 8,
             WWW = 16,
-            EditText = 32
+            EditText = 32,
+            Navigate = 64
 		}
 
         private class StateData

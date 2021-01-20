@@ -13,6 +13,7 @@ namespace Knowdes
         Author = 12,
         CreationDate = 13,
         LastChangedDate = 14,
+        Comment = 15,
     }
 
     static class MetaDataTypeMethods
@@ -34,6 +35,8 @@ namespace Knowdes
                     return "Änderungsdatum";
                 case MetaDataType.Tags:
                     return "Schlagwörter";
+                case MetaDataType.Comment:
+                    return "Kommentar";
                 default:
                     throw new NotImplementedException();
             }
