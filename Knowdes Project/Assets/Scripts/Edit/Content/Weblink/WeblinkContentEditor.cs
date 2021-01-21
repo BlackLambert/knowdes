@@ -15,9 +15,17 @@ namespace Knowdes
 		private TMP_Dropdown _schemeDropdown = null;
 		[SerializeField]
 		private GameObject _errorTextObject = null;
+		[SerializeField]
+		private TextMeshProUGUI _errorText = null;
 
 		public event Action OnChanged;
 
+		private URLConverter _urlConverter;
+
+		protected virtual void Start()
+		{
+			_urlConverter = new URLConverter();
+		}
 
 		private void updateText()
 		{
@@ -34,15 +42,15 @@ namespace Knowdes
 			}
 
 			string source = $"{_schemeDropdown.options[_schemeDropdown.value].text}://{_hostInput.text}";
-			Uri url;
-			bool successful = Uri.TryCreate(source, UriKind.Absolute, out url);
-			if (successful && validateInput())
+			URLConverter.Result result = _urlConverter.Convert(source);
+
+			if (result.Successful)
 			{
-				Data.Url = url;
+				Data.Url = result.Url;
 				OnChanged?.Invoke();
 			}
 			else
-				showError();
+				showError(result.Error);
 		}
 
 		private void removeSchema()
@@ -53,16 +61,7 @@ namespace Knowdes
 			_hostInput.text = urlParts[urlParts.Count - 1];
 		}
 
-		private bool validateInput()
-		{
-			List<string> urlParts = _hostInput.text.Split('.').ToList();
-			bool dotIncludes = urlParts.Count > 1;
-			bool correctLength = true;
-			foreach (string part in urlParts)
-				correctLength &= part.Length > 1;
-			bool noSchema = _hostInput.text.Contains("://");
-			return dotIncludes && correctLength;
-		}
+		
 
 		protected override void onDataAdded(WeblinkContentData data)
 		{
@@ -99,8 +98,9 @@ namespace Knowdes
 			updateContentLink();
 		}
 
-		private void showError()
+		private void showError(string error)
 		{
+			_errorText.text = error;
 			_errorTextObject.SetActive(true);
 		}
 

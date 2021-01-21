@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: -1
+  m_MinWidth: 25
   m_MinHeight: -1
   m_PreferredWidth: 25
   m_PreferredHeight: 20
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: -1
+  m_MinWidth: 100
   m_MinHeight: -1
   m_PreferredWidth: 100
   m_PreferredHeight: 35
@@ -1551,6 +1551,7 @@ MonoBehaviour:
   _hostInput: {fileID: 2447153898047889415}
   _schemeDropdown: {fileID: 1475146244582338549}
   _errorTextObject: {fileID: 8923434567216401883}
+  _errorText: {fileID: 3313218616751109685}
 --- !u!1 &2957499983290657562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,6 +1801,7 @@ GameObject:
   - component: {fileID: 4718568918696344034}
   - component: {fileID: 8907748262273379512}
   - component: {fileID: 8449905405007886417}
+  - component: {fileID: 6703056079453512348}
   m_Layer: 0
   m_Name: SchemaSeperators
   m_TagString: Untagged
@@ -1937,6 +1939,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 8907748262273379512}
   _type: 100
+--- !u!114 &6703056079453512348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873992825726709118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 25
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &5059726825990386965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2741,7 +2763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
-  m_MinWidth: -1
+  m_MinWidth: 25
   m_MinHeight: -1
   m_PreferredWidth: 25
   m_PreferredHeight: 20
