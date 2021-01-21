@@ -26,7 +26,7 @@ namespace Knowdes
             return new Result(result, true, null);
         }
 
-        public class Result
+        public struct Result
 		{
             public Uri Url { get; }
             public bool Successful { get; }

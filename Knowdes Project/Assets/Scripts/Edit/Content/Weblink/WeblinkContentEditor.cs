@@ -22,43 +22,71 @@ namespace Knowdes
 
 		private URLConverter _urlConverter;
 
-		protected virtual void Start()
+		private string urlString => $"{_schemeDropdown.options[_schemeDropdown.value].text}://{_hostInput.text}";
+
+		protected virtual void Awake()
 		{
 			_urlConverter = new URLConverter();
 		}
 
-		private void updateText()
+		private void initHost()
 		{
-			_hostInput.text = Data != null && !Data.Empty ? Data.UrlString : string.Empty;
+			_hostInput.text = removeSchema(Data != null && !Data.Empty ? Data.UrlString : string.Empty);
 		}
 
-		private void updateContentLink()
+		private void updateSchema(string schemaString)
 		{
-			if(_hostInput.text == string.Empty)
+			switch(schemaString)
+			{
+				case "https":
+					_schemeDropdown.value = 0;
+					break;
+				case "http":
+					_schemeDropdown.value = 1;
+					break;
+				default:
+					throw new NotImplementedException();
+			}
+		}
+
+		private void validateLink()
+		{
+			URLConverter.Result result = _urlConverter.Convert(urlString);
+
+			if (!result.Successful)
+				showError(result.Error);
+		}
+
+
+		private void createURL()
+		{
+			if (_hostInput.text == string.Empty)
 			{
 				Data.Url = null;
 				OnChanged?.Invoke();
 				return;
 			}
 
-			string source = $"{_schemeDropdown.options[_schemeDropdown.value].text}://{_hostInput.text}";
-			URLConverter.Result result = _urlConverter.Convert(source);
+			URLConverter.Result result = _urlConverter.Convert(urlString);
 
 			if (result.Successful)
 			{
 				Data.Url = result.Url;
 				OnChanged?.Invoke();
 			}
-			else
-				showError(result.Error);
 		}
 
-		private void removeSchema()
+		private string removeSchema(string url)
 		{
-			if (_hostInput.text == string.Empty)
-				return;
-			List<string> urlParts = _hostInput.text.Split(new string[]{ "://"}, StringSplitOptions.None).ToList();
-			_hostInput.text = urlParts[urlParts.Count - 1];
+			if (url == string.Empty)
+				return url;
+			List<string> urlParts = url.Split(new string[]{"://"}, StringSplitOptions.None).ToList();
+			if (urlParts.Count == 1)
+				return url;
+			if (urlParts.Count > 2)
+				throw new ArgumentException();
+			updateSchema(urlParts[0]);
+			return urlParts[urlParts.Count - 1];
 		}
 
 		
@@ -67,9 +95,12 @@ namespace Knowdes
 		{
 			if (data == null)
 				return;
-			updateText();
+			initHost();
+			hideError();
+			validateLink();
 			_hostInput.onValueChanged.AddListener(onValueChanged);
 			_schemeDropdown.onValueChanged.AddListener(onSchemaChanged);
+			_hostInput.onSubmit.AddListener(onSubmit);
 		}
 
 		protected override void onDataRemoved(WeblinkContentData data)
@@ -78,12 +109,14 @@ namespace Knowdes
 				return;
 			_hostInput.onValueChanged.RemoveListener(onValueChanged);
 			_schemeDropdown.onValueChanged.RemoveListener(onSchemaChanged);
+			_hostInput.onSubmit.RemoveListener(onSubmit);
 		}
 
 
 		private void onSchemaChanged(int arg0)
 		{
 			updateValues();
+			createURL();
 		}
 
 		private void onValueChanged(string arg0)
@@ -91,11 +124,16 @@ namespace Knowdes
 			updateValues();
 		}
 
+		private void onSubmit(string arg0)
+		{
+			createURL();
+		}
+
 		private void updateValues()
 		{
 			hideError();
-			removeSchema();
-			updateContentLink();
+			_hostInput.text = removeSchema(_hostInput.text);
+			validateLink();
 		}
 
 		private void showError(string error)

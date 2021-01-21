@@ -11,11 +11,14 @@ namespace Knowdes
         private TextMeshProUGUI _text;
         [SerializeField]
         private GameObject _textObject;
+        [SerializeField]
+        private LinkPreview _linkPreview;
 
 		private void updateText()
         {
             _textObject.SetActive(!Data.Empty);
             _text.text = Data != null ? Data.UrlString : string.Empty;
+            _linkPreview.URL = Data != null ? Data.Url : null;
         }
 
 		protected override void onDataAdded(WeblinkContentData data)

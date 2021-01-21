@@ -39,6 +39,7 @@ namespace Knowdes
         private void clearURL()
         {
             _editor.HostInput.text = null;
+            _editor.HostInput.onSubmit.Invoke(_editor.HostInput.text);
         }
     }
 }

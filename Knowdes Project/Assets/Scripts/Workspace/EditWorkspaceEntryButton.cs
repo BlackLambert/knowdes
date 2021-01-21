@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 namespace Knowdes.Prototype
 {
-    public class SetWorkspaceEntryToEditPanelOnClick : MonoBehaviour
+    public class EditWorkspaceEntryButton : MonoBehaviour
     {
         [SerializeField]
         private Button _button;
         [SerializeField]
         private WorkspaceEntry _entry;
 
-        private EditPanel _editPanel;
+        private ContextPanel _contextPanel;
 
         protected virtual void Start()
         {
-            _editPanel = FindObjectOfType<EditPanel>();
+            _contextPanel = FindObjectOfType<ContextPanel>();
             _button.onClick.AddListener(onClick);
         }
 
@@ -27,8 +27,7 @@ namespace Knowdes.Prototype
 
         private void onClick()
         {
-
-            _editPanel.SetEntry(_entry.LinkedEntry);
+            _contextPanel.ShowEditPanel(_entry.LinkedEntry);
         }
     }
 }
