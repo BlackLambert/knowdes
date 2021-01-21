@@ -80,12 +80,16 @@ namespace Knowdes
             switch (side)
             {
                 case Side.Bottom:
+                    _target.anchoredPosition = new Vector2(_formerPosition.x, _formerPosition.y - _delta / 2);
+                    break;
                 case Side.Top:
                     _target.anchoredPosition = new Vector2(_formerPosition.x, _formerPosition.y + _delta / 2);
                     break;
                 case Side.Left:
-                case Side.Right:
                     _target.anchoredPosition = new Vector2(_formerPosition.x + _delta / 2, _formerPosition.y);
+                    break;
+                case Side.Right:
+                    _target.anchoredPosition = new Vector2(_formerPosition.x - _delta / 2, _formerPosition.y);
                     break;
                 default:
                     throw new NotImplementedException();

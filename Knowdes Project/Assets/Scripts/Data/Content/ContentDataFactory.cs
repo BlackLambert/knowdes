@@ -18,8 +18,8 @@ namespace Knowdes
 			{
                 case ContentDataType.Text:
                     return new TextContentData(iD, _defaultText);
-                case ContentDataType.Data:
-                    return new DataContentData(iD, _defaultPath);
+                case ContentDataType.Weblink:
+                    return new WeblinkContentData(iD);
                 default:
                     throw new NotImplementedException();
 			}

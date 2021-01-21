@@ -6,40 +6,34 @@ using System;
 
 namespace Knowdes
 {
-    public class TextContentEditor : ContentEditor
+    public class TextContentEditor : ContentEditor<TextContentData>
     {
         [SerializeField]
         private TMP_InputField _input = null;
 
-        private TextContentData _contentData;
-        public TextContentData ContentData
-		{
-            get => _contentData;
-            set
-			{
-                _contentData = value;
-                updateText();
-            }
-		}
-
         private void updateText()
 		{
-            _input.text = _contentData != null ? _contentData.Text : string.Empty;
+            _input.text = Data != null ? Data.Text : string.Empty;
 		}
-
-        protected virtual void Start()
-		{
-            _input.onValueChanged.AddListener(updateContentText);
-		}
-
-		protected virtual void OnDestroy()
-		{
-            _input.onValueChanged.RemoveListener(updateContentText);
-        }
 
         private void updateContentText(string value)
         {
-            _contentData.Text = value;
+            Data.Text = value;
         }
-    }
+
+		protected override void onDataAdded(TextContentData data)
+		{
+			if (data == null)
+				return;
+			updateText();
+			_input.onValueChanged.AddListener(updateContentText);
+		}
+
+		protected override void onDataRemoved(TextContentData data)
+		{
+			if (data == null)
+				return;
+			_input.onValueChanged.RemoveListener(updateContentText);
+		}
+	}
 }

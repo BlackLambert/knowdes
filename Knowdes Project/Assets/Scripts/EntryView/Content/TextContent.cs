@@ -5,51 +5,26 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class TextContent : Content
+    public class TextContent : Content<TextContentData>
     {
         [SerializeField]
         private TextMeshProUGUI _text;
 
-        private TextContentData _contentData;
-        public TextContentData ContentData
+		private void updateText()
+		{
+            _text.text = Data != null ? Data.Text : string.Empty;
+        }
+
+        protected override void onDataAdded(TextContentData data)
         {
-            get => _contentData;
-            set
-            {
-
-                removeListener();
-                _contentData = value;
-                updateText();
-                addListener();
-            }
+            if (Data != null)
+                Data.OnTextChanged += updateText;
         }
 
-        protected virtual void Start()
-		{
-            
-            updateText();
-		}
-
-        protected virtual void OnDestroy()
-		{
-            removeListener();
-        }
-
-        private void updateText()
-		{
-            _text.text = _contentData != null ? _contentData.Text : string.Empty;
-        }
-
-        private void addListener()
-		{
-            if (_contentData != null)
-                _contentData.OnTextChanged += updateText;
-        }
-
-        private void removeListener()
-		{
-            if (_contentData != null)
-                _contentData.OnTextChanged -= updateText;
+        protected override void onDataRemoved(TextContentData data)
+        {
+            if (Data != null)
+                Data.OnTextChanged -= updateText;
         }
     }
 }
