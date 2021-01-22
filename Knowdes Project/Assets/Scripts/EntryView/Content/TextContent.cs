@@ -19,6 +19,7 @@ namespace Knowdes
         {
             if (Data != null)
                 Data.OnTextChanged += updateText;
+            updateText();
         }
 
         protected override void onDataRemoved(TextContentData data)

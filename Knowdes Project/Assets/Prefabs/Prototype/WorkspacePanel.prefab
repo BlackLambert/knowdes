@@ -792,7 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e53f3b939d1043d4b8db4ae3efd7716a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rethrowEvents: 1
 --- !u!114 &6817773494274274905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1191,7 +1190,7 @@ MonoBehaviour:
   m_MinHeight: 200
   m_PreferredWidth: -1
   m_PreferredHeight: -1
-  m_FlexibleWidth: 2
+  m_FlexibleWidth: 4
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
 --- !u!114 &2291042418538687596

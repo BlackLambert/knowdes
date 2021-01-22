@@ -47,9 +47,11 @@ namespace Knowdes
 
 		private void adjustLayout()
 		{
-            _text.autoSizeTextContainer = true;
-            float preferedHeight = _text.GetPreferredValues(_text.text).y;
-            _text.autoSizeTextContainer = false;
+            //_text.autoSizeTextContainer = true;
+            float preferedHeight;
+            //preferedHeight = _text.GetPreferredValues(_text.text).y;
+            preferedHeight = _text.preferredHeight;
+            //_text.autoSizeTextContainer = false;
             _layoutElement.preferredHeight = MaxHeight > 0 ? Mathf.Min(preferedHeight, MaxHeight) : preferedHeight;
         }
 
