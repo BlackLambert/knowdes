@@ -38,18 +38,32 @@ namespace Knowdes
         private Coroutine _fetchPreviewImageRoutine;
         private LinkPreviewData _data = null;
 
+        private CoroutineHelper _coroutineHelper;
+
+        protected virtual void Awake()
+        {
+            GameObject helperObject = new GameObject("CoroutineHelper");
+            _coroutineHelper = helperObject.AddComponent<CoroutineHelper>();
+        }
+
         protected virtual void Start()
-		{
+        {
             updatePreview();
         }
+
+        protected virtual void OnDestroy()
+		{
+            if(_coroutineHelper != null)
+                Destroy(_coroutineHelper.gameObject);
+		}
 
         private void updatePreview()
 		{
             clean();
             if (_fetchPreviewRoutine != null)
-                StopCoroutine(_fetchPreviewRoutine);
+                _coroutineHelper.StopCoroutine(_fetchPreviewRoutine);
             if(_uri != null)
-                _fetchPreviewRoutine = StartCoroutine(GetPreviewData());
+                _fetchPreviewRoutine = _coroutineHelper.StartCoroutine(GetPreviewData());
 		}
 
         private void updateVisablity()
@@ -88,11 +102,11 @@ namespace Knowdes
             if (_data == null)
                 return;
             if (_fetchPreviewImageRoutine != null)
-                StopCoroutine(_fetchPreviewImageRoutine);
+                _coroutineHelper.StopCoroutine(_fetchPreviewImageRoutine);
             _titleText.text = _data.title;
             _descriptionText.text = _data.description;
             if (!string.IsNullOrEmpty(_data.image))
-                _fetchPreviewImageRoutine = StartCoroutine(loadPreviewImage());
+                _fetchPreviewImageRoutine = _coroutineHelper.StartCoroutine(loadPreviewImage());
             else
                 _previewImage.texture = null;
         }
