@@ -10,19 +10,18 @@ namespace Knowdes
         [SerializeField]
         private WeblinkContentEditor _weblinkEditor = null;
 
-        public ContentEditor Create(ContentData contentData)
+        public ContentEditor Create(EntryData entryData)
 		{
+            ContentData contentData = entryData.Content;
             switch (contentData.Type)
             {
                 case ContentDataType.Text:
-                    TextContentData data = contentData as TextContentData;
                     TextContentEditor result = Instantiate(_textEditor);
-                    result.Data = data;
+                    result.EntryData = entryData;
                     return result;
                 case ContentDataType.Weblink:
-                    WeblinkContentData weblinkData = contentData as WeblinkContentData;
                     WeblinkContentEditor weblinkEditor = Instantiate(_weblinkEditor);
-                    weblinkEditor.Data = weblinkData;
+                    weblinkEditor.EntryData = entryData;
                     return weblinkEditor;
                 default:
                     throw new NotImplementedException();

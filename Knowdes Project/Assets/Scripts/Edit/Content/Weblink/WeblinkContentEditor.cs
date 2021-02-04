@@ -19,121 +19,101 @@ namespace Knowdes
 		private TextMeshProUGUI _errorText = null;
 
 		public event Action OnChanged;
+		private UriConverter _urlConverter;
+		private string _error = string.Empty;
+		private string _urlString => $"{_schemeDropdown.options[_schemeDropdown.value].text}://{_hostInput.text}".Trim();
+		private bool _valid => string.IsNullOrEmpty(_error);
 
-		private URLConverter _urlConverter;
-
-		private string urlString => $"{_schemeDropdown.options[_schemeDropdown.value].text}://{_hostInput.text}";
 
 		protected virtual void Awake()
 		{
-			_urlConverter = new URLConverter();
+			_urlConverter = new WeblinkConverter();
 		}
-
-		private void initHost()
-		{
-			_hostInput.text = removeSchema(Data != null && !Data.Empty ? Data.UrlString : string.Empty);
-		}
-
-		private void updateSchema(string schemaString)
-		{
-			switch(schemaString)
-			{
-				case "https":
-					_schemeDropdown.value = 0;
-					break;
-				case "http":
-					_schemeDropdown.value = 1;
-					break;
-				default:
-					throw new NotImplementedException();
-			}
-		}
-
-		private void validateLink()
-		{
-			URLConverter.Result result = _urlConverter.Convert(urlString);
-
-			if (!result.Successful)
-				showError(result.Error);
-		}
-
-
-		private void createURL()
-		{
-			if (_hostInput.text == string.Empty)
-			{
-				Data.Url = null;
-				OnChanged?.Invoke();
-				return;
-			}
-
-			URLConverter.Result result = _urlConverter.Convert(urlString);
-
-			if (result.Successful)
-			{
-				Data.Url = result.Url;
-				OnChanged?.Invoke();
-			}
-		}
-
-		private string removeSchema(string url)
-		{
-			if (url == string.Empty)
-				return url;
-			List<string> urlParts = url.Split(new string[]{"://"}, StringSplitOptions.None).ToList();
-			if (urlParts.Count == 1)
-				return url;
-			if (urlParts.Count > 2)
-				throw new ArgumentException();
-			updateSchema(urlParts[0]);
-			return urlParts[urlParts.Count - 1];
-		}
-
-		
 
 		protected override void onDataAdded(WeblinkContentData data)
 		{
 			if (data == null)
 				return;
-			initHost();
-			hideError();
-			validateLink();
-			_hostInput.onValueChanged.AddListener(onValueChanged);
-			_schemeDropdown.onValueChanged.AddListener(onSchemaChanged);
-			_hostInput.onSubmit.AddListener(onSubmit);
+			initSchemaInput();
+			initHostInput();
+			validateInputLink();
+			updateErrorDisplay();
+			addInputListeners();
 		}
 
 		protected override void onDataRemoved(WeblinkContentData data)
 		{
 			if (data == null)
 				return;
-			_hostInput.onValueChanged.RemoveListener(onValueChanged);
-			_schemeDropdown.onValueChanged.RemoveListener(onSchemaChanged);
-			_hostInput.onSubmit.RemoveListener(onSubmit);
+			removeInputListeners();
 		}
 
+		private void initSchemaInput()
+		{
+			updateSchemaInputBasedOn(Data.UrlString);
+		}
+
+		private void initHostInput()
+		{
+			_hostInput.text = removeSchemaFrom(Data.UrlString);
+		}
+
+		private void validateInputLink()
+		{
+			UriConverter.Result result = _urlConverter.Convert(_urlString);
+			_error = result.Error;
+		}
+
+		private string removeSchemaFrom(string url)
+		{
+			string[] urlParts = splitSchemaFromUrl(url);
+			return urlParts[1];
+		}
+
+		private void updateSchemaInputBasedOn(string url)
+		{
+			string[] urlParts = splitSchemaFromUrl(url);
+			updateSchemaInput(urlParts[0]);
+		}
 
 		private void onSchemaChanged(int arg0)
 		{
-			updateValues();
-			createURL();
+			tryUpdateDataURL();
 		}
 
-		private void onValueChanged(string arg0)
+		private void onHostInputSubmit(string arg0)
 		{
-			updateValues();
+			trimHostInputText();
+			updateSchemaInputBasedOn(_hostInput.text);
+			removeSchemaFromHostInput();
+			validateInputLink();
+			updateErrorDisplay();
+			tryUpdateDataURL();
 		}
 
-		private void onSubmit(string arg0)
+		private void updateErrorDisplay()
 		{
-			createURL();
+			if (_valid)
+				hideError();
+			else
+				showError(_error);
 		}
 
-		private void updateValues()
+		private void addInputListeners()
 		{
-			hideError();
-			_hostInput.text = removeSchema(_hostInput.text);
-			validateLink();
+			_schemeDropdown.onValueChanged.AddListener(onSchemaChanged);
+			_hostInput.onSubmit.AddListener(onHostInputSubmit);
+		}
+
+		private void removeInputListeners()
+		{
+			_schemeDropdown.onValueChanged.RemoveListener(onSchemaChanged);
+			_hostInput.onSubmit.RemoveListener(onHostInputSubmit);
+		}
+
+		private void removeSchemaFromHostInput()
+		{
+			_hostInput.text = removeSchemaFrom(_hostInput.text);
 		}
 
 		private void showError(string error)
@@ -145,6 +125,61 @@ namespace Knowdes
 		private void hideError()
 		{
 			_errorTextObject.SetActive(false);
+		}
+
+		private void updateSchemaInput(string schemaString)
+		{
+			switch (schemaString)
+			{
+				case "https":
+					_schemeDropdown.value = 0;
+					break;
+				case "http":
+					_schemeDropdown.value = 1;
+					break;
+				case "":
+					break;
+				default:
+					throw new NotImplementedException();
+
+			}
+		}
+
+		private string[] splitSchemaFromUrl(string url)
+		{
+			if (url == string.Empty)
+				return new string[] { string.Empty, url };
+			List<string> urlParts = url.Split(new string[] { "://" }, StringSplitOptions.None).ToList();
+			if (urlParts.Count == 1)
+				return new string[] { string.Empty, url };
+			if (urlParts.Count > 2)
+				throw new ArgumentException();
+			return urlParts.ToArray();
+		}
+
+		private void tryUpdateDataURL()
+		{
+			if (_hostInput.text == string.Empty)
+			{
+				Data.Url = null;
+				OnChanged?.Invoke();
+				return;
+			}
+
+			if (!_valid)
+				return;
+
+			UriConverter.Result result = _urlConverter.Convert(_urlString);
+
+			if (result.Successful)
+			{
+				Data.Url = result.Uri;
+				OnChanged?.Invoke();
+			}
+		}
+		private void trimHostInputText()
+		{
+			_hostInput.text = _hostInput.text.Trim();
 		}
 	}
 }

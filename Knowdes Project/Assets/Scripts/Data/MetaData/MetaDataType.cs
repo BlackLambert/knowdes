@@ -14,6 +14,8 @@ namespace Knowdes
         CreationDate = 13,
         LastChangedDate = 14,
         Comment = 15,
+        Description = 16,
+        PreviewImage = 17
     }
 
     static class MetaDataTypeMethods
@@ -37,6 +39,10 @@ namespace Knowdes
                     return "Schlagwörter";
                 case MetaDataType.Comment:
                     return "Kommentar";
+                case MetaDataType.Description:
+                    return "Beschreibung";
+                case MetaDataType.PreviewImage:
+                    return "Vorschaubild";
                 default:
                     throw new NotImplementedException();
             }

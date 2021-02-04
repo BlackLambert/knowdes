@@ -66,7 +66,7 @@ namespace Knowdes.Prototype
             if (_current.Volume.Data.Content == null)
                 return;
 
-            _editor = _factory.Create(_current.Volume.Data.Content);
+            _editor = _factory.Create(_current.Volume.Data);
             _editor.Base.SetParent(_hook, false);
             _editor.Base.localScale = Vector3.one;
         }

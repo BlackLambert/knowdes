@@ -19,6 +19,10 @@ namespace Knowdes.Prototype
         private LastChangeDateEditor _lastChangeDateEditor;
         [SerializeField]
         private CommentEditor _commentEditor;
+        [SerializeField]
+        private DescriptionEditor _descriptionEditor;
+        [SerializeField]
+        private PreviewImageEditor _previewImageEditor;
 
         public MetaContentEditorShell Create(MetaData data)
 		{
@@ -57,6 +61,16 @@ namespace Knowdes.Prototype
                     CommentEditor commentEditor = Instantiate(_commentEditor);
                     commentEditor.Data = data as CommentData;
                     return commentEditor;
+                case MetaDataType.Description:
+                    shell.ViewToggle.Toggle(true);
+                    DescriptionEditor descriptionEditor = Instantiate(_descriptionEditor);
+                    descriptionEditor.Data = data as DescriptionData;
+                    return descriptionEditor;
+                case MetaDataType.PreviewImage:
+                    shell.ViewToggle.Toggle(true);
+                    PreviewImageEditor previewImageEditor = Instantiate(_previewImageEditor);
+                    previewImageEditor.Data = data as PreviewImageData;
+                    return previewImageEditor;
                 default:
                     throw new NotImplementedException();
             }

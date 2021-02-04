@@ -8,7 +8,7 @@ namespace Knowdes
     public class MetaContentFactory : MonoBehaviour
     {
         [SerializeField]
-        private TitleMetaContent _titleContentPrefab;
+        private TitleContent _titleContentPrefab;
         [SerializeField]
         private TagsContent _tagsContentPrefab;
         [SerializeField]
@@ -17,6 +17,10 @@ namespace Knowdes
         private LastChangedDateContent _lastChangedDateContentPrefab;
         [SerializeField]
         private CommentContent _commentContentPrefab;
+        [SerializeField]
+        private DescriptionContent _descriptionContentPrefab;
+        [SerializeField]
+        private PreviewImageContent _previewImagePrefab;
 
         public MetaContent Create(MetaData data, EntryVolume volume)
 		{
@@ -31,7 +35,7 @@ namespace Knowdes
             switch (data.Type)
             {
                 case MetaDataType.Title:
-                    TitleMetaContent result = Instantiate(_titleContentPrefab);
+                    TitleContent result = Instantiate(_titleContentPrefab);
                     result.Data = data as TitleData;
                     return result;
                 case MetaDataType.Tags:
@@ -50,6 +54,14 @@ namespace Knowdes
                     CommentContent commentContent = Instantiate(_commentContentPrefab);
                     commentContent.Data = data as CommentData;
                     return commentContent;
+                case MetaDataType.Description:
+                    DescriptionContent descriptionContent = Instantiate(_descriptionContentPrefab);
+                    descriptionContent.Data = data as DescriptionData;
+                    return descriptionContent;
+                case MetaDataType.PreviewImage:
+                    PreviewImageContent previewImageContent = Instantiate(_previewImagePrefab);
+                    previewImageContent.Data = data as PreviewImageData;
+                    return previewImageContent;
                 default:
                     throw new NotImplementedException();
             }

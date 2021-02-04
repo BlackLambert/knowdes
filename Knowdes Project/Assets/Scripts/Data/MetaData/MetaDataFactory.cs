@@ -9,6 +9,7 @@ namespace Knowdes
     {
         private const string _defaultTitle = "Titel";
         private const string _defaultComment = "Neuer Kommentar";
+        private const string _defaultDescription = "Neue Beschreibung";
 
         public MetaData CreateNew(MetaDataType type)
 		{
@@ -39,6 +40,14 @@ namespace Knowdes
                     CommentData comment = new CommentData(iD, _defaultComment);
                     comment.ShowInPreview = true;
                     return comment;
+                case MetaDataType.Description:
+                    DescriptionData description = new DescriptionData(iD, _defaultDescription);
+                    description.ShowInPreview = true;
+                    return description;
+                case MetaDataType.PreviewImage:
+                    PreviewImageData previewImage = new PreviewImageData(iD, null);
+                    previewImage.ShowInPreview = true;
+                    return previewImage;
                 default:
                     throw new NotImplementedException();
             }

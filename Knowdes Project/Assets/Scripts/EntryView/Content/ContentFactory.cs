@@ -12,19 +12,18 @@ namespace Knowdes
         [SerializeField]
         private WeblinkContent _weblinkContentPrefab;
 
-        public Content Create(ContentData data)
+        public Content Create(EntryData entryData)
 		{
-            switch(data.Type)
+            ContentData contentData = entryData.Content;
+            switch (contentData.Type)
 			{
                 case ContentDataType.Text:
-                    TextContentData textData = data as TextContentData;
                     TextContent content = Instantiate(_textContentPrefab);
-                    content.Data = textData;
+                    content.EntryData = entryData;
                     return content;
                 case ContentDataType.Weblink:
-                    WeblinkContentData weblinkData = data as WeblinkContentData;
                     WeblinkContent weblinkContent = Instantiate(_weblinkContentPrefab);
-                    weblinkContent.Data = weblinkData;
+                    weblinkContent.EntryData = entryData;
                     return weblinkContent;
                 default:
                     throw new NotImplementedException();

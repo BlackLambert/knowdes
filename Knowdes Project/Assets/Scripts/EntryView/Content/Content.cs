@@ -11,6 +11,7 @@ namespace Knowdes
         private RectTransform _base;
         public RectTransform Base => _base;
 
+        public abstract EntryData EntryData { get; set; }
         public abstract ContentData ContentData { get; }
         public abstract ContentDataType Type { get; }
 
@@ -18,24 +19,28 @@ namespace Knowdes
 
     public abstract class Content<C> : Content where C : ContentData
 	{
-        public override ContentData ContentData => _data;
+        public override ContentData ContentData => Data;
         public override ContentDataType Type => ContentData.Type;
 
-        private C _data;
-        public C Data
-        {
-            get => _data;
+        public C Data => _entryData.Content as C;
+
+        private EntryData _entryData;
+        public override EntryData EntryData
+		{
+            get => _entryData;
             set
-            {
-                onDataRemoved(_data);
-                _data = value;
-                onDataAdded(_data);
+			{
+                if(_entryData != null)
+                    onDataRemoved(Data);
+                _entryData = value;
+                if (_entryData != null)
+                    onDataAdded(Data);
             }
-        }
+		}
 
         protected virtual void OnDestroy()
         {
-            onDataRemoved(_data);
+            onDataRemoved(Data);
         }
 
         protected abstract void onDataAdded(C data);

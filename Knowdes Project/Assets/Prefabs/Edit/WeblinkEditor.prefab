@@ -1481,6 +1481,7 @@ GameObject:
   - component: {fileID: 969769361415777491}
   - component: {fileID: 7635740669021544682}
   - component: {fileID: 741876317029569168}
+  - component: {fileID: 4665917170199125479}
   m_Layer: 5
   m_Name: WeblinkEditor
   m_TagString: Untagged
@@ -1552,6 +1553,19 @@ MonoBehaviour:
   _schemeDropdown: {fileID: 1475146244582338549}
   _errorTextObject: {fileID: 8923434567216401883}
   _errorText: {fileID: 3313218616751109685}
+--- !u!114 &4665917170199125479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2795506661260548255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea0f77863e5c1f4283527e2be8f821c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weblinkEditor: {fileID: 741876317029569168}
 --- !u!1 &2957499983290657562
 GameObject:
   m_ObjectHideFlags: 0

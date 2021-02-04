@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Knowdes.Prototype
@@ -36,7 +34,7 @@ namespace Knowdes.Prototype
             if (ContentData == null)
                 return;
 
-            Content content = _factory.Create(ContentData);
+            Content content = _factory.Create(_entryVolume.Data);
             content.Base.SetParent(_hook, false);
             content.Base.localScale = Vector3.one;
             _entryVolume.Content = content;

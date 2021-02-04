@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Knowdes
 {
-    public class TitleMetaContent : MetaContent<TitleData>
+    public class TitleContent : MetaContent<TitleData>
     {
 		[SerializeField]
 		private TextMeshProUGUI _text;

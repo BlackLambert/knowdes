@@ -6,6 +6,10 @@ namespace Knowdes
 {
     public class CoroutineHelper : MonoBehaviour
     {
-        
+        public static CoroutineHelper New()
+		{
+            GameObject helperObject = new GameObject("CoroutineHelper");
+            return helperObject.AddComponent<CoroutineHelper>();
+        }
     }
 }
