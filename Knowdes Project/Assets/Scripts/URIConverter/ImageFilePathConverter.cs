@@ -18,11 +18,9 @@ namespace Knowdes
 
 		public override Result Convert(string link)
 		{
-			if (!Uri.IsWellFormedUriString(link, UriKind.Absolute))
-				return new Result(_invalidFormatError);
 			Uri result;
 			if (!Uri.TryCreate(link, UriKind.Absolute, out result))
-				return new Result(_convertionFailedError);
+				return new Result(_invalidFormatError);
 			if (!isLinkToFile(result))
 				return new Result(_noFileError);
 			if (!isImageFile(result))
@@ -38,17 +36,20 @@ namespace Knowdes
 		private bool isImageFile(Uri uri)
 		{
 			string fileExtension = Path.GetExtension(uri.AbsoluteUri);
-			//Removes dot
-			string cleanedFileExtension = fileExtension.Remove(0, 1).Trim();
-			string lowerCleanedFileExtension = cleanedFileExtension.ToLower();
-			return _supportedFileExtensions.Contains(lowerCleanedFileExtension);
+			string lowerCleanedFileExtension = fileExtension.ToLower();
+			foreach (string extension in _supportedFileExtensions)
+			{
+				if (lowerCleanedFileExtension.Contains(extension))
+					return true;
+			}
+			return false;
 		}
 
 		private string createInvalidFileTypeError()
 		{
 			string extensionsString = string.Empty;
 			foreach (string extension in _supportedFileExtensions)
-				extensionsString += $", {extension}";
+				extensionsString += $"{extension}, ";
 			return string.Format(_invalidFileTypeError, extensionsString);
 		}
 	}
