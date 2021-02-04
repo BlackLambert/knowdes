@@ -10,7 +10,6 @@ namespace Knowdes
 	{
 		private const string _invalidFormatError = "Bitte geben Sie einen gültigen Link ein (z.B. www.bilder.de/Bild.jpg).";
 		private const string _invalidFileTypeError = "Ivalider Datentyp. Unterstützt werden: {0}";
-		private const string _convertionFailedError = "Link Konvertierung fehlgeschlagen.";
 		private const string _noFileError = "Bitte geben sie eine Link zu einer Bilddatei an.";
 
 		private readonly List<string> _supportedFileExtensions = new List<string>() { "png", "jpg", "jpeg" };

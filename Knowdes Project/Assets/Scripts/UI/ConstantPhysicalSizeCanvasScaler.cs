@@ -7,10 +7,10 @@ namespace Knowdes
     [ExecuteInEditMode]
     public class ConstantPhysicalSizeCanvasScaler : MonoBehaviour
     {
+        private const float _targetDPI = 120;
+
         [SerializeField]
         private Canvas _canvas = null;
-        [SerializeField]
-        private float _targetDPI = 96;
 
         protected virtual void Update()
 		{

@@ -8,6 +8,8 @@ namespace Knowdes
     public class LinkPreviewDataMetaDataExtractor : MonoBehaviour
     {
         private const string _loadingText = "Lade Metadaten";
+        private const string _loadingErrorMessage = "Es konnten keine MetaDaten von diesem Link extrahiert werden.";
+        private const float _errorMessageDisplayTime = 3f;
 
         [SerializeField]
         private WeblinkContentEditor _weblinkEditor = null;
@@ -16,9 +18,11 @@ namespace Knowdes
         private MetaDataFactory _metaDataFactory;
         private ImageFilePathConverter _imageFilePathConverter;
         private LinkPreviewLoader.LoadRequest _loadRequest;
+        private TemporaryNotificationDisplayer _notificationDisplayer;
 
         protected virtual void Start()
 		{
+            _notificationDisplayer = FindObjectOfType<TemporaryNotificationDisplayer>();
             _loadingOverlay = FindObjectOfType<LoadingOverlay>();
             _linkPreviewLoader = LinkPreviewLoader.New();
             _metaDataFactory = new MetaDataFactory();
@@ -51,11 +55,21 @@ namespace Knowdes
 		private void onPreviewLoaded(LinkPreviewLoader.Result result)
 		{
             disposeRequest();
-            if (!result.RequestWasSuccessful)
-                return;
-            List<MetaData> extractedMetaData = extractMetaDataFrom(result.Data);
-            addMissingMetaDataTo(_weblinkEditor.EntryData, extractedMetaData);
+            if (result.RequestWasSuccessful)
+            {
+                List<MetaData> extractedMetaData = extractMetaDataFrom(result.Data);
+                addMissingMetaDataTo(_weblinkEditor.EntryData, extractedMetaData);
+            }
+            else
+			{
+                displayErrorNotification(_loadingErrorMessage);
+            }
         }
+
+        private void displayErrorNotification(string message)
+		{
+            _notificationDisplayer.Show(new TemporaryNotificationDisplayer.Request(message, _errorMessageDisplayTime));
+		}
 
 		private void addMissingMetaDataTo(EntryData entryData, List<MetaData> extractedMetaData)
 		{

@@ -9,6 +9,9 @@ namespace Knowdes
 {
 	public class PreviewImageContent : MetaContent<PreviewImageData>
 	{
+		private const string _loadingErrorMessage = "Das gewünschte Vorschaubild konnte nicht geladen werden.";
+		private const float _loadingErrorNotificationDisplayTime = 3f;
+
 		[SerializeField]
 		private GameObject _imageObject;
 		[SerializeField]
@@ -18,12 +21,12 @@ namespace Knowdes
 
 		private RemoteImageLoader.LoadRequest _loadRequest = null;
 		private RemoteImageLoader _remoteImageLoader;
-
-
+		private TemporaryNotificationDisplayer _notificationDisplayer;
 
 		protected virtual void Awake()
 		{
 			_remoteImageLoader = RemoteImageLoader.New();
+			_notificationDisplayer = FindObjectOfType<TemporaryNotificationDisplayer>();
 		}
 
 		protected override void OnDestroy()
@@ -53,6 +56,7 @@ namespace Knowdes
 
 		private void onPathChanged()
 		{
+			clearImage();
 			tryToStopCurrentImageLoading();
 			tryToLoadImage();
 		}
@@ -84,6 +88,15 @@ namespace Knowdes
 			_loadRequest = null;
 			if (result.RequestWasSuccessful)
 				updateImage(result.Texture);
+			else
+				displayErrorNotification();
+		}
+
+		private void displayErrorNotification()
+		{
+			TemporaryNotificationDisplayer.Request request =
+				new TemporaryNotificationDisplayer.Request(_loadingErrorMessage, _loadingErrorNotificationDisplayTime);
+			_notificationDisplayer.Show(request);
 		}
 
 		private void updateImage(Texture texture)
