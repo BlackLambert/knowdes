@@ -13,14 +13,14 @@ namespace Knowdes
 
         public abstract EntryData EntryData { get; set; }
         public abstract ContentData ContentData { get; }
-        public abstract ContentDataType Type { get; }
+        public abstract ContentType Type { get; }
 
     }
 
     public abstract class Content<C> : Content where C : ContentData
 	{
         public override ContentData ContentData => Data;
-        public override ContentDataType Type => ContentData.Type;
+        public override ContentType Type => ContentData.Type;
 
         public C Data => _entryData.Content as C;
 

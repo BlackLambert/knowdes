@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 5647337395357974800}
   - component: {fileID: 8793995668658896400}
   - component: {fileID: 5050343905757376210}
+  - component: {fileID: 952305477963456318}
   m_Layer: 5
   m_Name: PreviewImageContent
   m_TagString: Untagged
@@ -147,9 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _base: {fileID: 4874003960138450242}
-  _imageObject: {fileID: 8859794836913588891}
-  _previewImage: {fileID: 8426402197199061864}
-  _imageAspectRatioFitter: {fileID: 3457060437120165446}
+  _previewImageView: {fileID: 952305477963456318}
 --- !u!114 &5050343905757376210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +175,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &952305477963456318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906191167038032874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8528602a25594fc40875f8a62525d3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 8426402197199061864}
+  _imageAspectRatioFitter: {fileID: 3457060437120165446}
+  _imageObject: {fileID: 4906191167038032874}
 --- !u!1 &5927898800783276967
 GameObject:
   m_ObjectHideFlags: 0

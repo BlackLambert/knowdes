@@ -31,7 +31,7 @@ namespace Knowdes
 
         
 
-        public override ContentDataType Type => ContentDataType.Weblink;
+        public override ContentType Type => ContentType.Weblink;
 
         public WeblinkContentData(Guid iD) : base(iD)
         {

@@ -64,12 +64,18 @@ namespace Knowdes
             get => _data;
             set
 			{
-                removeVisabilityListeners();
-                onDataRemoved(_data);
+                if (_data != null)
+                {
+                    removeVisabilityListeners();
+                    onDataRemoved(_data);
+                }
                 _data = value;
-                onDataAdded(_data);
-                updateVisibility();
-                addVisabilityListeners();
+                if (_data != null)
+                {
+                    onDataAdded(_data);
+                    updateVisibility();
+                    addVisabilityListeners();
+                }
             }
         }
 

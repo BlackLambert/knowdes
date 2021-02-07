@@ -6,7 +6,7 @@ namespace Knowdes
 	{
 		public Guid ID { get; }
 
-		public abstract ContentDataType Type { get; }
+		public abstract ContentType Type { get; }
 
 		public ContentData(Guid iD)
 		{

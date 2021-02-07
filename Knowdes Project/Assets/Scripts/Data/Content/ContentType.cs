@@ -2,7 +2,7 @@
 
 namespace Knowdes
 { 
-    public enum ContentDataType
+    public enum ContentType
     {
         Unset = 0,
         Text = 10,
@@ -15,21 +15,21 @@ namespace Knowdes
     static class ContentDataTypeMethods
     {
 
-        public static string GetName(this ContentDataType type)
+        public static string GetName(this ContentType type)
         {
             switch (type)
             {
-                case ContentDataType.Unset:
+                case ContentType.Unset:
                     return "Typ nicht gesetzt";
-                case ContentDataType.Text:
+                case ContentType.Text:
                     return "Editierbarer Text";
-                case ContentDataType.Image:
+                case ContentType.Image:
                     return "Bild";
-                case ContentDataType.PDF:
+                case ContentType.PDF:
                     return "PDF";
-                case ContentDataType.Weblink:
+                case ContentType.Weblink:
                     return "Weblink";
-                case ContentDataType.Data:
+                case ContentType.Data:
                     return "Unbekannte Datei";
                 default:
                     throw new NotImplementedException();

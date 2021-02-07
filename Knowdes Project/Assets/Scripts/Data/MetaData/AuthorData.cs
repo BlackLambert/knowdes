@@ -15,9 +15,6 @@ namespace Knowdes
 
 		public override bool Destroyable => true;
 
-		public event Action<Author> OnAdded;
-		public event Action<Author> OnRemoved;
-
 		public AuthorData(Guid iD):base(iD)
 		{
 			_authors = new List<Author>();

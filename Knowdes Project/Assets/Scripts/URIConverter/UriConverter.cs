@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UnityEngine;
 
 namespace Knowdes
 {
     public abstract class UriConverter
     {
-        
-
-
         public abstract Result Convert(string link);
 
         public struct Result

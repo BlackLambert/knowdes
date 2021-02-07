@@ -20,7 +20,7 @@ namespace Knowdes
 			}
         }
 
-		public override ContentDataType Type => ContentDataType.Text;
+		public override ContentType Type => ContentType.Text;
 
 		public TextContentData(Guid iD, string text) : base(iD)
         {

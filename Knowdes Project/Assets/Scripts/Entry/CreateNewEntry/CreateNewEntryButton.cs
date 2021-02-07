@@ -15,7 +15,7 @@ namespace Knowdes.Prototype
         private ContextPanel _contextPanel;
 
         [SerializeField]
-        private ContentDataType _type;
+        private ContentType _type;
 
         protected virtual void Start()
 		{

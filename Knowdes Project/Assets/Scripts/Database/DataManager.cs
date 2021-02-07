@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -42,6 +42,8 @@ namespace Knowdes
 
         public DataManager() : base()
         {
+            FileManager fm = new FileManager();
+            Debug.Log(fm.Dateiverzeichnis + " | " + fm.Arbeitsverzeichnis  );
             IDbCommand dbcmd = getDbCommand();
 
             if (!tableExists(TABLE_NAME_AUTHOR))
@@ -49,7 +51,6 @@ namespace Knowdes
                 dbcmd.CommandText = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME_AUTHOR + " ( " +
                 AUTHOR_KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + //AUTHOR_ID
                 AUTHOR_ID + " TEXT, " +
-                //AUTHOR_META_ID + " TEXT, " +
                 AUTHOR_AUTHOR + " TEXT)";
                 dbcmd.ExecuteNonQuery();
             }
@@ -89,14 +90,6 @@ namespace Knowdes
         // TAGS
         //____________________________________________________________
 
-        public void addTag(int meta_id, String guid, String name)
-        {
-            IDbCommand dbcmd = getDbCommand();
-            dbcmd.CommandText = "INSERT INTO " + TABLE_NAME_TAG + " ( " + TAG_META_ID + ", " + TAG_ID + ", " + TAG_NAME + " ) "
-                              + "VALUES ( '" + meta_id + "', '" + guid + "', '" + name + "' )";
-            dbcmd.ExecuteNonQuery();
-        }
-
         public void addTag(Tag tag)
         {
             IDbCommand dbcmd = getDbCommand();
@@ -111,6 +104,14 @@ namespace Knowdes
             dbcmd.CommandText = "DELETE FROM " + TABLE_NAME_TAG + " WHERE " + TAG_ID + " = '" + guid + "' AND " + TAG_NAME + " = '" + name + "'";
             dbcmd.ExecuteNonQuery();
         }
+
+        public void deleteTag(Tag tag) 
+        {
+            IDbCommand dbcmd = getDbCommand();
+            dbcmd.CommandText = "DELETE FROM " + TABLE_NAME_TAG + " WHERE " + TAG_ID + " = '" + tag.ID.ToString() + "' AND " + TAG_NAME + " = '" + tag.Name + "'";
+            dbcmd.ExecuteNonQuery();
+        }
+
         public void deleteAllTags(Guid guid)
         {
             IDbCommand dbcmd = getDbCommand();
@@ -118,10 +119,10 @@ namespace Knowdes
             dbcmd.ExecuteNonQuery();
         }
 
-        public void updateTag(int meta_id, Tag oldTag, Tag newTag)
+        public void updateTag(Tag oldTag, Tag newTag)
         {
-            deleteTag(oldTag.ID.ToString(), oldTag.Name);
-            addTag(meta_id, newTag.ID.ToString(), newTag.Name);
+            deleteTag(oldTag);
+            addTag(newTag);
         }
 
         public List<Tag> getAllTags(Guid id)
@@ -210,7 +211,6 @@ namespace Knowdes
                         metas.Add(td);
                         break;
                     default:
-                        //Debug.Log("default: " + reader[METADATA_TYP] + " | " + MetaDataType.Title + " | " + metas.Count);
                         throw new NotImplementedException();
                 }
 
@@ -221,7 +221,6 @@ namespace Knowdes
         public void addMetaData(MetaData meta)
         {
             String inhalt = null;
-            //Debug.Log("addMetaData: " + meta.Type );
 
             switch (meta.Type)
             {
@@ -296,7 +295,7 @@ namespace Knowdes
         public void addContent(ContentData content)
         {
             IDbCommand dbcmd = getDbCommand();
-            if (content.Type == ContentDataType.Text)
+            if (content.Type == ContentType.Text)
             {
                 TextContentData textcontent = (TextContentData)content;
                 dbcmd.CommandText = "INSERT INTO " + TABLE_NAME_CONTENT + " ( " + CONTENT_ID + ", " + CONTENT_TYP + ", " + CONTENT_INHALT + " ) " +
@@ -330,7 +329,7 @@ namespace Knowdes
             {
                 switch (Convert.ToInt16(reader[CONTENT_TYP]))
                 {
-                    case (int)ContentDataType.Text:
+                    case (int)ContentType.Text:
                         cd = new TextContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
                         break;
                     default:
@@ -340,21 +339,6 @@ namespace Knowdes
                 liste.Add(cd);
             }
             return liste;
-        }
-
-
-
-        public void deleteAllAuthors(Guid guid)
-        {
-            IDbCommand dbcmd = getDbCommand();
-            dbcmd.CommandText = "DELETE FROM " + TABLE_NAME_AUTHOR + " WHERE " + AUTHOR_ID + " = '" + guid.ToString() + "'";
-            dbcmd.ExecuteNonQuery();
-        }
-
-        public void deleteEntry(Guid guid)
-        {
-            deleteContent(guid);
-            deleteAllMetaData(guid);
         }
 
         // AUTHORS
@@ -384,6 +368,13 @@ namespace Knowdes
             dbcmd.ExecuteNonQuery();
         }
 
+        public void deleteAllAuthors(Guid guid)
+        {
+            IDbCommand dbcmd = getDbCommand();
+            dbcmd.CommandText = "DELETE FROM " + TABLE_NAME_AUTHOR + " WHERE " + AUTHOR_ID + " = '" + guid.ToString() + "'";
+            dbcmd.ExecuteNonQuery();
+        }
+
         // ENTRIES
         //____________________________________________________________
 
@@ -406,7 +397,6 @@ namespace Knowdes
             while (reader.Read())
                 {
                     guid = new Guid(Convert.ToString(reader[CONTENT_ID]));
-                    //Debug.Log("getAllEntrys : " + guid.ToString());
                         if (Convert.ToString(reader[CONTENT_TYP]) == "Text")
                         {
                             TextContentData content_text = new TextContentData(guid, Convert.ToString(reader[CONTENT_INHALT]));
@@ -425,6 +415,11 @@ namespace Knowdes
                 }
             
             return entries;
+        }
+        public void deleteEntry(Guid guid)
+        {
+            deleteContent(guid);
+            deleteAllMetaData(guid);
         }
 
         public EntryData getEntry(Guid guid)

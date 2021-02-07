@@ -68,7 +68,7 @@ namespace Knowdes
 
         private void displayErrorNotification(string message)
 		{
-            _notificationDisplayer.Show(new TemporaryNotificationDisplayer.Request(message, _errorMessageDisplayTime));
+            _notificationDisplayer.RequestDisplay(new TemporaryNotificationDisplayer.Request(message, _errorMessageDisplayTime));
 		}
 
 		private void addMissingMetaDataTo(EntryData entryData, List<MetaData> extractedMetaData)

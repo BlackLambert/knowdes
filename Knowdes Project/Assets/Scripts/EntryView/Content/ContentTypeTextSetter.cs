@@ -26,7 +26,7 @@ namespace Knowdes
 
         private void updateText()
 		{
-            _text.text = _content.Data.Content != null ? _content.Data.Content.Type.GetName() : ContentDataType.Unset.GetName();
+            _text.text = _content.Data.Content != null ? _content.Data.Content.Type.GetName() : ContentType.Unset.GetName();
 		}
     }
 }

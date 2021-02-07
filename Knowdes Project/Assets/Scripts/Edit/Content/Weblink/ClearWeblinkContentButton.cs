@@ -8,7 +8,7 @@ namespace Knowdes
     public class ClearWeblinkContentButton : MonoBehaviour
     {
         [SerializeField]
-        private WeblinkContentEditor _editor;
+        private UriInput _input;
         [SerializeField]
         private Button _clearURLButton;
         [SerializeField]
@@ -19,27 +19,26 @@ namespace Knowdes
         protected virtual void Start()
         {
             updateView();
-            _editor.OnChanged += updateView;
+            _input.OnUriChanged += updateView;
             _clearURLButton.onClick.AddListener(clearURL);
         }
 
         protected virtual void OnDestroy()
         {
-            _editor.OnChanged -= updateView;
+            _input.OnUriChanged -= updateView;
             _clearURLButton.onClick.RemoveListener(clearURL);
         }
 
         private void updateView()
         {
-            bool activate = _editor.Data != null && !_editor.Data.Empty;
+            bool activate = !_input.Empty;
             _buttonObject.SetActive(activate);
             _inactiveButtonObject.SetActive(!activate);
         }
 
         private void clearURL()
         {
-            _editor.HostInput.text = null;
-            _editor.HostInput.onSubmit.Invoke(_editor.HostInput.text);
+            _input.Clear();
         }
     }
 }

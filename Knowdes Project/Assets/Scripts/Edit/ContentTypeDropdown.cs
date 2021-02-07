@@ -15,7 +15,7 @@ namespace Knowdes.Prototype
 		private Entry _current = null;
 		private ContentDataFactory _contentDataFactory;
 
-		private List<ContentDataType> _typesList = new List<ContentDataType>();
+		private List<ContentType> _typesList = new List<ContentType>();
 
 		private ContentData Content => _editPanel.Entry.Volume.Data.Content;
 
@@ -40,7 +40,7 @@ namespace Knowdes.Prototype
 		{
 			_dropdown.options.Clear();
 			List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
-			foreach (ContentDataType value in Enum.GetValues(typeof(ContentDataType)))
+			foreach (ContentType value in Enum.GetValues(typeof(ContentType)))
 			{
 				_typesList.Add(value);
 				options.Add(new TMP_Dropdown.OptionData(value.GetName()));
@@ -61,8 +61,8 @@ namespace Knowdes.Prototype
 
 		private void onValueChanged(int value)
 		{
-			ContentDataType type = _typesList[value];
-			_current.Volume.Data.Content = type != ContentDataType.Unset ? _contentDataFactory.Create(_typesList[value]) : null;
+			ContentType type = _typesList[value];
+			_current.Volume.Data.Content = type != ContentType.Unset ? _contentDataFactory.Create(_typesList[value]) : null;
 		}
 
 

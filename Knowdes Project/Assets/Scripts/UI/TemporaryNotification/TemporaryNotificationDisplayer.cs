@@ -15,7 +15,7 @@ namespace Knowdes
 		private bool _readyToDisplayNext => _currentNotification == null && _pendungRequests.Count > 0;
 
 
-		public void Show(Request request)
+		public void RequestDisplay(Request request)
 		{
 			enqueue(request);
 			checkDisplayNext();

@@ -19,7 +19,7 @@ namespace Knowdes.Prototype
             _entries = FindObjectOfType<EntriesList>();
         }
 
-        public Entry CreateNew(ContentDataType type)
+        public Entry CreateNew(ContentType type)
 		{
             ContentData content = _contentDataFactory.Create(type);
             EntryData data = _entryDataFactory.CreateNew(content);

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Knowdes
@@ -11,20 +9,26 @@ namespace Knowdes
         private TextContent _textContentPrefab;
         [SerializeField]
         private WeblinkContent _weblinkContentPrefab;
+        [SerializeField]
+		private ImageContent _imageContentPrefab;
 
-        public Content Create(EntryData entryData)
+		public Content Create(EntryData entryData)
 		{
             ContentData contentData = entryData.Content;
             switch (contentData.Type)
 			{
-                case ContentDataType.Text:
+                case ContentType.Text:
                     TextContent content = Instantiate(_textContentPrefab);
                     content.EntryData = entryData;
                     return content;
-                case ContentDataType.Weblink:
+                case ContentType.Weblink:
                     WeblinkContent weblinkContent = Instantiate(_weblinkContentPrefab);
                     weblinkContent.EntryData = entryData;
                     return weblinkContent;
+                case ContentType.Image:
+                    ImageContent imageContent = Instantiate(_imageContentPrefab);
+                    imageContent.EntryData = entryData;
+                    return imageContent;
                 default:
                     throw new NotImplementedException();
 			}

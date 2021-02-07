@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 namespace Knowdes
 {
-    public class RemoteImageLoader : MonoBehaviour
+    public class ImageLoader : MonoBehaviour
     {
         private Dictionary<LoadRequest, Coroutine> _loadRoutines = new Dictionary<LoadRequest, Coroutine>();
         private Dictionary<LoadRequest, Action<Result>> _callbacks = new Dictionary<LoadRequest, Action<Result>>();
@@ -27,7 +27,7 @@ namespace Knowdes
             _loadRoutines.Add(request, routine);
         }
 
-        public void StopLoadingImage(LoadRequest request)
+        public void CancelLoadingImage(LoadRequest request)
 		{
             if (!_loadRoutines.ContainsKey(request))
                 throw new ArgumentException();
@@ -61,10 +61,10 @@ namespace Knowdes
             www.Dispose();
         }
 
-        public static RemoteImageLoader New()
+        public static ImageLoader New()
         {
-            GameObject loaderObject = new GameObject(nameof(RemoteImageLoader));
-            return loaderObject.AddComponent<RemoteImageLoader>();
+            GameObject loaderObject = new GameObject(nameof(ImageLoader));
+            return loaderObject.AddComponent<ImageLoader>();
         }
         public void Destroy()
         {

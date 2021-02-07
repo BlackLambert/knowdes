@@ -16,7 +16,7 @@ namespace Knowdes
 			}
 		}
 
-		public override ContentDataType Type => ContentDataType.Data;
+		public override ContentType Type => ContentType.Data;
 
 		public DataContentData(Guid iD, string path) : base(iD)
 		{

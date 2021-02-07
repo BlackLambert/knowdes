@@ -8,7 +8,7 @@ namespace Knowdes
     public class OpenWeblinkContentButton : MonoBehaviour
     {
         [SerializeField]
-        private WeblinkContentEditor _editor;
+        private UriInput _editor;
         [SerializeField]
         private Button _openURLButton;
         [SerializeField]
@@ -19,26 +19,26 @@ namespace Knowdes
         protected virtual void Start()
 		{
             updateView();
-            _editor.OnChanged += updateView;
+            _editor.OnUriChanged += updateView;
             _openURLButton.onClick.AddListener(openURL);
         }
 
         protected virtual void OnDestroy()
 		{
-            _editor.OnChanged -= updateView;
+            _editor.OnUriChanged -= updateView;
             _openURLButton.onClick.RemoveListener(openURL);
         }
 
         private void updateView()
 		{
-            bool activate = _editor.Data != null && !_editor.Data.Empty;
+            bool activate = _editor.Uri != null;
             _buttonObject.SetActive(activate);
             _inactiveButtonObject.SetActive(!activate);
         }
 
         private void openURL()
 		{
-            Application.OpenURL(_editor.Data.UrlString);
+            Application.OpenURL(_editor.Uri.AbsoluteUri);
         }
     }
 }

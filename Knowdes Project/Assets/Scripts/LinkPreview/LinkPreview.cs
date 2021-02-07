@@ -32,9 +32,9 @@ namespace Knowdes
 		}
 
         private LinkPreviewLoader _linkPreviewLoader = null;
-        private RemoteImageLoader _remoteImageLoader = null;
+        private ImageLoader _remoteImageLoader = null;
         private LinkPreviewLoader.LoadRequest _fetchPreviewRequest = null;
-        private RemoteImageLoader.LoadRequest _loadImageRequest = null;
+        private ImageLoader.LoadRequest _loadImageRequest = null;
         private LinkPreviewData _data = null;
         private bool _uriIsEmpty => _uri == null || string.IsNullOrEmpty(_uri.AbsoluteUri);
         private bool _hasPreviewData => _data != null;
@@ -82,7 +82,7 @@ namespace Knowdes
                 clearImage();
         }
 
-        private void onPreviewImageLoaded(RemoteImageLoader.Result result)
+        private void onPreviewImageLoaded(ImageLoader.Result result)
         {
             _loadImageRequest = null;
             updateImage(result.Texture);
@@ -91,7 +91,7 @@ namespace Knowdes
         private void createLoaders()
 		{
             _linkPreviewLoader = LinkPreviewLoader.New();
-            _remoteImageLoader = RemoteImageLoader.New();
+            _remoteImageLoader = ImageLoader.New();
         }
 
         private void destroyLoaders()
@@ -159,7 +159,7 @@ namespace Knowdes
         }
         private void loadPreviewImage()
         {
-            _loadImageRequest = new RemoteImageLoader.LoadRequest(new Uri(_data.image));
+            _loadImageRequest = new ImageLoader.LoadRequest(new Uri(_data.image));
             _remoteImageLoader.LoadImage(_loadImageRequest, onPreviewImageLoaded);
         }
 
@@ -167,7 +167,7 @@ namespace Knowdes
         {
             if (_loadImageRequest == null)
                 return;
-            _remoteImageLoader.StopLoadingImage(_loadImageRequest);
+            _remoteImageLoader.CancelLoadingImage(_loadImageRequest);
             _loadImageRequest = null;
         }
 
