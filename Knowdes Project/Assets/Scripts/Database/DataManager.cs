@@ -305,14 +305,26 @@ namespace Knowdes
                     throw new NotImplementedException();
             }
             IDbCommand dbcmd = getDbCommand();
-            dbcmd.CommandText = "REPLACE INTO " + TABLE_NAME_METADATA + " ( " + METADATA_ID + ", " + METADATA_INHALT +
-                                                                        ", " + METADATA_SHOWINPREVIEW + ", " + METADATA_TYP + ", " + METADATA_ENTRY_ID + " ) " +
-                                                                        "VALUES ( '" + metaData.ID.ToString() + "', '" + inhalt + "', '" +
-                                                                                  metaData.ShowInPreview + "', '" + ((int)metaData.Type) + "', '" + (entryID.ToString()) + "' )";
+            dbcmd.CommandText = createAddOrReplaceMetaDataCommand(metaData, inhalt, entryID);
             dbcmd.ExecuteNonQuery();
         }
 
-        public void addOrReplaceAllMetadataOf(EntryData entry)
+        private string createAddOrReplaceMetaDataCommand(MetaData metaData, string content, Guid entryID)
+		{
+            string escapedContent = escape(content);
+            return "REPLACE INTO " + TABLE_NAME_METADATA + " ( " + METADATA_ID + ", " + METADATA_INHALT +
+                                                                        ", " + METADATA_SHOWINPREVIEW + ", " + METADATA_TYP + ", " + METADATA_ENTRY_ID + " ) " +
+                                                                        "VALUES ( '" + metaData.ID.ToString() + "', '" + escapedContent + "', '" +
+                                                                                 Convert.ToInt32(metaData.ShowInPreview) + "', '" + ((int)metaData.Type) + "', '" + (entryID.ToString()) + "' )";
+
+        }
+
+		private string escape(string content)
+		{
+            return content.Replace("'", "''");
+        }
+
+		public void addOrReplaceAllMetadataOf(EntryData entry)
         {
             foreach (MetaData metaData in entry.MetaDatasCopy.Values)
                 addOrReplace(metaData, entry.Id);
@@ -339,7 +351,7 @@ namespace Knowdes
         private string createAddContentRequest(TextbasedContentData data, Guid entryID)
 		{
             return "REPLACE INTO " + TABLE_NAME_CONTENT + " ( " + CONTENT_ID + ", " + CONTENT_TYP + ", " + CONTENT_INHALT + ", " + CONTENT_ENTRY_ID + " ) " +
-                "VALUES ( '" + data.Id.ToString() + "', '" + (int) data.Type + "', '" + data.Content + "', '" + entryID.ToString() + "' )";
+                "VALUES ( '" + data.Id.ToString() + "', '" + (int) data.Type + "', '" + @data.Content + "', '" + entryID.ToString() + "' )";
         }
 
         private void deleteContentOf(EntryData data)

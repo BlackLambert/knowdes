@@ -8,7 +8,7 @@ namespace Knowdes
 		public event Action OnContentChanged;
 		public string Content
 		{
-			get => _content;
+			get => @_content;
 			set
 			{
 				_content = value;

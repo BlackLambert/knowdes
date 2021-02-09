@@ -29,13 +29,13 @@ namespace Knowdes
 		private void addListenersToEntry()
 		{
 			if (_entry != null)
-				_entry.OnMarkedForDestruct -= clearEditPanel;
+				_entry.OnMarkedForDestruct += clearEditPanel;
 		}
 
 		private void removeListenersFromEntry()
 		{
 			if (_entry != null)
-				_entry.OnMarkedForDestruct += clearEditPanel;
+				_entry.OnMarkedForDestruct -= clearEditPanel;
 		}
 
 		private void clearEditPanel()

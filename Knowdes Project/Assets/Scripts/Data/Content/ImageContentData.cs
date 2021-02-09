@@ -22,7 +22,7 @@ namespace Knowdes
 
 		public override ContentType Type => ContentType.Image;
 
-		public string Content => Path;
+		public string Content => @Path;
 
 
 		public ImageContentData(Guid iD, string path) : base(iD)
