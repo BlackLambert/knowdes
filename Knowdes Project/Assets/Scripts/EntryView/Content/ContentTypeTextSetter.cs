@@ -20,9 +20,9 @@ namespace Knowdes
 
         protected virtual void OnDestroy()
 		{
-
-            _content.Data.OnContentChanged -= updateText;
-        }
+            if(_content != null)
+                _content.Data.OnContentChanged -= updateText;
+        }   
 
         private void updateText()
 		{

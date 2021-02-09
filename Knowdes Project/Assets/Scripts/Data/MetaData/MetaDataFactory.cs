@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Knowdes
 {
@@ -13,41 +10,25 @@ namespace Knowdes
 
         public MetaData CreateNew(MetaDataType type)
 		{
-            Guid iD = new Guid();
+            Guid iD = Guid.NewGuid();
             switch (type)
             {
                 case MetaDataType.Title:
-                    TitleData title = new TitleData(iD, _defaultTitle);
-                    title.ShowInPreview = true;
-                    return title;
+                    return new TitleData(iD, _defaultTitle);
                 case MetaDataType.Author:
-                    AuthorData author = new AuthorData(iD);
-                    author.ShowInPreview = true;
-                    return author;
+                    return new AuthorData(iD);
                 case MetaDataType.CreationDate:
-                    CreationDateData creationData = new CreationDateData(iD);
-                    creationData.ShowInPreview = false;
-                    return creationData;
+                    return new CreationDateData(iD);
                 case MetaDataType.LastChangedDate:
-                    LastChangeDateData lastChangeDate = new LastChangeDateData(iD);
-                    lastChangeDate.ShowInPreview = false;
-                    return lastChangeDate;
+                    return new LastChangeDateData(iD);
                 case MetaDataType.Tags:
-                    TagsData tags = new TagsData(iD);
-                    tags.ShowInPreview = true;
-                    return tags;
+                    return new TagsData(iD);
                 case MetaDataType.Comment:
-                    CommentData comment = new CommentData(iD, _defaultComment);
-                    comment.ShowInPreview = true;
-                    return comment;
+                    return new CommentData(iD, _defaultComment);
                 case MetaDataType.Description:
-                    DescriptionData description = new DescriptionData(iD, _defaultDescription);
-                    description.ShowInPreview = true;
-                    return description;
+                    return new DescriptionData(iD, _defaultDescription);
                 case MetaDataType.PreviewImage:
-                    PreviewImageData previewImage = new PreviewImageData(iD, null);
-                    previewImage.ShowInPreview = true;
-                    return previewImage;
+                    return new PreviewImageData(iD, null);
                 default:
                     throw new NotImplementedException();
             }

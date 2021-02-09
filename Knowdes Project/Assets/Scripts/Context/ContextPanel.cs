@@ -23,7 +23,7 @@ namespace Knowdes.Prototype
 
         public void ShowEditPanel(Entry targetEntry)
 		{
-            _editPanel.SetEntry(targetEntry);
+            _editPanel.InitWith(targetEntry);
             showSubPanel(ContextSubPanelType.Edit);
             showContextPanel();
         }

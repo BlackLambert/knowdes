@@ -26,6 +26,7 @@ namespace Knowdes
 		public DescriptionData(Guid iD, string content) : base(iD)
 		{
 			_content = content;
+			ShowInPreview = true;
 		}
 	}
 }

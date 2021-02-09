@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Knowdes
 {
-    public class SqliteHelper
+    public class SqliteHelper : IDisposable
     {
         private const string database_name = "KNOWDESDB2.db";
         public string db_connection_string;
@@ -22,7 +22,7 @@ namespace Knowdes
             db_connection.Open();
         }
 
-        ~SqliteHelper()
+        public void Dispose()
         {
             db_connection.Close();
         }
@@ -118,5 +118,5 @@ namespace Knowdes
         {
             db_connection.Close();
         }
-    }
+	}
 }

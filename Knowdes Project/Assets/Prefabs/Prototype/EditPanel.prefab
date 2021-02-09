@@ -1255,6 +1255,9 @@ GameObject:
   - component: {fileID: 6056246688720208011}
   - component: {fileID: 6056246688720208015}
   - component: {fileID: 2002247458080940858}
+  - component: {fileID: 8377231281308429348}
+  - component: {fileID: 1087879752746469628}
+  - component: {fileID: 3050548520798294894}
   m_Layer: 5
   m_Name: EditPanel
   m_TagString: Untagged
@@ -1309,6 +1312,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _contextPanel: {fileID: 0}
+  _editPanel: {fileID: 6056246688720208015}
+--- !u!114 &8377231281308429348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056246688720208021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0278c8655a584334e9542acfe38ca54c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _editPanel: {fileID: 6056246688720208015}
+--- !u!114 &1087879752746469628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056246688720208021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 570b565e6b9631e4bbfd735d1121b7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _editPanel: {fileID: 6056246688720208015}
+--- !u!114 &3050548520798294894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056246688720208021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fd1d1b51e5aa64281a288b7b285c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _editPanel: {fileID: 6056246688720208015}
 --- !u!1 &6056246688855006297
 GameObject:
@@ -1661,7 +1703,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6704436897868511410}
   m_HandleRect: {fileID: 7834250709639594029}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

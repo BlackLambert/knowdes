@@ -28,7 +28,7 @@ namespace Knowdes.Prototype
         private void onClick()
         {
 
-            _editPanel.SetEntry(_entry.LinkedEntry);
+            _editPanel.InitWith(_entry.LinkedEntry);
         }
     }
 }

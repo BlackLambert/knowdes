@@ -31,11 +31,18 @@ namespace Knowdes
 		public CommentData(Guid iD) : base(iD)
 		{
 			_content = string.Empty;
+			init();
 		}
 
 		public CommentData(Guid iD, string defaultText) : base(iD)
 		{
 			_content = defaultText;
+			init();
+		}
+
+		private void init()
+		{
+			ShowInPreview = true;
 		}
 	}
 }

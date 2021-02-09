@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Knowdes
 {
-    public class WeblinkContentData : ContentData
+    public class WeblinkContentData : ContentData, TextbasedContentData
     {
         public bool Empty
 		{
@@ -17,8 +17,9 @@ namespace Knowdes
         public string TopLevelDomain => Host.Split('.').Last();
 
         public event Action OnUrlChanged;
+		public override event Action OnChanged;
 
-        private Uri _url = null;
+		private Uri _url = null;
         public Uri Url
 		{
             get => _url;
@@ -26,6 +27,7 @@ namespace Knowdes
 			{
                 _url = value;
                 OnUrlChanged();
+                OnChanged?.Invoke();
             }
 		}
 
@@ -33,7 +35,9 @@ namespace Knowdes
 
         public override ContentType Type => ContentType.Weblink;
 
-        public WeblinkContentData(Guid iD) : base(iD)
+		public string Content => UrlString;
+
+		public WeblinkContentData(Guid iD) : base(iD)
         {
             
         }

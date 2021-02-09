@@ -28,7 +28,7 @@ namespace Knowdes.Prototype
 
         private void updateText()
 		{
-            _text.text =$"#{ (_editPanel.Entry != null ? _editPanel.Entry.Data.ID.ToString() : string.Empty)}";
+            _text.text =$"#{ (_editPanel.Entry != null ? _editPanel.Entry.Data.Id.ToString() : string.Empty)}";
 
         }
     }

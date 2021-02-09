@@ -9,7 +9,7 @@ namespace Knowdes
         Image = 11,
         PDF = 12,
         Weblink = 13,
-        Data = 1000
+        File = 1000
     }
 
     static class ContentDataTypeMethods
@@ -29,7 +29,7 @@ namespace Knowdes
                     return "PDF";
                 case ContentType.Weblink:
                     return "Weblink";
-                case ContentType.Data:
+                case ContentType.File:
                     return "Unbekannte Datei";
                 default:
                     throw new NotImplementedException();

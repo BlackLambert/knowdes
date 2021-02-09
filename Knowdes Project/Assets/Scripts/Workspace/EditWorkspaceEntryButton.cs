@@ -16,7 +16,7 @@ namespace Knowdes.Prototype
 
         protected virtual void Start()
         {
-            _contextPanel = FindObjectOfType<ContextPanel>();
+            _contextPanel = FindObjectOfType<ContextPanel>(true);
             _button.onClick.AddListener(onClick);
         }
 

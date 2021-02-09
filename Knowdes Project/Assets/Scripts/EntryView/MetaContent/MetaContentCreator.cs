@@ -27,9 +27,11 @@ namespace Knowdes
 
 		protected virtual void OnDestroy()
 		{
-
-            _volume.Data.OnMetaDataAdded -= addMetaContent;
-            _volume.Data.OnMetaDataRemoved -= removeMetaContent;
+            if (_volume != null)
+            {
+                _volume.Data.OnMetaDataAdded -= addMetaContent;
+                _volume.Data.OnMetaDataRemoved -= removeMetaContent;
+            }
         }
 
         private void init()

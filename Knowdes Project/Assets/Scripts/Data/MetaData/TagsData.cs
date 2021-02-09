@@ -31,6 +31,7 @@ namespace Knowdes
 
 		private void init()
 		{
+			ShowInPreview = true;
 			foreach(Tag tag in _tags)
 			{
 				tag.OnNameChanged += invokeOnChanged;

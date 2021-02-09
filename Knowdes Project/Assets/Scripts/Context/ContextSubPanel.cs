@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knowdes.Prototype
+namespace Knowdes
 {
     public abstract class ContextSubPanel : MonoBehaviour
     {

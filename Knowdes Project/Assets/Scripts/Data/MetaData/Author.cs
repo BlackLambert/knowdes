@@ -7,6 +7,8 @@ namespace Knowdes
 {
     public class Author 
     {
+		public Guid Id { get; }
+
 		private string _name;
 		public event Action OnNameChanged;
 		public string Name
@@ -19,8 +21,9 @@ namespace Knowdes
 			}
 		}
 
-		public Author(string name)
+		public Author(Guid iD, string name)
 		{
+			Id = iD;
 			_name = name;
 		}
 	}

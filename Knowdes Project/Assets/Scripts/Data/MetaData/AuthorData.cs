@@ -27,6 +27,7 @@ namespace Knowdes
 		}
 		private void init()
 		{
+			ShowInPreview = true;
 			foreach (Author author in _authors)
 			{
 				author.OnNameChanged += invokeOnChanged;

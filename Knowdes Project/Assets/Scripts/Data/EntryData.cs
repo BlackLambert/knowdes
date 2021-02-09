@@ -5,9 +5,9 @@ using System;
 
 namespace Knowdes
 {
-    public class EntryData 
+    public class EntryData : IDisposable
     {
-        public Guid ID { get; }
+        public Guid Id => _content.Id;
 
         private ContentData _content;
         public event Action OnContentChanged;
@@ -27,22 +27,33 @@ namespace Knowdes
         public event Action<MetaData> OnMetaDataAdded;
         public event Action<MetaData> OnMetaDataRemoved;
 
-        public event Action<EntryData> OnChanged;
+        public event Action OnChanged;
 
-        public EntryData(Guid iD, ContentData content)
+        public EntryData(ContentData content)
 		{
-            ID = iD;
             _content = content;
-
+            init();
         }
 
-        public EntryData(Guid iD,
+        public EntryData(
             ContentData content,
             Dictionary<MetaDataType, MetaData> metaDatas)
         {
-            ID = iD;
             _content = content;
             _metaDatas = metaDatas;
+            init();
+        }
+
+        private void init()
+		{
+            _content.OnChanged += invokeOnChanged;
+		}
+
+        public void Dispose()
+		{
+            _content.OnChanged -= invokeOnChanged;
+            foreach (MetaData data in _metaDatas.Values)
+                data.OnChanged -= invokeOnChanged;
         }
 
         public void AddMetaData(MetaData metaData)
@@ -77,7 +88,12 @@ namespace Knowdes
 
         private void invokeOnChanged()
 		{
-            OnChanged?.Invoke(this);
+            OnChanged?.Invoke();
         }
-    }
+
+		public override string ToString()
+		{
+            return $"EntryData (ID: {Id} | Content: {_content.Type.GetName()} | Meta Data Count: {_metaDatas.Count}";
+		}
+	}
 }

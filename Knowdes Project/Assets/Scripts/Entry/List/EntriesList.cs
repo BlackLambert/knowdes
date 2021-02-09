@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knowdes.Prototype
+namespace Knowdes
 {
     public class EntriesList : MonoBehaviour
     {
@@ -17,7 +17,6 @@ namespace Knowdes.Prototype
         [SerializeField]
         private Transform _hook = null;
 
-
         public void Add(Entry entry)
 		{
             _entries.Add(entry);
@@ -29,7 +28,6 @@ namespace Knowdes.Prototype
         public void Remove(Entry entry)
 		{
             _entries.Remove(entry);
-            Destroy(entry.Base.gameObject);
             OnCountChanged?.Invoke();
             OnEntryRemoved?.Invoke(entry);
         }

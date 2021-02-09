@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Knowdes
 {
@@ -29,11 +26,18 @@ namespace Knowdes
 		public LastChangeDateData(Guid iD) : base(iD)
 		{
 			_date = DateTime.Now;
+			init();
 		}
 
 		public LastChangeDateData(Guid iD, DateTime dateTime) : base(iD)
 		{
 			_date = dateTime;
+			init();
+		}
+
+		private void init()
+		{
+			ShowInPreview = false;
 		}
 	}
 }

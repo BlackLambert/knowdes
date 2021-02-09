@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Knowdes.Prototype
+namespace Knowdes
 {
     public class Entry : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace Knowdes.Prototype
         [SerializeField]
         private UISelectable _selectable = null;
         public UISelectable Selectable => _selectable;
-        public event Action<Entry> OnMarkedForDestruct;
+        public event Action OnMarkedForDestruct;
 
         private bool _pending = true;
         public event Action OnPendingChanged;
@@ -35,7 +35,12 @@ namespace Knowdes.Prototype
 
         public void MarkForDestruct()
 		{
-            OnMarkedForDestruct?.Invoke(this);
+            OnMarkedForDestruct?.Invoke();
         }
-    }
+
+		public void Destroy()
+		{
+            Destroy(Base.gameObject);
+        }
+	}
 }

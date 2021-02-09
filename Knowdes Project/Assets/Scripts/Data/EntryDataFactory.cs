@@ -15,27 +15,19 @@ namespace Knowdes
 
         }
 
-        public EntryData CreateNew(ContentData content)
+        public EntryData Create(ContentData content)
 		{
-            return CreateNew(Guid.NewGuid(), content);
+			EntryData result = new EntryData(content);
+			initNewEntryData(result);
+			return result;
 		}
 
-        public EntryData CreateNew(Guid iD, ContentData content)
+		private void initNewEntryData(EntryData result)
 		{
-            EntryData result = new EntryData(iD, content);
-            MetaData creationDateData = _factory.CreateNew(MetaDataType.CreationDate);
-            MetaData lastChangeDateData = _factory.CreateNew(MetaDataType.LastChangedDate);
-            result.AddMetaData(creationDateData);
-            result.AddMetaData(lastChangeDateData);
-            result.OnChanged += updateLastChangeDate;
-            return result;
-        }
-
-        //TODO: Put in own class! But only if there is a repository.
-        private void updateLastChangeDate(EntryData data)
-		{
-            LastChangeDateData lastChangeDateData = data.Get(MetaDataType.LastChangedDate) as LastChangeDateData;
-            lastChangeDateData.Date = DateTime.Now;
+			MetaData creationDateData = _factory.CreateNew(MetaDataType.CreationDate);
+			MetaData lastChangeDateData = _factory.CreateNew(MetaDataType.LastChangedDate);
+			result.AddMetaData(creationDateData);
+			result.AddMetaData(lastChangeDateData);
 		}
     }
 }

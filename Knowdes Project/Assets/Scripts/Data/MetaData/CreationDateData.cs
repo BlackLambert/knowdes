@@ -18,11 +18,20 @@ namespace Knowdes
 		public CreationDateData(Guid iD) : base(iD)
 		{
 			_date = DateTime.Now;
+			init();
 		}
 
 		public CreationDateData(Guid iD, DateTime date) : base(iD)
 		{
 			_date = date;
+			init();
+		}
+
+
+
+		private void init()
+		{
+			ShowInPreview = false;
 		}
 	}
 }

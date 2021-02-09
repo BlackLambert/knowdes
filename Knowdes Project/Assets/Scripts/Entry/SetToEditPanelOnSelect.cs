@@ -16,7 +16,7 @@ namespace Knowdes.Prototype
 
         protected virtual void Start()
 		{
-            _editPanel = FindObjectOfType<EditPanel>();
+            _editPanel = FindObjectOfType<EditPanel>(true);
             _selectable.OnSelected += setEntry;
         }
 
@@ -27,7 +27,7 @@ namespace Knowdes.Prototype
 
         private void setEntry()
         {
-            _editPanel.SetEntry(_entry);
+            _editPanel.InitWith(_entry);
         }
     }
 }

@@ -2,10 +2,12 @@
 
 namespace Knowdes
 {
-	public class DataContentData : ContentData
+	public class FileContentData : ContentData
 	{
 		private string _path;
 		public event Action OnPathChanged;
+		public override event Action OnChanged;
+
 		public string Path
 		{
 			get => _path;
@@ -13,12 +15,13 @@ namespace Knowdes
 			{
 				_path = value;
 				OnPathChanged?.Invoke();
+				OnChanged?.Invoke();
 			}
 		}
 
-		public override ContentType Type => ContentType.Data;
+		public override ContentType Type => ContentType.File;
 
-		public DataContentData(Guid iD, string path) : base(iD)
+		public FileContentData(Guid iD, string path) : base(iD)
 		{
 			_path = path;
 		}

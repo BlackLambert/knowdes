@@ -30,6 +30,7 @@ namespace Knowdes
 		public PreviewImageData(Guid iD, Uri path) :base(iD)
 		{
 			Uri = path;
+			ShowInPreview = true;
 		}
 	}
 }

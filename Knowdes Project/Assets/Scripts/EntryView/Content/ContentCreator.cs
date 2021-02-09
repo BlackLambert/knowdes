@@ -23,7 +23,8 @@ namespace Knowdes.Prototype
 
 		protected virtual void OnDestroy()
         {
-            _entryVolume.Data.OnContentChanged -= onContentChanged;
+            if (_entryVolume != null)
+                _entryVolume.Data.OnContentChanged -= onContentChanged;
             cleanContent();
         }
 
