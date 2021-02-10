@@ -17,6 +17,7 @@ namespace Knowdes
 		protected virtual void Start()
 		{
 			_image.SetErrorMessage(_loadingErrorMessage, _loadingErrorNotificationDisplayTime);
+			updateView();
 		}
 
 		protected override void onDataAdded(ImageContentData data)

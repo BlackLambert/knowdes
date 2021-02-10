@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 8426402197199061864}
   _imageAspectRatioFitter: {fileID: 3457060437120165446}
-  _imageObject: {fileID: 4906191167038032874}
+  _imageObject: {fileID: 5927898800783276967}
 --- !u!1 &5927898800783276967
 GameObject:
   m_ObjectHideFlags: 0

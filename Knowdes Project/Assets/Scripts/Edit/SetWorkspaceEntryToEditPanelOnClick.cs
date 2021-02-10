@@ -16,7 +16,7 @@ namespace Knowdes.Prototype
 
         protected virtual void Start()
         {
-            _editPanel = FindObjectOfType<EditPanel>();
+            _editPanel = FindObjectOfType<EditPanel>(true);
             _button.onClick.AddListener(onClick);
         }
 
