@@ -11,12 +11,7 @@ namespace Knowdes.Prototype
         private Button _button;
         [SerializeField]
         private TextMeshProUGUI _label;
-        private EntryFactory _factory;
-        private ContextPanel _contextPanel;
-        private EntriesList _entryList;
-        private EntryDataFactory _entryDatasFactory;
-        private EntryDataRepository _entryRepository;
-        private ContentDataFactory _contentDataFactory;
+        private EntryCreator _entryCreator;
 
         [SerializeField]
         private ContentType _type;
@@ -25,12 +20,7 @@ namespace Knowdes.Prototype
 		{
             _button.onClick.AddListener(createEntry);
             _label.text = _type.GetName();
-            _factory = FindObjectOfType<EntryFactory>();
-            _contextPanel = FindObjectOfType<ContextPanel>();
-            _entryDatasFactory = new EntryDataFactory();
-            _contentDataFactory = new ContentDataFactory();
-            _entryList = FindObjectOfType<EntriesList>();
-            _entryRepository = FindObjectOfType<EntryDataRepository>();
+            _entryCreator = FindObjectOfType<EntryCreator>();
         }
 
 		protected virtual void OnDestroy()
@@ -40,12 +30,7 @@ namespace Knowdes.Prototype
 
         private void createEntry()
         {
-            ContentData content = _contentDataFactory.Create(_type);
-            EntryData entryData = _entryDatasFactory.Create(content);
-            _entryRepository.Add(entryData);
-            Entry newEntry = _factory.Create(entryData);
-            _entryList.Add(newEntry);
-            _contextPanel.ShowEditPanel(newEntry);
+            _entryCreator.Create(_type);
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 
 namespace Knowdes
 {
@@ -12,7 +9,7 @@ namespace Knowdes
 		private const string _invalidFileTypeError = "Ivalider Datentyp. Unterstützt werden: {0}";
 		private const string _noFileError = "Bitte geben sie eine Link zu einer Bilddatei an.";
 
-		private readonly List<string> _supportedFileExtensions = new List<string>() { "png", "jpg", "jpeg" };
+		private SupportedFileTypes _supportedFiles = new SupportedFileTypes();
 
 
 		public override Result Convert(string link)
@@ -20,23 +17,24 @@ namespace Knowdes
 			Uri result;
 			if (!Uri.TryCreate(link, UriKind.Absolute, out result))
 				return new Result(_invalidFormatError);
-			if (!isLinkToFile(result))
+			if (!isFilePath(result))
 				return new Result(_noFileError);
-			if (!isImageFile(result))
+			if (!isImageFilePath(result))
 				return new Result(createInvalidFileTypeError());
 			return new Result(result);
 		}
 
-		private bool isLinkToFile(Uri uri)
+
+		private bool isFilePath(Uri uri)
 		{
 			return !string.IsNullOrEmpty(Path.GetExtension(uri.AbsoluteUri));
 		}
 
-		private bool isImageFile(Uri uri)
+		private bool isImageFilePath(Uri uri)
 		{
 			string fileExtension = Path.GetExtension(uri.AbsoluteUri);
 			string lowerCleanedFileExtension = fileExtension.ToLower();
-			foreach (string extension in _supportedFileExtensions)
+			foreach (string extension in _supportedFiles.Image)
 			{
 				if (lowerCleanedFileExtension.Contains(extension))
 					return true;
@@ -47,7 +45,7 @@ namespace Knowdes
 		private string createInvalidFileTypeError()
 		{
 			string extensionsString = string.Empty;
-			foreach (string extension in _supportedFileExtensions)
+			foreach (string extension in _supportedFiles.Image)
 				extensionsString += $"{extension}, ";
 			return string.Format(_invalidFileTypeError, extensionsString);
 		}

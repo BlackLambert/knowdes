@@ -20,8 +20,8 @@ namespace Knowdes.Prototype
 
         protected virtual void OnDestroy()
 		{
-
-            _editPanel.OnEntryChanged -= updateText;
+            if(_editPanel != null)
+                _editPanel.OnEntryChanged -= updateText;
         }
 
         private void updateText()

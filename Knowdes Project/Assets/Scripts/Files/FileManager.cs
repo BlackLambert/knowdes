@@ -36,36 +36,26 @@ namespace Knowdes
 
         public void deleteDatei(String datei)
         {
-            if (System.IO.File.Exists(@datei))
+            if (existDatei(@datei))
+                throw new InvalidOperationException();
+            try
             {
-                try
-                {
-                    System.IO.File.Delete(@datei);
-                }
-                catch (System.IO.IOException e)
-                {
-                    Debug.Log (e.Message);
-                }
+                System.IO.File.Delete(@datei);
             }
-
+            catch (System.IO.IOException e)
+            {
+                Debug.Log (e.Message);
+            }
         }
 
         public bool existDatei(String datei)
         {
-            if (System.IO.File.Exists(@datei))
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
-
+            return System.IO.File.Exists(@datei);
         }
 
-        public String saveDatei(String datei)
+        public String SaveDatei(String datei)
         {
             String ziel = datei_verzeichnis + @"\" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + getDateiName(datei);
-            Debug.Log("DateTime.UtcNow: " + DateTime.Now.ToString("yyyyMMddHHmmssffff"));
             if (existDatei(ziel))
             {
                 ziel = datei_verzeichnis + @"\" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + getDateiName(datei);

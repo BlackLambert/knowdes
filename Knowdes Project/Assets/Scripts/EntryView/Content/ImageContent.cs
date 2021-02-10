@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Knowdes
 {
-	public class ImageContent : Content<ImageContentData>
+	public class ImageContent : Content<ImageContentData>, FilebasedContent
 	{
 		private const string _loadingErrorMessage = "Das gewünschte Bild konnte nicht geladen werden.";
 		private const float _loadingErrorNotificationDisplayTime = 3f;
@@ -13,6 +13,8 @@ namespace Knowdes
 		private RemoteImageView _image;
 		[SerializeField]
 		private TextMeshProUGUI _pathText;
+
+		public string Path => Data.Path;
 
 		protected virtual void Start()
 		{

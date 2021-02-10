@@ -2,7 +2,7 @@
 
 namespace Knowdes
 {
-	public class ImageContentData : ContentData, TextbasedContentData
+	public class ImageContentData : ContentData, TextbasedContentData, FilebasedContentData
 	{
 		private string _path = string.Empty;
 		public event Action OnPathChanged;
