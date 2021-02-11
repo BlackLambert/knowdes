@@ -21,6 +21,7 @@ namespace Knowdes
 		public TagsData(Guid iD) : base(iD)
 		{
 			_tags = new List<Tag>();
+			init();
 		}
 
 		public TagsData(Guid iD, List<Tag> tags) : base(iD)

@@ -19,7 +19,6 @@ namespace Knowdes
                 throw new ArgumentException();
             _filebasedContent = (FilebasedContent)_content;
             _button.onClick.AddListener(onClick);
-
         }
 
         protected virtual void OnDestroy()

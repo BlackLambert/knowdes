@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 
 namespace Knowdes
 {
@@ -18,6 +15,13 @@ namespace Knowdes
 			if (!hasExtension(result))
 				return new Result(_invalidFormatError);
 			return new Result(result);
+		}
+
+		public override bool Convertable(string link)
+		{
+			Uri uri;
+			return Uri.TryCreate(link, UriKind.Absolute, out uri) &&
+				hasExtension(uri);
 		}
 
 		private bool hasExtension(Uri uri)

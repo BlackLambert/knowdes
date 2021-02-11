@@ -78,6 +78,8 @@ namespace Knowdes
                     return new WeblinkContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), string.IsNullOrEmpty(content) ? null : new Uri(content));
                 case (int)ContentType.Image:
                     return new ImageContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
+                case (int)ContentType.File:
+                    return new UnknownFileContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
                 default:
                     throw new NotImplementedException();
             }

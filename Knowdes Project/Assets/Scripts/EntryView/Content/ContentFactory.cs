@@ -11,6 +11,8 @@ namespace Knowdes
         private WeblinkContent _weblinkContentPrefab;
         [SerializeField]
 		private ImageContent _imageContentPrefab;
+        [SerializeField]
+        private UnknownFileContent _unknownFileContentPrefab;
 
 		public Content Create(EntryData entryData)
 		{
@@ -29,6 +31,10 @@ namespace Knowdes
                     ImageContent imageContent = Instantiate(_imageContentPrefab);
                     imageContent.EntryData = entryData;
                     return imageContent;
+                case ContentType.File:
+                    UnknownFileContent unknownFileContent = Instantiate(_unknownFileContentPrefab);
+                    unknownFileContent.EntryData = entryData;
+                    return unknownFileContent;
                 default:
                     throw new NotImplementedException();
 			}

@@ -5,6 +5,7 @@ namespace Knowdes
     public abstract class UriConverter
     {
         public abstract Result Convert(string link);
+        public abstract bool Convertable(string link);
 
         public struct Result
 		{

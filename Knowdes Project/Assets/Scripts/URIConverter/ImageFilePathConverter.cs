@@ -5,9 +5,8 @@ namespace Knowdes
 {
 	public class ImageFilePathConverter : UriConverter
 	{
-		private const string _invalidFormatError = "Bitte geben Sie einen gültigen Link ein (z.B. www.bilder.de/Bild.jpg).";
+		private const string _invalidFormatError = "Bitte geben Sie einen gültigen Pfad oder Link zu einer Bilddatei an (z.B. www.bilder.de/Bild.jpg).";
 		private const string _invalidFileTypeError = "Ivalider Datentyp. Unterstützt werden: {0}";
-		private const string _noFileError = "Bitte geben sie eine Link zu einer Bilddatei an.";
 
 		private SupportedFileTypes _supportedFiles = new SupportedFileTypes();
 
@@ -18,7 +17,7 @@ namespace Knowdes
 			if (!Uri.TryCreate(link, UriKind.Absolute, out result))
 				return new Result(_invalidFormatError);
 			if (!isFilePath(result))
-				return new Result(_noFileError);
+				return new Result(_invalidFormatError);
 			if (!isImageFilePath(result))
 				return new Result(createInvalidFileTypeError());
 			return new Result(result);
@@ -48,6 +47,14 @@ namespace Knowdes
 			foreach (string extension in _supportedFiles.Image)
 				extensionsString += $"{extension}, ";
 			return string.Format(_invalidFileTypeError, extensionsString);
+		}
+
+		public override bool Convertable(string link)
+		{
+			Uri uri;
+			return Uri.TryCreate(link, UriKind.Absolute, out uri) &&
+				isFilePath(uri) &&
+				isImageFilePath(uri);
 		}
 	}
 }

@@ -11,6 +11,8 @@ namespace Knowdes
         private WeblinkContentEditor _weblinkEditorPrefab = null;
         [SerializeField]
         private ImageContentEditor _imageEditorPrefab = null;
+        [SerializeField]
+        private UnknownFileEditor _unknownFileEditorPrefab = null;
 
         public ContentEditor Create(EntryData entryData)
 		{
@@ -29,6 +31,10 @@ namespace Knowdes
                     ImageContentEditor imageContentEditor = Instantiate(_imageEditorPrefab);
                     imageContentEditor.EntryData = entryData;
                     return imageContentEditor;
+                case ContentType.File:
+                    UnknownFileEditor unknownFileEditor = Instantiate(_unknownFileEditorPrefab);
+                    unknownFileEditor.EntryData = entryData;
+                    return unknownFileEditor;
                 default:
                     throw new NotImplementedException();
             }

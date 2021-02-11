@@ -53,7 +53,7 @@ namespace Knowdes
             return System.IO.File.Exists(@datei);
         }
 
-        public String SaveDatei(String datei)
+        public String SaveFile(String datei)
         {
             String ziel = datei_verzeichnis + @"\" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + getDateiName(datei);
             if (existDatei(ziel))

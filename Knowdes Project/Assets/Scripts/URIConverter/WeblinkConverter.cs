@@ -17,7 +17,14 @@ namespace Knowdes
             return new Result(result);
         }
 
-        private bool isLinkToFile(Uri uri)
+		public override bool Convertable(string link)
+		{
+            Uri uri;
+            return Uri.TryCreate(link, UriKind.Absolute, out uri) &&
+                isLinkToFile(uri);
+        }
+
+		private bool isLinkToFile(Uri uri)
         {
             return uri.IsFile;
         }

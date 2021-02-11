@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Knowdes
@@ -16,5 +18,10 @@ namespace Knowdes
             result.AddRange(Image);
             return result;
         }
-    }
+
+		internal bool Contains(string extension)
+		{
+            return All().ToList().Contains(extension);
+        }
+	}
 }
