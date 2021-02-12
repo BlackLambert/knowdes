@@ -23,6 +23,8 @@ namespace Knowdes.Prototype
         private DescriptionEditor _descriptionEditor;
         [SerializeField]
         private PreviewImageEditor _previewImageEditor;
+        [SerializeField]
+        private AuthorsEditor _authorsEditor;
 
         public MetaContentEditorShell Create(MetaData data)
 		{
@@ -71,6 +73,11 @@ namespace Knowdes.Prototype
                     PreviewImageEditor previewImageEditor = Instantiate(_previewImageEditor);
                     previewImageEditor.Data = data as PreviewImageData;
                     return previewImageEditor;
+                case MetaDataType.Author:
+                    shell.ViewToggle.Toggle(true);
+                    AuthorsEditor authorsEditor = Instantiate(_authorsEditor);
+                    authorsEditor.Data = data as AuthorData;
+                    return authorsEditor;
                 default:
                     throw new NotImplementedException();
             }

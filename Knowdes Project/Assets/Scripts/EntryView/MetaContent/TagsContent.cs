@@ -45,8 +45,8 @@ namespace Knowdes
 				return;
 			foreach (Tag tag in Data.TagsCopy)
 				initTag(tag);
-			data.OnTagsAdded += initTag;
-			data.OnTagsRemoved += cleanTag;
+			data.OnTagAdded += initTag;
+			data.OnTagRemoved += cleanTag;
 			updateText();
 		}
 
@@ -56,8 +56,8 @@ namespace Knowdes
 				return;
 			foreach (Tag tag in Data.TagsCopy)
 				cleanTag(tag);
-			data.OnTagsAdded -= initTag;
-			data.OnTagsRemoved -= cleanTag;
+			data.OnTagAdded -= initTag;
+			data.OnTagRemoved -= cleanTag;
 		}
 	}
 }

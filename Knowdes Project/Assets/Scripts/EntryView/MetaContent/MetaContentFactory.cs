@@ -21,6 +21,8 @@ namespace Knowdes
         private DescriptionContent _descriptionContentPrefab;
         [SerializeField]
         private PreviewImageContent _previewImagePrefab;
+        [SerializeField]
+        private AuthorsContent _authorsContentPrefab;
 
         public MetaContent Create(MetaData data, EntryVolume volume)
 		{
@@ -62,6 +64,10 @@ namespace Knowdes
                     PreviewImageContent previewImageContent = Instantiate(_previewImagePrefab);
                     previewImageContent.Data = data as PreviewImageData;
                     return previewImageContent;
+                case MetaDataType.Author:
+                    AuthorsContent authorsContent = Instantiate(_authorsContentPrefab);
+                    authorsContent.Data = data as AuthorData;
+                    return authorsContent;
                 default:
                     throw new NotImplementedException();
             }

@@ -15,9 +15,13 @@ namespace Knowdes
 
 		public override bool Destroyable => true;
 
+		public event Action<Author> OnAuthorAdded;
+		public event Action<Author> OnAuthorRemoved;
+
 		public AuthorData(Guid iD):base(iD)
 		{
 			_authors = new List<Author>();
+			init();
 		}
 
 		public AuthorData(Guid iD, List<Author> authors) : base(iD)
@@ -27,7 +31,7 @@ namespace Knowdes
 		}
 		private void init()
 		{
-			ShowInPreview = true;
+			ShowInPreview = false;
 			foreach (Author author in _authors)
 			{
 				author.OnNameChanged += invokeOnChanged;
@@ -40,6 +44,7 @@ namespace Knowdes
 				throw new InvalidOperationException();
 			_authors.Add(author);
 			author.OnNameChanged += invokeOnChanged;
+			OnAuthorAdded?.Invoke(author);
 			invokeOnChanged();
 		}
 
@@ -49,6 +54,7 @@ namespace Knowdes
 				throw new InvalidOperationException();
 			_authors.Remove(author);
 			author.OnNameChanged -= invokeOnChanged;
+			OnAuthorRemoved?.Invoke(author);
 			invokeOnChanged();
 		}
 	}

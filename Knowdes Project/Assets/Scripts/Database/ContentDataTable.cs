@@ -80,6 +80,8 @@ namespace Knowdes
                     return new ImageContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
                 case (int)ContentType.File:
                     return new UnknownFileContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
+                case (int)ContentType.PDF:
+                    return new PdfContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
                 default:
                     throw new NotImplementedException();
             }

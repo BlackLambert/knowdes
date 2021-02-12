@@ -13,8 +13,10 @@ namespace Knowdes
 		private ImageContent _imageContentPrefab;
         [SerializeField]
         private UnknownFileContent _unknownFileContentPrefab;
+        [SerializeField]
+        private PdfContent _pdfContentPrefab;
 
-		public Content Create(EntryData entryData)
+        public Content Create(EntryData entryData)
 		{
             ContentData contentData = entryData.Content;
             switch (contentData.Type)
@@ -35,6 +37,10 @@ namespace Knowdes
                     UnknownFileContent unknownFileContent = Instantiate(_unknownFileContentPrefab);
                     unknownFileContent.EntryData = entryData;
                     return unknownFileContent;
+                case ContentType.PDF:
+                    PdfContent pdfContent = Instantiate(_pdfContentPrefab);
+                    pdfContent.EntryData = entryData;
+                    return pdfContent;
                 default:
                     throw new NotImplementedException();
 			}

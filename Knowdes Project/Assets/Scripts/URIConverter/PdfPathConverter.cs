@@ -3,9 +3,9 @@ using System.IO;
 
 namespace Knowdes
 {
-	public class ImageFilePathConverter : UriConverter
-	{
-		private const string _invalidFormatError = "Bitte geben Sie einen gültigen Pfad oder Link zu einer Bilddatei an (z.B. www.bilder.de/Bild.jpg).";
+    public class PdfPathConverter : UriConverter
+    {
+		private const string _invalidFormatError = "Bitte geben Sie einen gültigen Pfad oder Link zu einer PDF-Datei an (z.B. C://Dateien/Datei.pdf).";
 		private const string _invalidFileTypeError = "Invalider Datentyp. Unterstützt werden: {0}";
 
 		private SupportedFileTypes _supportedFiles = new SupportedFileTypes();
@@ -18,7 +18,7 @@ namespace Knowdes
 				return new Result(_invalidFormatError);
 			if (!isFilePath(result))
 				return new Result(_invalidFormatError);
-			if (!isImageFilePath(result))
+			if (!isPdfFilePath(result))
 				return new Result(createInvalidFileTypeError());
 			return new Result(result);
 		}
@@ -29,11 +29,11 @@ namespace Knowdes
 			return !string.IsNullOrEmpty(Path.GetExtension(uri.AbsoluteUri));
 		}
 
-		private bool isImageFilePath(Uri uri)
+		private bool isPdfFilePath(Uri uri)
 		{
 			string fileExtension = Path.GetExtension(uri.AbsoluteUri);
 			string lowerCleanedFileExtension = fileExtension.ToLower();
-			foreach (string extension in _supportedFiles.Image)
+			foreach (string extension in _supportedFiles.Pdf)
 			{
 				if (lowerCleanedFileExtension.Contains(extension))
 					return true;
@@ -44,7 +44,7 @@ namespace Knowdes
 		private string createInvalidFileTypeError()
 		{
 			string extensionsString = string.Empty;
-			foreach (string extension in _supportedFiles.Image)
+			foreach (string extension in _supportedFiles.Pdf)
 				extensionsString += $"{extension}, ";
 			return string.Format(_invalidFileTypeError, extensionsString);
 		}
@@ -54,7 +54,7 @@ namespace Knowdes
 			Uri uri;
 			return Uri.TryCreate(link, UriKind.Absolute, out uri) &&
 				isFilePath(uri) &&
-				isImageFilePath(uri);
+				isPdfFilePath(uri);
 		}
 	}
 }

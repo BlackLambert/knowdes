@@ -13,6 +13,8 @@ namespace Knowdes
         private ImageContentEditor _imageEditorPrefab = null;
         [SerializeField]
         private UnknownFileEditor _unknownFileEditorPrefab = null;
+        [SerializeField]
+        private PdfContentEditor _pdfContentEditorPrefab = null;
 
         public ContentEditor Create(EntryData entryData)
 		{
@@ -35,6 +37,10 @@ namespace Knowdes
                     UnknownFileEditor unknownFileEditor = Instantiate(_unknownFileEditorPrefab);
                     unknownFileEditor.EntryData = entryData;
                     return unknownFileEditor;
+                case ContentType.PDF:
+                    PdfContentEditor pdfEditor = Instantiate(_pdfContentEditorPrefab);
+                    pdfEditor.EntryData = entryData;
+                    return pdfEditor;
                 default:
                     throw new NotImplementedException();
             }

@@ -9,6 +9,7 @@ namespace Knowdes
         private FilePathConverter _filePathConverter;
         private ImageFilePathConverter _imageFilePathConverter;
         private UnknownFilePathConverter _unknownFilePathConverter;
+        private PdfPathConverter _pdfPathConverter;
 
 
         public FileContentDataFactory()
@@ -17,6 +18,7 @@ namespace Knowdes
             _filePathConverter = new FilePathConverter();
             _imageFilePathConverter = new ImageFilePathConverter();
             _unknownFilePathConverter = new UnknownFilePathConverter();
+            _pdfPathConverter = new PdfPathConverter();
         }
 
 
@@ -28,6 +30,13 @@ namespace Knowdes
             {
                 Uri uri = Convert(path, _imageFilePathConverter);
                 ImageContentData result = _contentDataFactory.Create(ContentType.Image) as ImageContentData;
+                result.Path = uri.AbsoluteUri;
+                return result;
+            }
+            else if(_pdfPathConverter.Convertable(path))
+			{
+                Uri uri = Convert(path, _pdfPathConverter);
+                PdfContentData result = _contentDataFactory.Create(ContentType.PDF) as PdfContentData;
                 result.Path = uri.AbsoluteUri;
                 return result;
             }

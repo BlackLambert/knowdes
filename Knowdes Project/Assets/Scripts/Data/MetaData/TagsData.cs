@@ -15,8 +15,8 @@ namespace Knowdes
 
 		public override bool Destroyable => true;
 
-		public event Action<Tag> OnTagsAdded;
-		public event Action<Tag> OnTagsRemoved;
+		public event Action<Tag> OnTagAdded;
+		public event Action<Tag> OnTagRemoved;
 
 		public TagsData(Guid iD) : base(iD)
 		{
@@ -44,7 +44,7 @@ namespace Knowdes
 			if (_tags.Contains(tag))
 				throw new InvalidOperationException();
 			_tags.Add(tag);
-			OnTagsAdded?.Invoke(tag);
+			OnTagAdded?.Invoke(tag);
 			tag.OnNameChanged += invokeOnChanged;
 			invokeOnChanged();
 		}
@@ -54,7 +54,7 @@ namespace Knowdes
 			if (!_tags.Contains(tag))
 				throw new InvalidOperationException();
 			_tags.Remove(tag);
-			OnTagsRemoved?.Invoke(tag);
+			OnTagRemoved?.Invoke(tag);
 			tag.OnNameChanged -= invokeOnChanged;
 			invokeOnChanged();
 		}

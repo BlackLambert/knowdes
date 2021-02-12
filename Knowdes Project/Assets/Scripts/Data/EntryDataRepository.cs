@@ -41,7 +41,7 @@ namespace Knowdes
 		public void Save(EntryData data)
 		{
 			_dataManager.AddOrReplaceEntryData(data);
-            Debug.Log($"Saved {data.ToString()}");
+            //Debug.Log($"Saved {data.ToString()}");
 		}
 
 		internal void SaveAll()

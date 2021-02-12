@@ -73,8 +73,8 @@ namespace Knowdes.Prototype
 		{
             if (Data == null)
                 return;
-            Data.OnTagsAdded += addEditor;
-            Data.OnTagsRemoved += removeEditor;
+            Data.OnTagAdded += addEditor;
+            Data.OnTagRemoved += removeEditor;
             foreach (Tag tag in Data.TagsCopy)
                 addEditor(tag);
 		}
@@ -83,8 +83,8 @@ namespace Knowdes.Prototype
 		{
             if (Data == null)
                 return;
-            Data.OnTagsAdded -= addEditor;
-            Data.OnTagsRemoved -= removeEditor;
+            Data.OnTagAdded -= addEditor;
+            Data.OnTagRemoved -= removeEditor;
             foreach (KeyValuePair<Tag, TagEditor> pair in new Dictionary<Tag, TagEditor>(_editors))
                 removeEditor(pair.Key);
         }

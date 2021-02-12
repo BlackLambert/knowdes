@@ -18,6 +18,8 @@ namespace Knowdes
                     return new WeblinkContentData(iD);
                 case ContentType.Image:
                     return new ImageContentData(iD, string.Empty);
+                case ContentType.PDF:
+                    return new PdfContentData(iD, string.Empty);
                 case ContentType.File:
                     return new UnknownFileContentData(iD, string.Empty);
                 default:
