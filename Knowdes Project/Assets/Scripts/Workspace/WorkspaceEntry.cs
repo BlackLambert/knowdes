@@ -1,8 +1,9 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Knowdes.Prototype
+namespace Knowdes
 {
 	public class WorkspaceEntry : MonoBehaviour
 	{
@@ -18,22 +19,17 @@ namespace Knowdes.Prototype
 		private RectTransform _contentHook = null;
 
 		public Entry LinkedEntry { get; set; }
+		public EntryVolume Volume { get; private set; } = null;
 
-		private EntryVolume _content = null;
-		public EntryVolume Content => _content;
+		public event Action OnVolumeSet;
 
 
-		public void SetContent(EntryVolume content)
+		public void Set(EntryVolume content)
 		{
-
-			_content = content;
-			_content.Base.SetParent(_contentHook, false);
-			_content.Base.localPosition = Vector3.one;
-		}
-
-		private void updateLayout()
-		{
-			LayoutRebuilder.ForceRebuildLayoutImmediate(_base);
+			Volume = content;
+			Volume.Base.SetParent(_contentHook, false);
+			Volume.Base.localPosition = Vector3.one;
+			OnVolumeSet?.Invoke();
 		}
 	}
 }

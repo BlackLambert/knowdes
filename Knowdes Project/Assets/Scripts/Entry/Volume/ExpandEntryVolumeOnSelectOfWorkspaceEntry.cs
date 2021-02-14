@@ -9,6 +9,6 @@ namespace Knowdes.Prototype
 		[SerializeField]
 		private WorkspaceEntry _entry = null;
 
-		protected override EntryVolume EntryContent => _entry.Content;
+		protected override EntryVolume EntryContent => _entry.Volume;
 	}
 }

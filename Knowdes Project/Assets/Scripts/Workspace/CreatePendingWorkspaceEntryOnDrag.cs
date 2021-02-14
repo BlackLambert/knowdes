@@ -30,8 +30,8 @@ namespace Knowdes.Prototype
 			result.Base.SetParent(GetComponentInParent<Canvas>().transform, false);
 			result.Base.localScale = Vector3.one;
 			result.WorkspaceEntry.LinkedEntry = _entry;
-			result.WorkspaceEntry.SetContent(_volumeFactory.Create(_entry.Volume));
-			result.WorkspaceEntry.Content.Data = _entry.Volume.Data;
+			result.WorkspaceEntry.Set(_volumeFactory.Create(_entry.Volume));
+			result.WorkspaceEntry.Volume.Data = _entry.Volume.Data;
 			result.Base.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _entry.Base.rect.width);
 			_workspace.PendingEntry = result;
 		}

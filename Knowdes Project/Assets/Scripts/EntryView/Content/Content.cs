@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Knowdes
@@ -9,11 +7,15 @@ namespace Knowdes
     {
         [SerializeField]
         private RectTransform _base;
+        [SerializeField]
+        private List<ContentSpecificButton> _contentSpecificButtons = new List<ContentSpecificButton>();
+
         public RectTransform Base => _base;
 
         public abstract EntryData EntryData { get; set; }
         public abstract ContentData ContentData { get; }
         public abstract ContentType Type { get; }
+        public IEnumerable<ContentSpecificButton> ContentSpecificButtons => _contentSpecificButtons;
 
     }
 

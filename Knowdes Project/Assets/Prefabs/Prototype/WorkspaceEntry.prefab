@@ -799,7 +799,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
-  m_Spacing: 5
+  m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1266,6 +1266,8 @@ GameObject:
   - component: {fileID: 8588095688641343659}
   - component: {fileID: 1893356200546044065}
   - component: {fileID: 1762725111412125993}
+  - component: {fileID: 6417051413246615613}
+  - component: {fileID: 7724470754917638627}
   m_Layer: 5
   m_Name: WorkspaceEntry
   m_TagString: Untagged
@@ -1450,6 +1452,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 5560524816187573576}
   _show: 1
+--- !u!114 &6417051413246615613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310639767674293492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e4ce81a6bdb884a830be0fb903c95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entry: {fileID: 673252919941439089}
+--- !u!114 &7724470754917638627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310639767674293492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7646d0a1541d6742b56c8724d87c251, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _volumeContainer: {fileID: 6417051413246615613}
+  _hook: {fileID: 8382892673685230873}
 --- !u!1 &8628989318143823535
 GameObject:
   m_ObjectHideFlags: 0

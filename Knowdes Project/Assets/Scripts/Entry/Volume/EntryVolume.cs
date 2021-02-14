@@ -39,7 +39,8 @@ namespace Knowdes
 
         private Dictionary<MetaDataType, MetaContent> _metaContent = new Dictionary<MetaDataType, MetaContent>();
         public Dictionary<MetaDataType, MetaContent> MetaContentCopy => new Dictionary<MetaDataType, MetaContent>(_metaContent);
-        public event Action<MetaContent> OnMetaContentAdded;
+
+		public event Action<MetaContent> OnMetaContentAdded;
         public event Action<MetaContent> OnMetaContentRemoved;
 
         public void AddMetaContent(MetaContent content)

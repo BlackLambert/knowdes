@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Knowdes
 {
-    public class OpenWeblinkContentButton : MonoBehaviour
+    public class OpenUriButton : MonoBehaviour
     {
         [SerializeField]
         private UriInput _editor;

@@ -33,9 +33,9 @@ namespace Knowdes.Prototype
         private void onClick()
         {
             WorkspaceEntry newEntry = Instantiate(_entryPrefab);
-            newEntry.SetContent(_volumeFactory.Create(_entry.Volume));
+            newEntry.Set(_volumeFactory.Create(_entry.Volume));
             newEntry.LinkedEntry = _entry;
-            newEntry.Content.Data = _entry.Volume.Data;
+            newEntry.Volume.Data = _entry.Volume.Data;
             _workspace.AddToCenter(newEntry);
         }
     }

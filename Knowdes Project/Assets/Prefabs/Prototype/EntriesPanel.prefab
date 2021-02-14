@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 10
+  m_ScrollSensitivity: 20
   m_Viewport: {fileID: 7978427382399747503}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 7978427381941272432}
@@ -2827,7 +2827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7064729673297170044, guid: 833d0737e3554654ba63893d5eb1ba09, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 295.75012
+      value: 268.25012
       objectReference: {fileID: 0}
     - target: {fileID: 7064729673297170044, guid: 833d0737e3554654ba63893d5eb1ba09, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2863,7 +2863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7064729673297170044, guid: 833d0737e3554654ba63893d5eb1ba09, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 177.87506
+      value: 164.12506
       objectReference: {fileID: 0}
     - target: {fileID: 7064729673297170044, guid: 833d0737e3554654ba63893d5eb1ba09, type: 3}
       propertyPath: m_AnchoredPosition.y
