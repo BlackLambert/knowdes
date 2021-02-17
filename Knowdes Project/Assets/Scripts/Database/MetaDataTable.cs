@@ -46,6 +46,13 @@ namespace Knowdes
             executeNonQuery(command);
         }
 
+        public void Delete(MetaData data)
+		{
+            deleteMetaDataAdditions(data);
+            string command = "DELETE FROM " + TABLE_NAME + " WHERE " + METADATA_ID + " = '" + data.ID.ToString() + "'";
+            executeNonQuery(command);
+        }
+
         private void deleteMetaDataAdditions(MetaData data)
         {
             if (data is TagsData)

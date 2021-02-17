@@ -30,21 +30,21 @@ namespace Knowdes
             {
                 Uri uri = Convert(path, _imageFilePathConverter);
                 ImageContentData result = _contentDataFactory.Create(ContentType.Image) as ImageContentData;
-                result.Path = uri.AbsoluteUri;
+                result.Path = uri.AbsolutePath;
                 return result;
             }
             else if(_pdfPathConverter.Convertable(path))
 			{
                 Uri uri = Convert(path, _pdfPathConverter);
                 PdfContentData result = _contentDataFactory.Create(ContentType.PDF) as PdfContentData;
-                result.Path = uri.AbsoluteUri;
+                result.Path = uri.AbsolutePath;
                 return result;
             }
             else
 			{
                 Uri uri = Convert(path, _unknownFilePathConverter);
                 UnknownFileContentData result = _contentDataFactory.Create(ContentType.File) as UnknownFileContentData;
-                result.Path = uri.AbsoluteUri;
+                result.Path = uri.AbsolutePath;
                 return result;
             }
         }

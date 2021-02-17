@@ -7,7 +7,7 @@ namespace Knowdes
 {
     public class EntryDataRepository : MonoBehaviour
     {
-        DataManager _dataManager;
+        private DataManager _dataManager;
         private Dictionary<Guid, EntryData> _iDToDatas = new Dictionary<Guid, EntryData>();
 		public IEnumerable<EntryData> Datas => _iDToDatas.Values;
 
@@ -40,7 +40,7 @@ namespace Knowdes
 
 		public void Save(EntryData data)
 		{
-			_dataManager.AddOrReplaceEntryData(data);
+			_dataManager.Replace(data);
             //Debug.Log($"Saved {data.ToString()}");
 		}
 
@@ -62,7 +62,7 @@ namespace Knowdes
 			if (_iDToDatas.ContainsKey(data.Id))
 				throw new ArgumentException();
 			_iDToDatas.Add(data.Id, data);
-			Save(data);
+			_dataManager.AddOrReplace(data);
 		}
 
 		public void Delete(EntryData data)
@@ -70,7 +70,7 @@ namespace Knowdes
             if (!_iDToDatas.ContainsKey(data.Id))
                 throw new ArgumentException();
             _iDToDatas.Remove(data.Id);
-            _dataManager.DeleteEntry(data);
+            _dataManager.Delete(data);
             data.Dispose();
         }
     }

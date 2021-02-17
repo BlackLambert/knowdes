@@ -48,7 +48,13 @@ namespace Knowdes
             executeNonQuery(command);
         }
 
-        public void DeleteAllAuthorsOf(MetaData metaData)
+		internal void Delete(Author author)
+		{
+            string command = "DELETE FROM " + TABLE_NAME + " WHERE " + AUTHOR_ID + " = '" + author.Id.ToString() + "'";
+            executeNonQuery(command);
+        }
+
+		public void DeleteAllAuthorsOf(MetaData metaData)
         {
             string command = "DELETE FROM " + TABLE_NAME + " WHERE " + AUTHOR_META_ID + " = '" + metaData.ID.ToString() + "'";
             executeNonQuery(command);

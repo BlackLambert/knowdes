@@ -34,9 +34,9 @@ namespace Knowdes
             System.IO.File.Copy(quelle, ziel, true); 
         }
 
-        public void deleteDatei(String datei)
+        public void DeleteFile(String datei)
         {
-            if (existDatei(@datei))
+            if (!existDatei(@datei))
                 throw new InvalidOperationException();
             try
             {
@@ -63,6 +63,11 @@ namespace Knowdes
             copyDatei(datei, ziel);
             return @ziel;
         }
+
+        public bool IsManagedFile(string filePath)
+		{
+            return filePath.Contains(datei_verzeichnis);
+		}
 
         public String getDateiExtention(String datei)
         {

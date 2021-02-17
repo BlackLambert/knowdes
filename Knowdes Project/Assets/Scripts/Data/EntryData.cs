@@ -59,7 +59,7 @@ namespace Knowdes
         public void AddMetaData(MetaData metaData)
 		{
             if (_metaDatas.ContainsKey(metaData.Type))
-                throw new InvalidOperationException();
+                throw new MetaDataAlreadyAddedException();
             _metaDatas.Add(metaData.Type, metaData);
             OnMetaDataAdded?.Invoke(metaData);
             metaData.OnChanged += invokeOnChanged;
@@ -69,7 +69,7 @@ namespace Knowdes
         public void RemoveMetaData(MetaData metaData)
 		{
             if (!_metaDatas.ContainsKey(metaData.Type))
-                throw new InvalidOperationException();
+                throw new MetaDataNotAddedException();
             _metaDatas.Remove(metaData.Type);
             OnMetaDataRemoved?.Invoke(metaData);
             metaData.OnChanged -= invokeOnChanged;
@@ -95,5 +95,8 @@ namespace Knowdes
 		{
             return $"EntryData (ID: {Id} | Content: {_content.Type.GetName()} | Meta Data Count: {_metaDatas.Count}";
 		}
-	}
+
+        public class MetaDataAlreadyAddedException : InvalidOperationException { }
+        public class MetaDataNotAddedException : InvalidOperationException { }
+    }
 }

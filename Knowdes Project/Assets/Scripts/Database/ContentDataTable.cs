@@ -69,19 +69,20 @@ namespace Knowdes
         public ContentData ConvertContentFrom(IDataReader reader)
         {
             int typeInt = Convert.ToInt16(reader[CONTENT_TYP]);
+            string content = Convert.ToString(reader[CONTENT_INHALT]);
+            Guid contentID = new Guid(Convert.ToString(reader[CONTENT_ID]));
             switch (typeInt)
             {
                 case (int)ContentType.Text:
-                    return new TextContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
+                    return new TextContentData(contentID, content);
                 case (int)ContentType.Weblink:
-                    string content = Convert.ToString(reader[CONTENT_INHALT]);
-                    return new WeblinkContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), string.IsNullOrEmpty(content) ? null : new Uri(content));
+                    return new WeblinkContentData(contentID, string.IsNullOrEmpty(content) ? null : new Uri(content));
                 case (int)ContentType.Image:
-                    return new ImageContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
+                    return new ImageContentData(contentID, content);
                 case (int)ContentType.File:
-                    return new UnknownFileContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
+                    return new UnknownFileContentData(contentID, content);
                 case (int)ContentType.PDF:
-                    return new PdfContentData(new Guid(Convert.ToString(reader[CONTENT_ID])), Convert.ToString(reader[CONTENT_INHALT]));
+                    return new PdfContentData(contentID, content);
                 default:
                     throw new NotImplementedException();
             }

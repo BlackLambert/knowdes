@@ -53,7 +53,7 @@ namespace Knowdes
                 dbcmd.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 return false;
             }

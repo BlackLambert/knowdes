@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Knowdes
 {
-    public class LinkPreviewDataMetaDataExtractor : MonoBehaviour
+    public class LinkPreviewDataMetaDataExtractorButton : MonoBehaviour
     {
         private const string _loadingText = "Lade Metadaten";
         private const string _loadingErrorMessage = "Es konnten keine MetaDaten von diesem Link extrahiert werden.";
@@ -13,12 +14,16 @@ namespace Knowdes
 
         [SerializeField]
         private WeblinkContentEditor _weblinkEditor = null;
+        [SerializeField]
+        private Button _button;
         private LoadingOverlay _loadingOverlay = null;
         private LinkPreviewLoader _linkPreviewLoader;
         private MetaDataFactory _metaDataFactory;
         private ImageFilePathConverter _imageFilePathConverter;
         private LinkPreviewLoader.LoadRequest _loadRequest;
         private TemporaryNotificationDisplayer _notificationDisplayer;
+
+        private EntryData _entry => _weblinkEditor.EntryData;
 
         protected virtual void Start()
 		{
@@ -27,7 +32,7 @@ namespace Knowdes
             _linkPreviewLoader = LinkPreviewLoader.New();
             _metaDataFactory = new MetaDataFactory();
             _imageFilePathConverter = new ImageFilePathConverter();
-            _weblinkEditor.OnChanged += onContentChanged;
+            _button.onClick.AddListener(onClick);
         }
 
 		protected virtual void OnDestroy()
@@ -35,10 +40,10 @@ namespace Knowdes
             tryToStopLoadingPreview();
             if (_linkPreviewLoader != null)
                 _linkPreviewLoader.Destroy();
-            _weblinkEditor.OnChanged -= onContentChanged;
+            _button.onClick.RemoveListener(onClick);
         }
 
-        private void onContentChanged()
+        private void onClick()
         {
             tryToStopLoadingPreview();
             if (!_weblinkEditor.Data.Empty)
@@ -58,7 +63,7 @@ namespace Knowdes
             if (result.RequestWasSuccessful)
             {
                 List<MetaData> extractedMetaData = extractMetaDataFrom(result.Data);
-                addMissingMetaDataTo(_weblinkEditor.EntryData, extractedMetaData);
+                updateMetaData(extractedMetaData);
             }
             else
 			{
@@ -66,18 +71,18 @@ namespace Knowdes
             }
         }
 
-        private void displayErrorNotification(string message)
+		private void displayErrorNotification(string message)
 		{
             _notificationDisplayer.RequestDisplay(new TemporaryNotificationDisplayer.Request(message, _errorMessageDisplayTime));
 		}
 
-		private void addMissingMetaDataTo(EntryData entryData, List<MetaData> extractedMetaData)
+		private void updateMetaData(List<MetaData> extractedMetaData)
 		{
-			foreach(MetaData metaData in extractedMetaData)
-			{
-                if (entryData.Contains(metaData.Type))
-                    continue;
-                entryData.AddMetaData(metaData);
+            foreach (MetaData metaData in extractedMetaData)
+            {
+                if (_entry.Contains(metaData.Type))
+                    _entry.RemoveMetaData(_entry.Get(metaData.Type));
+                _entry.AddMetaData(metaData);
             }
 		}
 

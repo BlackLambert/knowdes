@@ -39,6 +39,12 @@ namespace Knowdes
 			executeNonQuery(command);
 		}
 
+		public void Delete(Tag tag)
+		{
+			string command = "DELETE FROM " + TABLE_NAME + " WHERE " + TAG_ID + " = '" + tag.ID.ToString() + "'";
+			executeNonQuery(command);
+		}
+
 		public List<Tag> GetAllTagsOf(Guid metaDataID)
 		{
 			string command = "SELECT * FROM " + TABLE_NAME + " WHERE " + TAG_META_ID + " = '" + metaDataID.ToString() + "'";

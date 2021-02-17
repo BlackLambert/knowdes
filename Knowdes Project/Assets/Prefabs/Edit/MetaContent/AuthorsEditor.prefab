@@ -344,7 +344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _base: {fileID: 2102553031840559978}
   _editorPrefab: {fileID: 332871952478219865, guid: eb93db3587e4aa947b701462dd7a7a79, type: 3}
-  _hook: {fileID: 2102553031840559978}
+  _hook: {fileID: 5951360359710320591}
   _addButton: {fileID: 9044014729889107447}
   _authorNameInput: {fileID: 6151344725971212255}
   _emptyNameErrorTextPanel: {fileID: 5465813895947687831}

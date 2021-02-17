@@ -11,5 +11,10 @@ namespace Knowdes
 		public override EntryVolume Volume => _entry.Volume;
 
 		public override event Action OnVolumeSet;
+
+		protected virtual void Start()
+		{
+			OnVolumeSet?.Invoke();
+		}
 	}
 }

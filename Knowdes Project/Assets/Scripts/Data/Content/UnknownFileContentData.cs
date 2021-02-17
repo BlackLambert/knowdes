@@ -24,6 +24,7 @@ namespace Knowdes
 
 		public UnknownFileContentData(Guid iD, string path) : base(iD)
 		{
+			Path = path;
 		}
 
 		

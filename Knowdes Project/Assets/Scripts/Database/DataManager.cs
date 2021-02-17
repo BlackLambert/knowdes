@@ -46,13 +46,34 @@ namespace Knowdes
             _tagsTable.Init();
         }
 
-        public void AddOrReplaceEntryData(EntryData entry)
+        public void AddOrReplace(EntryData entry)
         {
             _contentDataTable.AddOrReplaceContentOf(entry);
             _metaDataTable.AddOrReplaceAllMetadataOf(entry);
         }
 
-        public void DeleteEntry(EntryData entryData)
+        public void Replace(EntryData entry)
+		{
+            Delete(entry);
+            AddOrReplace(entry);
+        }
+
+        public void Delete(Tag tag)
+		{
+            _tagsTable.Delete(tag);
+		}
+
+        public void Delete(Author author)
+		{
+            _authorTable.Delete(author);
+		}
+
+        public void Delete(MetaData data)
+		{
+            _metaDataTable.Delete(data);
+		}
+
+        public void Delete(EntryData entryData)
         {
             _contentDataTable.DeleteContentOf(entryData);
             _metaDataTable.DeleteAllMetaDataOf(entryData);

@@ -28,7 +28,7 @@ namespace Knowdes
                 executeNonQuery("SELECT * FROM " + Name);
                 return true;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 return false;
             }
