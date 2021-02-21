@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 8733144120345965971}
   - component: {fileID: 8733144120345965970}
   - component: {fileID: 1536947001853010750}
+  - component: {fileID: 7823664842183850700}
   m_Layer: 5
   m_Name: Border
   m_TagString: Untagged
@@ -329,6 +330,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _graphic: {fileID: 8733144120345965970}
   _selectable: {fileID: 2267071489259851309}
+--- !u!114 &7823664842183850700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8733144120345965968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90498a46b414d24f917357d8ceb2604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputField: {fileID: 8733144120909356533}
 --- !u!1 &8733144120351503785
 GameObject:
   m_ObjectHideFlags: 0

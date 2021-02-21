@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 namespace Knowdes
 {
-	public class PreviewImageData : MetaData
+	public class PreviewImageData : MetaData, TextBasedMetaData
 	{
 		private Uri _path;
 		public event Action OnPathChanged;
@@ -26,6 +23,8 @@ namespace Knowdes
 
 		public override bool Destroyable => true;
 		public bool IsEmpty => Uri == null || string.IsNullOrEmpty(Uri.AbsoluteUri);
+
+		public string Content => Uri.OriginalString;
 
 		public PreviewImageData(Guid iD, Uri path) :base(iD)
 		{

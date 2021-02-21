@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Meta Daten extrahieren
+  m_text: Metadaten extrahieren
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e7d6ce2c124384e4db85156d18c16a1c, type: 2}
   m_sharedMaterial: {fileID: -5530825042215507899, guid: e7d6ce2c124384e4db85156d18c16a1c, type: 2}

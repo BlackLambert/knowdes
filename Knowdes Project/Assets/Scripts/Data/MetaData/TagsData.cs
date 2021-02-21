@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Knowdes
 {
-	public class TagsData : MetaData
+	public class TagsData : MetaData, TextBasedMetaData
 	{
 		private List<Tag> _tags = new List<Tag>();
 		public List<Tag> TagsCopy => new List<Tag>(_tags);
@@ -14,6 +14,8 @@ namespace Knowdes
 		public override int Priority => 0;
 
 		public override bool Destroyable => true;
+
+		public string Content => getContent();
 
 		public event Action<Tag> OnTagAdded;
 		public event Action<Tag> OnTagRemoved;
@@ -57,6 +59,14 @@ namespace Knowdes
 			OnTagRemoved?.Invoke(tag);
 			tag.OnNameChanged -= invokeOnChanged;
 			invokeOnChanged();
+		}
+
+		private string getContent()
+		{
+			string result = string.Empty;
+			foreach (Tag tag in _tags)
+				result += $"{tag.Name} ";
+			return result;
 		}
 	}
 }

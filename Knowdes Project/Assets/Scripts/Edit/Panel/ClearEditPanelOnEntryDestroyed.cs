@@ -12,7 +12,8 @@ namespace Knowdes
         protected virtual void Start()
 		{
 			_editPanel.OnEntryChanged += onEntryChanged;
-        }
+			onEntryChanged();
+		}
 
 		protected virtual void OnDestroy()
 		{
@@ -26,16 +27,17 @@ namespace Knowdes
 			addListenersToEntry();
 		}
 
-		private void addListenersToEntry()
-		{
-			if (_entry != null)
-				_entry.OnMarkedForDestruct += clearEditPanel;
-		}
-
 		private void removeListenersFromEntry()
 		{
 			if (_entry != null)
 				_entry.OnMarkedForDestruct -= clearEditPanel;
+		}
+
+		private void addListenersToEntry()
+		{
+			if (_entry == null)
+				return;
+			_entry.OnMarkedForDestruct += clearEditPanel;
 		}
 
 		private void clearEditPanel()

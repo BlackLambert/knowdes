@@ -37,7 +37,7 @@ namespace Knowdes
 
         private void onFileDropped(Uri uri, Vector2 point)
         {
-            string managedFilePath = tryToSaveFile(uri.AbsolutePath);
+            string managedFilePath = tryToSaveFile(uri.LocalPath);
             if (string.IsNullOrEmpty(managedFilePath))
                 return;
             ContentData content = _contentDataFactory.Create(managedFilePath);

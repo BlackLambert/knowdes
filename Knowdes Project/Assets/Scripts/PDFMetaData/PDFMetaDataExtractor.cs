@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using System.IO;
+using System.Text;
 
 namespace Knowdes
 {
@@ -21,10 +24,13 @@ namespace Knowdes
 
         public Result Extract()
 		{
-            PdfReader reader = new PdfReader(_path);
-            PdfDocument pdfDocument = new PdfDocument(reader);
-            PdfDocumentInfo info = pdfDocument.GetDocumentInfo();
-
+            PdfDocumentInfo info;
+            using (FileStream fileStream = File.OpenRead(_path))
+            {
+                PdfReader reader = new PdfReader(fileStream);
+                PdfDocument pdfDocument = new PdfDocument(reader);
+                info = pdfDocument.GetDocumentInfo();
+            }
             TitleData title = extractTitle(info);
             AuthorData authors = extractAuthors(info);
             TagsData tags = extractTags(info);

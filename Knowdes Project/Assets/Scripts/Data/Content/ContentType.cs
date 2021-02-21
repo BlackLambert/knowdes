@@ -17,23 +17,8 @@ namespace Knowdes
 
         public static string GetName(this ContentType type)
         {
-            switch (type)
-            {
-                case ContentType.Unset:
-                    return "Typ nicht gesetzt";
-                case ContentType.Text:
-                    return "Editierbarer Text";
-                case ContentType.Image:
-                    return "Bild";
-                case ContentType.PDF:
-                    return "PDF";
-                case ContentType.Weblink:
-                    return "Weblink";
-                case ContentType.File:
-                    return "Unbekannte Datei";
-                default:
-                    throw new NotImplementedException();
-            }
+            ContentTypeConverter converter = new ContentTypeConverter();
+            return converter.Convert(type);
         }
     }
 }

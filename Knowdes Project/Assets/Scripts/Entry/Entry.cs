@@ -17,6 +17,8 @@ namespace Knowdes
         private UISelectable _selectable = null;
         public UISelectable Selectable => _selectable;
         public event Action OnMarkedForDestruct;
+        public bool Visable => Base.gameObject.activeSelf;
+        public event Action OnVisableChanged;
 
         private bool _pending = true;
         public event Action OnPendingChanged;
@@ -41,6 +43,12 @@ namespace Knowdes
 		public void Destroy()
 		{
             Destroy(Base.gameObject);
+        }
+
+        public void Show(bool show)
+		{
+            Base.gameObject.SetActive(show);
+            OnVisableChanged?.Invoke();
         }
 	}
 }

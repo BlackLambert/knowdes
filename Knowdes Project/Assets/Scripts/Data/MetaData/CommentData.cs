@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Knowdes
 {
-	public class CommentData : MetaData
+	public class CommentData : MetaData, TextBasedMetaData
 	{
 		public event Action OnContentChanged;
 		private string _content;

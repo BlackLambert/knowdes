@@ -28,7 +28,7 @@ namespace Knowdes
 
 		private void onClick()
 		{
-            Application.OpenURL(_filebasedContent.Path);
+            Application.OpenURL(_filebasedContent.Data.Path);
 		}
 	}
 }

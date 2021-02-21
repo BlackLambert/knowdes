@@ -10,6 +10,8 @@ namespace Knowdes
 
 		public string Path => Data.Path;
 
+		FilebasedContentData FilebasedContent.Data => Data;
+
 		protected override void onDataAdded(PdfContentData data)
 		{
 			data.OnPathChanged += onPathChanged;

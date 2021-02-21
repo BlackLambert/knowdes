@@ -11,6 +11,8 @@ namespace Knowdes
 
 		public string Path => Data.Path;
 
+		FilebasedContentData FilebasedContent.Data => Data;
+
 		protected override void onDataAdded(UnknownFileContentData data)
 		{
 			data.OnPathChanged += onPathChanged;

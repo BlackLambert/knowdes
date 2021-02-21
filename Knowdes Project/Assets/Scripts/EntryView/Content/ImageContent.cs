@@ -1,4 +1,5 @@
 ﻿
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Knowdes
 		private TextMeshProUGUI _pathText;
 
 		public string Path => Data.Path;
+		FilebasedContentData FilebasedContent.Data => Data;
 
 		protected virtual void Start()
 		{

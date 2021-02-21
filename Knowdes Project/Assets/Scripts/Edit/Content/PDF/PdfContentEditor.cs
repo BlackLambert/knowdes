@@ -30,7 +30,7 @@ namespace Knowdes
 
 		private void onUriChanged()
 		{
-			_data.Path = _uriInput.Uri == null ? string.Empty : _uriInput.Uri.AbsoluteUri;
+			_data.Path = _uriInput.Uri == null ? string.Empty : _uriInput.Uri.LocalPath;
 		}
 	}
 }

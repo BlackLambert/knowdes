@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Knowdes
 {
-	public class AuthorData : MetaData
+	public class AuthorData : MetaData, TextBasedMetaData
 	{
 		private List<Author> _authors = new List<Author>();
 		public List<Author> AuthorsCopy => new List<Author>(_authors);
@@ -14,6 +14,8 @@ namespace Knowdes
 		public override int Priority => 100;
 
 		public override bool Destroyable => true;
+
+		public string Content => getContent();
 
 		public event Action<Author> OnAuthorAdded;
 		public event Action<Author> OnAuthorRemoved;
@@ -56,6 +58,14 @@ namespace Knowdes
 			author.OnNameChanged -= invokeOnChanged;
 			OnAuthorRemoved?.Invoke(author);
 			invokeOnChanged();
+		}
+
+		private string getContent()
+		{
+			string result = string.Empty;
+			foreach (Author author in _authors)
+				result += $"{author.Name} ";
+			return result;
 		}
 	}
 }

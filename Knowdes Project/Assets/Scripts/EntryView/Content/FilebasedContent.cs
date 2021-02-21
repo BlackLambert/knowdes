@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 namespace Knowdes
 {
     public interface FilebasedContent
     {
-        string Path { get; }
+        FilebasedContentData Data { get; }
     }
 }

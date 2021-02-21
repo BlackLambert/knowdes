@@ -55,10 +55,10 @@ namespace Knowdes
 
         public String SaveFile(String datei)
         {
-            String ziel = datei_verzeichnis + @"\" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + getDateiName(datei);
+            String ziel = datei_verzeichnis + @"\" + getDateiName(datei) + "_" + DateTime.Now.ToString("yyMMdd_HHmmss") + getExtension(datei);
             if (existDatei(ziel))
             {
-                ziel = datei_verzeichnis + @"\" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + "_" + getDateiName(datei);
+                ziel = datei_verzeichnis + @"\" + getDateiName(datei) + "_" + DateTime.Now.ToString("yyMMdd_HHmmss") + getExtension(datei);
             }
             copyDatei(datei, ziel);
             return @ziel;
@@ -78,9 +78,14 @@ namespace Knowdes
         public String getDateiName(String datei) 
         {
             FileInfo fi = new FileInfo(datei);
-            return fi.Name ;
-
+            return fi.Name.Split('.')[0] ;
         }
+
+        private string getExtension(string path)
+		{
+            FileInfo info = new FileInfo(path);
+            return info.Extension;
+		}
 
         public bool existVerzeichnis(String Verzeichnisname)
         {

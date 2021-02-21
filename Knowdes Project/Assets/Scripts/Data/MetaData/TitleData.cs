@@ -2,7 +2,7 @@
 
 namespace Knowdes
 {
-	public class TitleData : MetaData
+	public class TitleData : MetaData, TextBasedMetaData
 	{
 		private string _content;
 		public event Action OnContentChanged;
