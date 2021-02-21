@@ -33,10 +33,12 @@ namespace Knowdes
                 return ContentType.Image;
             else if (_pdfName.ToLower() == word)
                 return ContentType.PDF;
-            else if (_unknownFileName.ToLower() == word)
+            else if (_unsetName.ToLower() == word)
                 return ContentType.Unset;
             else if (_weblinkName.ToLower() == word)
                 return ContentType.Weblink;
+            else if (_unknownFileName.ToLower() == word)
+                return ContentType.File;
             else
                 throw new NotImplementedException();
 		}

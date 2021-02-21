@@ -26,7 +26,7 @@ namespace Knowdes
 			set
 			{
                 _url = value;
-                OnUrlChanged();
+                OnUrlChanged?.Invoke();
                 OnChanged?.Invoke();
             }
 		}
