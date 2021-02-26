@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Knowdes.Prototype
+namespace Knowdes
 {
-    public class SetToEditPanelOnSelect : MonoBehaviour
+    public abstract class SetToEditPanelOnSelect : MonoBehaviour
     {
-        [SerializeField]
-        private Entry _entry = null;
+
+        protected abstract Entry Entry{get;}
         [SerializeField]
         private UISelectable _selectable = null;
 
@@ -27,7 +27,7 @@ namespace Knowdes.Prototype
 
         private void setEntry()
         {
-            _editPanel.InitWith(_entry);
+            _editPanel.InitWith(Entry);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Knowdes
             _dropReceiver.OnFileDropped += onFileDropped;
             //Uncomment for testing the file dropping
             //onFileDropped(new Uri(@"W:\Studium\WissenschaftlichesProjekt\Entwicklung\Knowdes_Merkmale201201.pdf"), Vector2.zero);
-            //onFileDropped(new Uri(@"W:\Studium\UserExperience\6_UX-Entwicklungsprozess\Schön-2016-Kanban.pdf"), Vector2.zero);
+            //onFileDropped(new Uri(@"W:\Studium\UserExperience\6_UX-Entwicklungsprozess\Schön 2016-Kanban.pdf"), Vector2.zero);
         }
 
         protected virtual void OnDestroy()

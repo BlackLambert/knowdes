@@ -50,6 +50,7 @@ namespace Knowdes
 		{
             _buttons.Add(button);
             button.Base.SetParent(_hook, false);
+            button.Base.SetAsFirstSibling();
         }
     }
 }

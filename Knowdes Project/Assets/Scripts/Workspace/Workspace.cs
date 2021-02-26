@@ -47,6 +47,7 @@ namespace Knowdes.Prototype
             entry.Base.anchorMin = normalized;
             entry.Base.anchorMax = normalized;
             entry.Base.anchoredPosition = Vector2.zero;
+            entry.Base.localScale = Vector3.one;
             entry.CursorFollower.Container = Content;
 
             OnCountChanged?.Invoke();

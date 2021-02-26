@@ -208,7 +208,7 @@ namespace Knowdes
                     break;
                 case MetaDataType.PreviewImage:
                     PreviewImageData previewData = (PreviewImageData)metaData;
-                    inhalt = previewData.Uri.AbsoluteUri;
+                    inhalt = previewData.IsEmpty ? string.Empty : previewData.Uri.AbsoluteUri;
                     break;
                 default:
                     throw new NotImplementedException();

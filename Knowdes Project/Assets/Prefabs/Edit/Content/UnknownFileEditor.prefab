@@ -85,6 +85,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 969769361415777491}
     m_Modifications:
+    - target: {fileID: 586334077000014561, guid: 66c3c87a0acff114d88ee4028f9a0d53, type: 3}
+      propertyPath: m_text
+      value: Link zu einer unbekannten Datei eingeben...
+      objectReference: {fileID: 0}
     - target: {fileID: 1198921308367924570, guid: 66c3c87a0acff114d88ee4028f9a0d53, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
